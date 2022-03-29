@@ -1,0 +1,40 @@
+@import "src/constants/styles/common";
+
+.cars-tab {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  width: 70%;
+  min-height: 400px;
+  border-right: 1px solid $main-lightgrey-color;
+
+  &__car-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+    overflow: auto;
+  }
+  &__spinner {
+    display: none;
+
+    &_visible {
+      display: block;
+      width: 100%;
+      padding: 1rem 0;
+    }
+  }
+}
+
+@media screen and (max-width: 1023px){
+  .cars-tab {
+    width: 100%;
+    border-right: none;
+  }
+}
+
+@media screen and (max-width: 360px){
+  .cars-tab {
+    padding-top: .5rem;
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "name": "need-for-drive-iteration-2",
+  "version": "0.2.0",
+  "private": true,
+  "homepage": "https://gabdrahmanovar.github.io/need-for-drive-i2/",
+  "dependencies": {
+    "@ant-design/icons": "^4.7.0",
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.4.0",
+    "@types/node": "^16.11.25",
+    "@types/react": "^17.0.39",
+    "@types/react-dom": "^17.0.11",
+    "@types/react-router-dom": "^5.3.2",
+    "antd": "^4.18.7",
+    "axios": "^0.26.0",
+    "gh-pages": "^3.2.3",
+    "immer": "^9.0.6",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.1",
+    "node-sass": "^6.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-error-boundary": "^3.1.4",
+    "react-redux": "^7.2.6",
+    "react-router-dom": "^6.2.1",
+    "react-scripts": "5.0.0",
+    "react-yandex-maps": "^4.6.0",
+    "redux": "^4.1.2",
+    "redux-thunk": "^2.4.0",
+    "typescript": "^4.5.5",
+    "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.179",
+    "@typescript-eslint/eslint-plugin": "^5.2.0",
+    "@typescript-eslint/parser": "^5.2.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-typescript": "^14.0.1",
+    "redux-devtools-extension": "^2.13.9"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "eslint": "eslint ./src",
+    "eslint:fix": "eslint ./src --fix",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "eslintConfig": {
+    "extends": [
+      "airbnb",
+      "airbnb-typescript"
+    ],
+    "plugins": [
+      "@typescript-eslint/eslint-plugin"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "project": "./tsconfig.json"
+    },
+    "rules": {
+      "react/prefer-stateless-function": "off",
+      "import/prefer-default-export": "off",
+      "jsx-a11y/anchor-is-valid": "off",
+      "react/destructuring-assignment": "off",
+      "jsx-a11y/click-events-have-key-events": "off",
+      "react/sort-comp": "off",
+      "no-param-reassign": "off",
+      "import/no-named-as-default": "off",
+      "import/no-extraneous-dependencies": "off",
+      "react/jsx-props-no-spreading": "off",
+      "react/require-default-props": "off",
+      "max-len": [
+        1,
+        120
+      ],
+      "no-console": "off",
+      "react/no-access-state-in-setstate": "off",
+      "react/no-array-index-key": "off"
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+@import 'src/constants/styles/common';
+
+.order-missing {
+  display: flex;
+  flex-direction: column;
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+
+  &__title {
+    margin: 0 auto;
+    padding: .5rem 2rem;
+    border-top: 1px solid $main-lightgrey-color;
+    border-bottom: 1px solid $main-lightgrey-color;
+    width: 100%;
+
+    font-size: .875rem;
+    color: $main-grey-color;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    padding: .5rem 2rem;
+    width: 100%;
+    height: 100%;
+
+    img {
+      height: 14rem;
+    }
+    &__link {
+      color: $main-black-color;
+      &:hover {
+        color: $main-green-color;
+      }
+    }
+  }
+}

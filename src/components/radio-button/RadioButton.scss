@@ -1,0 +1,73 @@
+@import "src/constants/styles/common";
+
+.form_radio {
+  &__fieldset {
+    display: flex;
+    border: none;
+    padding: 0;
+    margin: 0;
+
+    &__r-button {
+      display: flex;
+      margin: .375rem .5rem .375rem 0;
+    }
+    &__name {
+      font-size: .875rem;
+      color: $main-grey-color;
+
+      &_active {
+        color: $main-black-color;
+      }
+    }
+    &__input {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+
+      border-radius: 50%;
+      width: 1rem;
+      height: 1rem;
+
+      border: 2px solid $main-grey-color;
+      outline: none;
+      margin: 0 .375rem 0 0;
+
+      position: relative;
+      top: .25rem;
+      cursor: pointer;
+
+      &_checkbox {
+        border-radius: 0;
+      }
+    }
+
+    &__input:checked {
+      border: 4px solid $main-green-color;
+    }
+    &__input_checkbox:checked {
+      border: 2px solid $main-green-color;
+      background: url("../../assets/icons/check-mark.svg") no-repeat;
+    }
+
+    &__input_checkbox:checked + span {
+      color: $main-black-color;
+    }
+
+    &_column {
+      flex-direction: column;
+
+      &__r-button {
+        margin-bottom: 1rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 360px){
+  .form_radio {
+    &__fieldset {
+      flex-direction: column;
+    }
+  }
+}
+

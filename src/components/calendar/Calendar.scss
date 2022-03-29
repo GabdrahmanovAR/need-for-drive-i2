@@ -1,0 +1,20 @@
+.calendar {
+  position: absolute;
+  top: 0;
+  opacity: 0;
+}
+
+@media screen and (max-width: 419px){
+  .calendar {
+    top: 1.2rem;
+  }
+  .ant-picker-datetime-panel {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 540px){
+  .ant-picker-datetime-panel {
+    display: block;
+  }
+}

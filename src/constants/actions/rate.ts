@@ -1,0 +1,1 @@
+export const LOAD_RATE_SUCCESS = 'RATE/LOAD_RATE_SUCCESS';

@@ -1,0 +1,13 @@
+.main {
+  display: flex;
+  height: 100%;
+
+  &__sidebar {
+    max-width: 4rem;
+    width: 10%;
+  }
+  &__container {
+    width: 100%;
+    padding: 0;
+  }
+}

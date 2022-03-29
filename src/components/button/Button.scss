@@ -1,0 +1,68 @@
+@import "src/constants/styles/common";
+
+.button {
+  min-height: 3rem;
+  font-size: 1.125rem;
+  border-radius: .375rem;
+  border: none;
+  color: $main-white-color;
+  transition: hover 500ms linear;
+  position: relative;
+  width: 100%;
+
+  &__text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    width: 100%;
+
+    &_disabled {
+      cursor: default;
+    }
+  }
+  &__spinner {
+    border: 0.125rem solid white !important;
+    border-bottom-color: transparent !important;
+    height: 48px;
+  }
+  div {
+    color: $main-white-color;
+  }
+  &_disabled {
+    position: relative;
+    height: 3rem;
+    font-size: 1.125rem;
+    border-radius: .375rem;
+    border: none;
+    color: $main-white-color;
+    width: 100%;
+    background: $main-lightgrey-color;
+  }
+}
+
+.button:before {
+  display: block;
+  position: absolute;
+  border-radius: .375rem;
+  content: '';
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background: linear-gradient(to right, #0EC261, #039F67);
+}
+
+.button:hover:before {
+  cursor: pointer;
+  filter: brightness(.8);
+}
+
+.button:active:before {
+  filter: brightness(.6);
+}
+
+.button_disabled:hover {
+  cursor: default;
+}

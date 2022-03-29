@@ -1,0 +1,24 @@
+@import "src/constants/styles/common";
+
+.lang-btn {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  color: $main-green-color;
+}
+
+.lang-btn:hover {
+  border-radius: 100%;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid $main-white-color;
+  color: $main-white-color;
+}
+
+.lang-btn:active {
+  color: $main-green-color;
+}

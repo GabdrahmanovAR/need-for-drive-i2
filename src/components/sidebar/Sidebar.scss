@@ -1,0 +1,44 @@
+@import "src/constants/styles/common";
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $main-black-color;
+  min-width: 4rem;
+  padding: 2rem 0 1.2rem 0;
+  box-sizing: border-box;
+
+  &__button {
+    background: transparent;
+    border: none;
+    padding: 0;
+
+    img {
+      width: 2rem;
+    }
+  }
+  &__button:hover {
+    cursor: pointer;
+  }
+  &__lang {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__btn {
+      display: none;
+      background-color: transparent;
+      border: none;
+    }
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px){
+  .sidebar {
+    display: none;
+  }
+}
