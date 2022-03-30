@@ -3,53 +3,68 @@ import { Button, Form, Input } from 'antd';
 import { inputRules } from '../../constants/input-rules/inputRules';
 import './LoginForm.scss';
 import logoIcon from '../../assets/icons/login-icon.svg';
+import { authorizationRequest } from '../../api-request/apiRequest';
 
-const LoginForm = () => (
-  <main className="login-form">
-    <section className="login-form__header">
-      <img src={logoIcon} alt="logo" />
-      <h2>Need for drive</h2>
-    </section>
-    <section className="login-form__container">
-      <Form name="login-form">
-        <p className="form-login__input-title">Почта</p>
-        <Form.Item
-          name="email"
-          label=""
-          rules={inputRules.email}
+interface IFormResult {
+  username: string;
+  password: string;
+}
+
+const LoginForm = () => {
+  const onFinish = (values: IFormResult) => {
+    authorizationRequest(values.username, values.password);
+  };
+
+  return (
+    <main className="login-form">
+      <section className="login-form__header">
+        <img src={logoIcon} alt="logo" />
+        <h2><a className="login-form__header__link" href="/need-for-drive-i2">Need for drive</a></h2>
+      </section>
+      <section className="login-form__container">
+        <Form
+          name="login-form"
+          onFinish={onFinish}
         >
-          <Input
-            placeholder="Введите e-mail"
-            onChange={(event) => console.log(event.target.value)}
-          />
-        </Form.Item>
-        <p className="form-login__input-title">Пароль</p>
-        <Form.Item
-          name="password"
-          label=""
-          rules={inputRules.password}
-        >
-          <Input.Password
-            placeholder="Введите пароль"
-            onChange={(event) => console.log(event.target.value)}
-          />
-        </Form.Item>
-        <div className="login-form__footer">
-          <a href="">Запросить доступ</a>
-          <Form.Item name="form-button">
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="form-login__button"
-              onClick={() => console.log('Button clicked')}
-            >
-              Войти
-            </Button>
+          <p className="form-login__input-title">Логин</p>
+          <Form.Item
+            name="username"
+            label=""
+            rules={inputRules.email}
+          >
+            <Input
+              placeholder="Введите логин"
+              onChange={(event) => console.log(event.target.value)}
+            />
           </Form.Item>
-        </div>
-      </Form>
-    </section>
-  </main>
-);
+          <p className="form-login__input-title">Пароль</p>
+          <Form.Item
+            name="password"
+            label=""
+            rules={inputRules.password}
+          >
+            <Input.Password
+              placeholder="Введите пароль"
+              onChange={(event) => console.log(event.target.value)}
+            />
+          </Form.Item>
+          <div className="login-form__footer">
+            <a href="">Запросить доступ</a>
+            <Form.Item name="form-button">
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="form-login__button"
+                onClick={() => console.log('Button clicked')}
+              >
+                Войти
+              </Button>
+            </Form.Item>
+          </div>
+        </Form>
+      </section>
+    </main>
+  );
+};
 
 export default LoginForm;
