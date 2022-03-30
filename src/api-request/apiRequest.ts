@@ -42,7 +42,7 @@ export const apiAuth = axios.create({
   baseURL: BASE_URL,
   headers: {
     [APP_ID_FIELD]: APP_ID_VALUE,
-    Authorization: `Basic ${btoa(`${randomHash}:${SECRET_KEY}`)}`,
+    Authorization: `Basic ${btoa(`${randomHash()}:${SECRET_KEY}`)}`,
     'Content-Type': 'application/json',
   },
 });
