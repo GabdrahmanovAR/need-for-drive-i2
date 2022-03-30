@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
 import { Button, Form, Input } from 'antd';
 import { inputRules } from '../../constants/input-rules/inputRules';
@@ -13,15 +14,14 @@ interface IFormResult {
 }
 
 const LoginForm = () => {
-  const [isLoading, setIsLoaing] = useState(false);
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const onFinish = (values: IFormResult) => {
+    setIsLoading(true);
     authorizationRequest(values.username, values.password)
-      .then((response: AxiosResponse<IAuthToken>) => localStorage.setItem('auth-token', response.data.access_token));
-  };
-
-  const handleSubmitBtnClick = () => {
-    setIsLoaing(true);
+      .then((response: AxiosResponse<IAuthToken>) => localStorage.setItem('auth-token', response.data.access_token))
+      .finally(() => localStorage.getItem('auth-token') && navigate('/admin/panel'));
   };
 
   return (
@@ -58,11 +58,9 @@ const LoginForm = () => {
                 type="primary"
                 htmlType="submit"
                 className="form-login__button"
-                onClick={handleSubmitBtnClick}
                 loading={isLoading}
-              >
-                Войти
-              </Button>
+                icon={<span>Войти</span>}
+              />
             </Form.Item>
           </div>
         </Form>

@@ -1,0 +1,41 @@
+@import "src/constants/styles/common";
+
+.admin-sidebar {
+  width: 285px;
+  height: 100%;
+  background-color: $main-white-color;
+  box-shadow: 0 6px 16px 0 rgba(0, 0, 0, .08);
+
+  &__header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+
+    img {
+      width: 2rem;
+    }
+    h3 {
+      color: $main-lightblack-color;
+      margin: 0 0 0 1rem;
+    }
+    &__link {
+      color: $main-lightblack-color;
+      text-decoration: none;
+    }
+    &__link:hover {
+      cursor: pointer;
+      color: $main-lightblack-color;
+    }
+  }
+}
+
+.admin-sidebar__menu li.ant-menu-item {
+  border-bottom: 2px solid #F5F6F8;
+  border-top: 2px solid #f5f6f8;
+  margin-top: 0;
+  height: 57px;
+}
+.admin-sidebar__menu li.ant-menu-item:not(:last-child) {
+  margin-bottom: -2px;
+}

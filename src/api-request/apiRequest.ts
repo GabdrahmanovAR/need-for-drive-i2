@@ -38,7 +38,7 @@ export const getOrderById = (orderId: string) => apiDB.get(`${ORDER_URL}/${order
 
 export const deleteOrderById = (orderId: string) => apiDB.delete(`${ORDER_URL}/${orderId}`);
 
-export const apiAuth = axios.create({
+const apiAuth = axios.create({
   baseURL: BASE_URL,
   headers: {
     [APP_ID_FIELD]: APP_ID_VALUE,
@@ -51,3 +51,13 @@ export const authorizationRequest = (username: string, password: string) => apiA
   username,
   password,
 });
+
+// const apiEdit = axios.create({
+//   baseURL: BASE_URL,
+//   headers: {
+//     [APP_ID_FIELD]: APP_ID_VALUE,
+//     Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
+//   },
+// });
+//
+// export const getOrders = () => apiEdit('/db/order');
