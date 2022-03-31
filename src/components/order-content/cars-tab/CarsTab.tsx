@@ -44,7 +44,7 @@ const CarsTab = () => {
   }, [fetching]);
 
   const handleCarsScroll = (event: any) => {
-    if (event.target.scrollHeight - event.target.scrollTop <= event.target.clientHeight) {
+    if (event.target.scrollHeight - event.target.scrollTop <= event.target.clientHeight && !carsDataState.isLoading) {
       setFetching(true);
     }
   };

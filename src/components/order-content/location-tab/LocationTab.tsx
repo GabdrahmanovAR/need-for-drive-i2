@@ -144,7 +144,7 @@ const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocati
           onClickBtnFunc={handleCityBtnClick}
           childComponent={(
             <DropDownMenu
-              pointData={pointsDataState}
+              data={pointsDataState}
               isActive={citiesMenuActive}
               onClickFunc={handleCityListItemClick}
               cityName={city}
@@ -160,7 +160,7 @@ const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocati
           onClickBtnFunc={handleMarkerBtnClick}
           childComponent={(
             <DropDownMenu
-              pointData={pointsDataState}
+              data={pointsDataState}
               isActive={markerMenuActive}
               onClickFunc={handleMarkerListItemClick}
             />

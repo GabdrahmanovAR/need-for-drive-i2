@@ -1,11 +1,15 @@
 import React from 'react';
 import './AdminContent.scss';
 import Sidebar from './sidebar/Sidebar';
+import Header from './header/Header';
 
 const AdminContent = () => (
-  <section className="admin-content">
+  <main className="admin-content">
     <Sidebar />
-  </section>
+    <section className="admin-content__main">
+      <Header />
+    </section>
+  </main>
 );
 
 export default AdminContent;

@@ -1,7 +1,9 @@
 .admin-content {
   display: flex;
-  max-width: 1440px;
-  margin: 0 auto;
   width: 100%;
   height: 100%;
+
+  &__main {
+    width: 100%;
+  }
 }

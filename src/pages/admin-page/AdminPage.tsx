@@ -5,13 +5,15 @@ import './AdminPage.scss';
 import AdminContent from '../../components/admin-content/AdminContent';
 
 const AdminPage = () => (
-  <div className="admin-page">
+  <main className="admin-page">
     <Routes>
+      {localStorage.getItem('auth-token')
+        ? <Route path="/" element={<Navigate to="/admin/panel" />} />
+        : <Route path="/" element={<Navigate to="/admin/login" />} />}
       <Route path="/login" element={<LoginForm />} />
       <Route path="/panel" element={<AdminContent />} />
-      <Route path="/" element={<Navigate to="/admin/login" />} />
     </Routes>
-  </div>
+  </main>
 );
 
 export default AdminPage;

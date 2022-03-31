@@ -1,0 +1,25 @@
+@import "src/constants/styles/common";
+
+.admin-header {
+  display: flex;
+  width: 100%;
+  background-color: $main-white-color;
+  height: 4rem;
+  padding: 0 1.75rem;
+  box-shadow: 0 6px 16px 0 rgba(0, 0, 0, .08);
+
+  &__search {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    flex-grow: 1;
+  }
+  &__notice {
+    width: 70px;
+    border-left: 1px solid #CACEDB;
+    border-right: 1px solid #CACEDB;
+  }
+  &__profile {
+    width: 220px;
+  }
+}
