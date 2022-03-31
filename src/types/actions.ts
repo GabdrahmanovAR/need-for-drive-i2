@@ -32,8 +32,9 @@ export interface IAdvancedTabActionType extends IActionType {
   endDay?: string;
 }
 
-export interface IInputFieldActionType extends IActionType{
-  focusedField?: string;
+export interface IFocusedItemActionType extends IActionType{
+  item?: string;
+  isActive?: boolean;
 }
 
 export interface IOrderConfirmActionType extends IActionType {

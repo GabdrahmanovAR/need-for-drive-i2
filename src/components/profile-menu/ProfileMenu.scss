@@ -22,8 +22,8 @@
     img {
       width: 1rem;
     }
-  }
-  &__dropdown-menu:hover {
-    cursor: pointer;
+    img:hover {
+      cursor: pointer;
+    }
   }
 }

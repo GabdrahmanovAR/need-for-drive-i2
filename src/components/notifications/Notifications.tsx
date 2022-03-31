@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import DropDownMenu from '../dropdown-menu/DropDownMenu';
 import notificationIcon from '../../assets/icons/notifications.svg';
 import './Notifications.scss';
+import { outsideClickDetection } from '../../utils/OutsideClickDetection';
+import { setFocusedFieldAction } from '../../redux/actions/FocusedItemAction';
 
 const Notifications = () => {
-  const [dropDownMenuActive, setDropDownMenuActive] = useState(false);
+  const [isDropDownMenuActive, setIsDropDownMenuActive] = useState(false);
+  const dispatch = useDispatch();
+  const wrapperRef = useRef(null);
+  outsideClickDetection(wrapperRef, setIsDropDownMenuActive);
 
   const handleImageClick = () => {
-    setDropDownMenuActive(!dropDownMenuActive);
-    console.log(`Bell clicked - ${!dropDownMenuActive}`);
+    setIsDropDownMenuActive(!isDropDownMenuActive);
+    dispatch(setFocusedFieldAction('notifications'));
   };
 
   const handleSomeAction = () => {
@@ -16,7 +22,7 @@ const Notifications = () => {
   };
 
   return (
-    <div className="notifications">
+    <div className="notifications" ref={wrapperRef}>
       <div className="notifications__bell">
         <img
           src={notificationIcon}
@@ -25,7 +31,7 @@ const Notifications = () => {
           role="presentation"
         />
         <div className="notifications__bell__count">2</div>
-        <DropDownMenu data="" isActive={dropDownMenuActive} onClickFunc={handleSomeAction} />
+        <DropDownMenu data="" isActive={isDropDownMenuActive} onClickFunc={handleSomeAction} />
       </div>
     </div>
   );

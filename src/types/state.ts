@@ -5,7 +5,7 @@ export interface IState {
   sidebarMenu: ISidebarMenuState;
   carCard: ICarCardState;
   advancedTab: IAdvancedTabState;
-  inputField: IInputFieldState;
+  focusedItem: IFocusedItemState;
   orderConfirm: IOrderConfirmState;
   orderInfo: IOrderInfoState;
   orderStep: IOrderStepState;
@@ -30,8 +30,9 @@ export interface IAdvancedTabState {
   endDay: string;
 }
 
-export interface IInputFieldState {
-  focusedField: string;
+export interface IFocusedItemState {
+  item: string;
+  isActive: boolean
 }
 
 export interface IOrderConfirmState {

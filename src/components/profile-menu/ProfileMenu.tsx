@@ -4,22 +4,23 @@ import DropDownMenu from '../dropdown-menu/DropDownMenu';
 import userAvatar from '../../assets/images/user-avatar.png';
 import dropDownIcon from '../../assets/icons/dropdown-icon.svg';
 import './ProfileMenu.scss';
-import { setFocusedFieldAction } from '../../redux/actions/InputFieldAction';
+import { setFocusedFieldAction } from '../../redux/actions/FocusedItemAction';
 import { outsideClickDetection } from '../../utils/OutsideClickDetection';
+import { EMPTY_STRING } from '../../constants/common';
 
 const ProfileMenu = () => {
-  const [dropDownMenuActive, setDropDownMenuActive] = useState(false);
+  const [isDropDownMenuActive, setIsDropDownMenuActive] = useState(false);
   const dispatch = useDispatch();
   const wrapperRef = useRef(null);
-  outsideClickDetection(wrapperRef);
+  outsideClickDetection(wrapperRef, setIsDropDownMenuActive);
 
   const handleImageClick = () => {
-    setDropDownMenuActive(!dropDownMenuActive);
+    setIsDropDownMenuActive(!isDropDownMenuActive);
     dispatch(setFocusedFieldAction('profile-menu'));
   };
 
-  const handleSomeAction = () => {
-    console.log('Some Action');
+  const handleMenuClick = () => {
+    dispatch(setFocusedFieldAction(EMPTY_STRING));
   };
 
   return (
@@ -38,7 +39,7 @@ const ProfileMenu = () => {
             onClick={handleImageClick}
             role="presentation"
           />
-          <DropDownMenu data="" isActive={dropDownMenuActive} onClickFunc={handleSomeAction} />
+          <DropDownMenu data="" isActive={isDropDownMenuActive} onClickFunc={handleMenuClick} />
         </div>
       </section>
     </div>

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import './DropDownMenu.scss';
 import { useLocation } from 'react-router-dom';
 import { EMPTY_STRING } from '../../constants/common';
-import { inputFieldSelector } from '../../selectors/inputFieldSelector';
+import { focusedItemSelector } from '../../selectors/FocusedItemSelector';
 import { orderInfoSelector } from '../../selectors/orderInfoSelector';
 import { IPoint } from '../../types/api';
 
@@ -21,7 +21,7 @@ const DropDownMenu: FC<IDropDownMenu> = (props) => {
     onClickFunc,
     cityName = EMPTY_STRING,
   } = props;
-  const inputFieldState = useSelector(inputFieldSelector);
+  const focusedItemState = useSelector(focusedItemSelector);
   const { location } = useSelector(orderInfoSelector);
   const locationPath = useLocation();
 
@@ -32,7 +32,7 @@ const DropDownMenu: FC<IDropDownMenu> = (props) => {
           className={
           `drop-down-menu__list 
           ${isActive && 'drop-down-menu__list_active'}
-          ${inputFieldState.focusedField === 'profile-menu' && 'drop-down-menu__list_active-admin'}`
+          ${focusedItemState.item === 'profile-menu' && 'drop-down-menu__list_active-admin'}`
           }
         >
           <ul>
@@ -48,7 +48,7 @@ const DropDownMenu: FC<IDropDownMenu> = (props) => {
     <div className="drop-down-menu">
       <nav className={`drop-down-menu__list ${isActive && 'drop-down-menu__list_active'}`}>
         <ul>
-          {inputFieldState.focusedField === 'city-field'
+          {focusedItemState.item === 'city-field'
             ? (data.data.map((someCity: IPoint, index: number) => {
               if (someCity.cityId === null || someCity.cityId.name.slice(0, cityName.length) !== cityName) return null;
               return (
