@@ -5,11 +5,13 @@ import notificationIcon from '../../assets/icons/notifications.svg';
 import './Notifications.scss';
 import { outsideClickDetection } from '../../utils/OutsideClickDetection';
 import { setFocusedFieldAction } from '../../redux/actions/FocusedItemAction';
+import { EMPTY_STRING } from '../../constants/common';
 
 const Notifications = () => {
   const [isDropDownMenuActive, setIsDropDownMenuActive] = useState(false);
   const dispatch = useDispatch();
   const wrapperRef = useRef(null);
+
   outsideClickDetection(wrapperRef, setIsDropDownMenuActive);
 
   const handleImageClick = () => {
@@ -17,8 +19,9 @@ const Notifications = () => {
     dispatch(setFocusedFieldAction('notifications'));
   };
 
-  const handleSomeAction = () => {
-    console.log('Some Action');
+  const handleMenuClick = () => {
+    setIsDropDownMenuActive(false);
+    dispatch(setFocusedFieldAction(EMPTY_STRING));
   };
 
   return (
@@ -31,7 +34,7 @@ const Notifications = () => {
           role="presentation"
         />
         <div className="notifications__bell__count">2</div>
-        <DropDownMenu data="" isActive={isDropDownMenuActive} onClickFunc={handleSomeAction} />
+        <DropDownMenu data="" isActive={isDropDownMenuActive} onClickFunc={handleMenuClick} />
       </div>
     </div>
   );

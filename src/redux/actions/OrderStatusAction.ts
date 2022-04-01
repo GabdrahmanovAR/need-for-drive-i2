@@ -8,12 +8,15 @@ import {
   UPLOADING_ORDER_START,
 } from '../../constants/actions/orderStatus';
 import { IOrderInfoState } from '../../types/state';
-import { deleteOrderById, getOrderById, registerOrder } from '../../api-request/apiRequest';
-import { IOrderStatus, IOrderStatusResponse } from '../../types/api';
+import {
+  adminGetCarOrder, deleteOrderById, getOrderById, registerOrder,
+} from '../../api-request/apiRequest';
+import { IAdminOrderStatusState, IOrderStatus, IOrderStatusResponse } from '../../types/api';
 import { changeOrderConfirmAction } from './OrderConfirmAction';
 import { clearOrderInfoAction } from './OrderInfoAction';
 import { resetRadioBtnAction } from './RadioButtonAction';
 import { resetTabsStateAction } from './OrderStepAction';
+import { EMPTY_STRING } from '../../constants/common';
 
 const loadingOrderStart = (): IOrderStatusActionType => ({
   type: UPLOADING_ORDER_START,
@@ -23,14 +26,21 @@ const loadingOrderEnd = (): IOrderStatusActionType => ({
   type: UPLOADING_ORDER_END,
 });
 
-const getOrderStatusData = (data: IOrderStatusResponse): IOrderStatusActionType => ({
+const getOrderStatusData = (data: IOrderStatusResponse, count?: number): IOrderStatusActionType => ({
   type: GET_ORDER_STATUS_DATA,
+  count,
   statusInfo: {
     id: data.id,
-    car: {
+    car: data.carId ? {
       name: data.carId.name,
       image: data.carId.thumbnail.path,
       number: data.carId.number,
+      tank: data.carId.tank,
+    } : {
+      name: EMPTY_STRING,
+      image: EMPTY_STRING,
+      number: EMPTY_STRING,
+      tank: 0,
     },
     color: data.color,
     dateTo: data.dateTo,
@@ -39,7 +49,7 @@ const getOrderStatusData = (data: IOrderStatusResponse): IOrderStatusActionType 
     isNeedChildChair: data.isNeedChildChair,
     isRightWheel: data.isRightWheel,
     price: data.price,
-    rate: data.rateId.rateTypeId.name,
+    rate: data.rateId ? data.rateId.rateTypeId.name : EMPTY_STRING,
     cityName: data.cityId.name,
     pointName: data.pointId.address,
   },
@@ -84,6 +94,18 @@ export const deleteOrderByIdAction = (orderId: string) => async (dispatch: Dispa
     dispatch(resetTabsStateAction());
     const response = await deleteOrderById(orderId);
     console.log(response.data);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    dispatch(loadingOrderEnd());
+  }
+};
+
+export const adminGetCarOrderAction = (page: number) => async (dispatch: Dispatch) => {
+  dispatch(loadingOrderStart());
+  try {
+    const response: AxiosResponse<IAdminOrderStatusState> = await adminGetCarOrder(page);
+    dispatch(getOrderStatusData(response.data.data[0], response.data.count));
   } catch (error) {
     console.log(error);
   } finally {

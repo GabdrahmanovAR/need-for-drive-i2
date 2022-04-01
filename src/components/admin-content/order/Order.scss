@@ -1,0 +1,12 @@
+.admin-order {
+  display: flex;
+
+  &__car-img {
+    img {
+      height: 60px;
+    }
+  }
+  &__info {
+    font-size: .8125rem;
+  }
+}

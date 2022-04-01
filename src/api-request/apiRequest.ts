@@ -52,12 +52,12 @@ export const authorizationRequest = (username: string, password: string) => apiA
   password,
 });
 
-// const apiEdit = axios.create({
-//   baseURL: BASE_URL,
-//   headers: {
-//     [APP_ID_FIELD]: APP_ID_VALUE,
-//     Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
-//   },
-// });
-//
-// export const getOrders = () => apiEdit('/db/order');
+const apiAdminRequests = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    [APP_ID_FIELD]: APP_ID_VALUE,
+    Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
+  },
+});
+
+export const adminGetCarOrder = (page: number) => apiAdminRequests.get(`/db/order?page=${5420 + page}&limit=1`);

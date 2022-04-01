@@ -101,6 +101,7 @@ export interface IRateActionType extends IActionType {
 }
 
 export interface IOrderStatusActionType extends IActionType {
+  count?: number
   loading?: boolean;
   statusInfo?: IOrderStatusInfoState;
 }

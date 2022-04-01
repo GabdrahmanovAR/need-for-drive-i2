@@ -12,6 +12,7 @@ const ProfileMenu = () => {
   const [isDropDownMenuActive, setIsDropDownMenuActive] = useState(false);
   const dispatch = useDispatch();
   const wrapperRef = useRef(null);
+
   outsideClickDetection(wrapperRef, setIsDropDownMenuActive);
 
   const handleImageClick = () => {
@@ -21,6 +22,7 @@ const ProfileMenu = () => {
 
   const handleMenuClick = () => {
     dispatch(setFocusedFieldAction(EMPTY_STRING));
+    setIsDropDownMenuActive(false);
   };
 
   return (

@@ -45,7 +45,13 @@ export interface ICarThumbnail {
   mimetype: string;
 }
 
+export interface IAdminOrderStatusState {
+  count: number;
+  data: IOrderStatusResponse[];
+}
+
 export interface IOrderStatus {
+  count: number;
   data: IOrderStatusResponse;
   fields: {
     'orderStatusId': {
@@ -153,6 +159,7 @@ export interface IOrderStatusResponse {
     'priceMax': number,
     'name': string,
     'number': string,
+    'tank': number,
     'categoryId': {
       'name': string,
       'description': string,

@@ -8,6 +8,7 @@ export const outsideClickDetection = (ref: any, callback?: SetStateAction<any>) 
 
   useEffect(() => {
     function handleClickOutside(event: any) {
+      // TODO исправить постоянный вызов при клике вне компонента, когда компонент уже закрыт
       if (ref.current && !ref.current.contains(event.target)) {
         dispatch(setFocusedFieldAction(EMPTY_STRING));
         callback(false);

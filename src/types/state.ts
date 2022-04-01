@@ -135,6 +135,7 @@ interface IRateTypeInfoState {
 }
 
 export interface IOrderStatusState {
+  count: number;
   loading: boolean;
   statusInfo: IOrderStatusInfoState;
 }
@@ -144,6 +145,7 @@ export interface IOrderStatusInfoState {
     name: string;
     number: string;
     image: string;
+    tank: number;
   };
   cityName: string;
   color: string;
