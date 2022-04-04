@@ -7,6 +7,7 @@ import { DEFAULT_PAGE_LIMIT } from '../../../constants/common';
 import Spinner from '../../Spinner/Spinner';
 import Order from '../order/Order';
 import './OrderMenu.scss';
+import OrderEdit from '../order-edit/OrderEdit';
 
 const OrdersMenu = () => {
   const orderStatusState = useSelector(orderStatusSelector);
@@ -28,8 +29,10 @@ const OrdersMenu = () => {
     <main className="order-menu">
       <h2>Заказы</h2>
       <section className="order-menu__info">
-        <div className="order-menu__info__edit" />
-        <div className="order-menu__info__status">
+        <div className="order-menu__info__edit">
+          <OrderEdit />
+        </div>
+        <div className={`order-menu__info__status ${orderStatusState.loading && 'order-menu__info__status_loading'}`}>
           {orderStatusState.loading ? <Spinner />
             : <Order />}
         </div>

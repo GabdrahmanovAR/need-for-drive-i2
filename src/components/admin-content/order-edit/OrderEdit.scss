@@ -1,0 +1,21 @@
+@import "src/constants/styles/common";
+
+.order-edit {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid $main-lightgrey-color;
+  padding: 1rem;
+
+  &__form {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    &__selectors {
+      display: flex;
+    }
+    &__button .ant-form-item {
+      margin-right: 0;
+    }
+  }
+}

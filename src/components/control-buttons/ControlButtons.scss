@@ -1,0 +1,34 @@
+@import "src/constants/styles/common";
+
+.control-buttons {
+  display: flex;
+  border: 1px solid #BECAD6;
+  border-radius: .25rem;
+  padding: 0;
+  font-size: 0.6875rem;
+
+  div {
+    display: flex;
+  }
+  &__container {
+    &__button {
+      background-color: transparent;
+      border: none;
+      width: fit-content;
+    }
+    &__button:hover {
+      cursor: pointer;
+    }
+    img {
+      margin-left: .5rem;
+    }
+  }
+
+  &__container:not(:last-child) {
+    border-right: 1px solid #BECAD6;
+  }
+  &__container:hover {
+    cursor: pointer;
+    background-color: $main-lightgrey-color;
+  }
+}

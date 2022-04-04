@@ -53,6 +53,7 @@ const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocati
   }, [cityName, markerName]);
 
   useEffect(() => {
+    dispatch(resetRadioBtnAction());
     if (city === EMPTY_STRING) return;
     pointsDataState.data.forEach((someCity: IPoint) => {
       if (someCity.cityId !== null && someCity.cityId.name === city) {

@@ -1,12 +1,75 @@
 .admin-order {
   display: flex;
+  width: 100%;
 
-  &__car-img {
-    img {
-      height: 60px;
+  &__car {
+    display: flex;
+    width: 50%;
+
+    &__car-img {
+      display: flex;
+      align-items: center;
+      img {
+        height: 60px;
+        margin-right: 1.5rem;
+      }
+    }
+    &__info {
+      width: 100%;
+      font-size: .8125rem;
     }
   }
-  &__info {
+  &__radio-buttons {
+    display: flex;
+    justify-content: center;
+    width: 20%;
+  }
+  &__radio-buttons .form_radio__fieldset__name {
     font-size: .8125rem;
   }
+  &__radio-buttons .form_radio__fieldset__input {
+    width: .8125rem;
+    height: .8125rem;
+  }
+  &__price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+
+    h2 {
+      margin-bottom: 0;
+    }
+  }
+  &__control-buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 20%;
+  }
+}
+
+@media screen and (max-width: 1439px) {
+  .admin-order {
+    flex-direction: column;
+
+    section {
+      margin: .5rem 0;
+      justify-content: flex-start;
+      width: 100%;
+    }
+    section.admin-order__radio-buttons {
+      margin-top: 1rem;
+    }
+    &__car {
+      width: 100%;
+
+      section.admin-order__car__car-img {
+        width: auto;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1023px) {
 }

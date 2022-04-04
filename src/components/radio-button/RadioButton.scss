@@ -9,6 +9,8 @@
 
     &__r-button {
       display: flex;
+    }
+    &__r-button:not(:first-child) {
       margin: .375rem .5rem .375rem 0;
     }
     &__name {
@@ -47,6 +49,7 @@
     &__input_checkbox:checked {
       border: 2px solid $main-green-color;
       background: url("../../assets/icons/check-mark.svg") no-repeat;
+      background-size: contain;
     }
 
     &__input_checkbox:checked + span {
