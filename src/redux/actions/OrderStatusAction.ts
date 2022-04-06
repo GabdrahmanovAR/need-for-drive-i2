@@ -105,7 +105,8 @@ export const adminGetCarOrderAction = (page: number) => async (dispatch: Dispatc
   dispatch(loadingOrderStart());
   try {
     const response: AxiosResponse<IAdminOrderStatusState> = await adminGetCarOrder(page);
-    dispatch(getOrderStatusData(response.data.data[0], response.data.count));
+    if (response.status === 401) localStorage.removeItem('auth-token');
+    else dispatch(getOrderStatusData(response.data.data[0], response.data.count));
   } catch (error) {
     console.log(error);
   } finally {

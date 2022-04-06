@@ -52,12 +52,8 @@ export const authorizationRequest = (username: string, password: string) => apiA
   password,
 });
 
-const apiAdminRequests = axios.create({
-  baseURL: BASE_URL,
+export const adminGetCarOrder = (page: number) => apiDB.get(`/db/order?page=${5420 + page}&limit=1`, {
   headers: {
-    [APP_ID_FIELD]: APP_ID_VALUE,
     Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
   },
 });
-
-export const adminGetCarOrder = (page: number) => apiAdminRequests.get(`/db/order?page=${5420 + page}&limit=1`);

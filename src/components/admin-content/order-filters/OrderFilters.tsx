@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Form, Select } from 'antd';
-import './OrderEdit.scss';
+import './OrderFilters.scss';
+import dropdownIcon from '../../../assets/icons/filter-dropdown-icon.svg';
 
 const { Option } = Select;
 
@@ -9,7 +10,7 @@ interface IFormResult {
   password: string;
 }
 
-const OrderEdit = () => {
+const OrderFilters = () => {
   const onFinish = (values: IFormResult) => {
     console.log(values);
   };
@@ -26,18 +27,24 @@ const OrderEdit = () => {
           <Form.Item
             name="rate"
             label=""
-            initialValue="rate-1"
           >
-            <Select>
-              <Option value="rate-1">За неделю</Option>
+            <Select
+              suffixIcon={<img src={dropdownIcon} alt="" />}
+              placeholder="Интервал"
+            >
+              <Option value="rate-1">За день</Option>
+              <Option value="rate-2">За неделю</Option>
+              <Option value="rate-3">За месяц</Option>
             </Select>
           </Form.Item>
           <Form.Item
             name="car"
             label=""
-            initialValue="car-1"
           >
-            <Select>
+            <Select
+              suffixIcon={<img src={dropdownIcon} alt="" />}
+              placeholder="Марка"
+            >
               <Option value="car-1">Elantra</Option>
               <Option value="car-2">Mazda</Option>
             </Select>
@@ -45,18 +52,22 @@ const OrderEdit = () => {
           <Form.Item
             name="city"
             label=""
-            initialValue="city-1"
           >
-            <Select>
+            <Select
+              suffixIcon={<img src={dropdownIcon} alt="" />}
+              placeholder="Город"
+            >
               <Option value="city-1">Ульяновск</Option>
             </Select>
           </Form.Item>
           <Form.Item
             name="status"
             label=""
-            initialValue="status-1"
           >
-            <Select>
+            <Select
+              suffixIcon={<img src={dropdownIcon} alt="" />}
+              placeholder="Статус"
+            >
               <Option value="status-1">В процессе</Option>
             </Select>
           </Form.Item>
@@ -77,4 +88,4 @@ const OrderEdit = () => {
   );
 };
 
-export default OrderEdit;
+export default OrderFilters;

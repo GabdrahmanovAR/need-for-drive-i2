@@ -11,6 +11,10 @@
   &__burger-menu {
     display: none;
     border-right: 1px solid #CACEDB;
+
+    img {
+      cursor: pointer;
+    }
   }
   &__search {
     display: flex;
