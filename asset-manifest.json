@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/need-for-drive-i2/static/css/main.37b78311.css",
-    "main.js": "/need-for-drive-i2/static/js/main.19d1f1dd.js",
+    "main.css": "/need-for-drive-i2/static/css/main.d539defb.css",
+    "main.js": "/need-for-drive-i2/static/js/main.eb3e0288.js",
     "static/media/car-picture.png": "/need-for-drive-i2/static/media/car-picture.a9d926c8d4161c8b877f.png",
     "static/media/error.png": "/need-for-drive-i2/static/media/error.c2c8bd4f135f792dae74.png",
     "static/media/no-data.png": "/need-for-drive-i2/static/media/no-data.b306be4db6d6cebcaf8d.png",
@@ -19,6 +19,7 @@
     "index.html": "/need-for-drive-i2/index.html",
     "static/media/menu_btn_black.svg": "/need-for-drive-i2/static/media/menu_btn_black.fdc4c708b977a801c1027f21723eed6e.svg",
     "static/media/menu_btn.svg": "/need-for-drive-i2/static/media/menu_btn.33a037861fe40a57f066c4407f3003d5.svg",
+    "static/media/filter-dropdown-icon.svg": "/need-for-drive-i2/static/media/filter-dropdown-icon.551085a20b618db60dfab9248ea8125e.svg",
     "static/media/menu_close_btn.svg": "/need-for-drive-i2/static/media/menu_close_btn.1d4598cc9458aab267f86f7a6fc8b3fa.svg",
     "static/media/reject-icon.svg": "/need-for-drive-i2/static/media/reject-icon.ebfbf7fc23a4eeda15963f5c613914fc.svg",
     "static/media/delete-city.svg": "/need-for-drive-i2/static/media/delete-city.01609553fec431d0b9d66b5b4910376f.svg",
@@ -28,11 +29,11 @@
     "static/media/right-arrow.svg": "/need-for-drive-i2/static/media/right-arrow.7591c327fb5160f95b31d713c84e5cc5.svg",
     "static/media/dropdown-icon.svg": "/need-for-drive-i2/static/media/dropdown-icon.e709e3e8126acd27b6f4998529bcde32.svg",
     "static/media/location-arrow.svg": "/need-for-drive-i2/static/media/location-arrow.3f54b55d7d55c4a8870ecaeb995be364.svg",
-    "main.37b78311.css.map": "/need-for-drive-i2/static/css/main.37b78311.css.map",
-    "main.19d1f1dd.js.map": "/need-for-drive-i2/static/js/main.19d1f1dd.js.map"
+    "main.d539defb.css.map": "/need-for-drive-i2/static/css/main.d539defb.css.map",
+    "main.eb3e0288.js.map": "/need-for-drive-i2/static/js/main.eb3e0288.js.map"
   },
   "entrypoints": [
-    "static/css/main.37b78311.css",
-    "static/js/main.19d1f1dd.js"
+    "static/css/main.d539defb.css",
+    "static/js/main.eb3e0288.js"
   ]
 }
