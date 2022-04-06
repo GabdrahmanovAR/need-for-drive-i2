@@ -4,7 +4,7 @@ import { EMPTY_STRING, EmptyFuncType } from '../../constants/common';
 import deleteIcon from '../../assets/icons/delete-city.svg';
 import './InputField.scss';
 import { setFocusedFieldAction } from '../../redux/actions/FocusedItemAction';
-import { focusedItemSelector } from '../../selectors/FocusedItemSelector';
+import { focusedItemSelector } from '../../selectors/focusedItemSelector';
 
 interface IInputFieldProps {
   title: string,

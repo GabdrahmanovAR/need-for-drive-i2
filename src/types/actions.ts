@@ -12,6 +12,10 @@ export interface ISidebarMenuActionType extends IActionType {
   menuOpen?: boolean;
 }
 
+export interface IAdminSidebarMenuActionType extends IActionType {
+  menuOpen?: boolean;
+}
+
 export interface IOrderLocationActionType {
   cityName?: string;
   cityId?: string;

@@ -6,10 +6,11 @@ import { orderStatusSelector } from '../../../selectors/orderStatusSelector';
 import { DEFAULT_PAGE_LIMIT } from '../../../constants/common';
 import Spinner from '../../Spinner/Spinner';
 import Order from '../order/Order';
-import './OrderMenu.scss';
+import './OrderInfo.scss';
 import OrderEdit from '../order-edit/OrderEdit';
+import { resetRadioBtnAction } from '../../../redux/actions/RadioButtonAction';
 
-const OrdersMenu = () => {
+const OrdersInfo = () => {
   const orderStatusState = useSelector(orderStatusSelector);
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,6 +23,7 @@ const OrdersMenu = () => {
 
   const handlePaginationChange = (page: number) => {
     setCurrentPage(page);
+    dispatch(resetRadioBtnAction());
     dispatch(adminGetCarOrderAction(page));
   };
 
@@ -52,4 +54,4 @@ const OrdersMenu = () => {
   );
 };
 
-export default OrdersMenu;
+export default OrdersInfo;

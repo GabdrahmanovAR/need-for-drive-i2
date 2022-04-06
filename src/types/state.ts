@@ -3,6 +3,7 @@ import { ICarInfoData, IPoint } from './api';
 
 export interface IState {
   sidebarMenu: ISidebarMenuState;
+  adminSidebarMenu: IAdminSidebarMenuState
   carCard: ICarCardState;
   advancedTab: IAdvancedTabState;
   focusedItem: IFocusedItemState;
@@ -17,6 +18,10 @@ export interface IState {
 }
 
 export interface ISidebarMenuState {
+  isOpen: boolean;
+}
+
+export interface IAdminSidebarMenuState {
   isOpen: boolean;
 }
 

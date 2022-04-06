@@ -28,7 +28,7 @@ const OrderEdit = () => {
             label=""
             initialValue="rate-1"
           >
-            <Select style={{ width: 100, fontSize: 11 }}>
+            <Select>
               <Option value="rate-1">За неделю</Option>
             </Select>
           </Form.Item>
@@ -37,7 +37,7 @@ const OrderEdit = () => {
             label=""
             initialValue="car-1"
           >
-            <Select style={{ width: 100, fontSize: 11 }}>
+            <Select>
               <Option value="car-1">Elantra</Option>
               <Option value="car-2">Mazda</Option>
             </Select>
@@ -47,7 +47,7 @@ const OrderEdit = () => {
             label=""
             initialValue="city-1"
           >
-            <Select style={{ width: 100, fontSize: 11 }}>
+            <Select>
               <Option value="city-1">Ульяновск</Option>
             </Select>
           </Form.Item>
@@ -56,7 +56,7 @@ const OrderEdit = () => {
             label=""
             initialValue="status-1"
           >
-            <Select style={{ width: 100, fontSize: 11 }}>
+            <Select>
               <Option value="status-1">В процессе</Option>
             </Select>
           </Form.Item>
@@ -65,7 +65,7 @@ const OrderEdit = () => {
           <Form.Item name="form-button" style={{ width: 110 }}>
             <Button
               type="primary"
-              style={{ width: 110 }}
+              style={{ width: 110, padding: 0, fontSize: 11 }}
               htmlType="submit"
               className="form-login__button"
               icon={<span style={{ fontSize: 11 }}>Применить</span>}

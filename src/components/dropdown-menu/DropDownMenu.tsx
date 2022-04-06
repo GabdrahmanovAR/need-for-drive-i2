@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import './DropDownMenu.scss';
 import { useLocation } from 'react-router-dom';
 import { EMPTY_STRING } from '../../constants/common';
-import { focusedItemSelector } from '../../selectors/FocusedItemSelector';
+import { focusedItemSelector } from '../../selectors/focusedItemSelector';
 import { orderInfoSelector } from '../../selectors/orderInfoSelector';
 import { IPoint } from '../../types/api';
 

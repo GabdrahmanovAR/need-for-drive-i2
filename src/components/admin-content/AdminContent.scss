@@ -9,6 +9,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    overflow: auto;
 
     &__container {
       padding: 1.75rem;
@@ -20,12 +21,34 @@
     justify-content: space-between;
     align-items: center;
     background-color: $main-white-color;
-    height: 4rem;
+    min-height: 4rem;
     font-size: .875rem;
     padding: 0 1.75rem;
 
     &__links > a:first-child {
       margin-right: 1rem;
     }
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .admin-footer {
+    padding: 1rem 1.75rem;
+
+    &__links {
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+    }
+    &__copyright {
+      width: 50%;
+      text-align: end;
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .admin-footer a, .admin-footer div {
+    font-size: .75rem;
   }
 }

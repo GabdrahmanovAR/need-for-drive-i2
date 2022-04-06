@@ -2,7 +2,7 @@ import React from 'react';
 import { DatePicker } from 'antd';
 import './Calendar.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { focusedItemSelector } from '../../selectors/FocusedItemSelector';
+import { focusedItemSelector } from '../../selectors/focusedItemSelector';
 import { endDayRentAction, startDayRentAction } from '../../redux/actions/OrderInfoAction';
 import { orderInfoSelector } from '../../selectors/orderInfoSelector';
 import { EMPTY_STRING } from '../../constants/common';

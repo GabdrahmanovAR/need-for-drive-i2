@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import './AdminContent.scss';
 import Sidebar from './sidebar/Sidebar';
 import Header from './header/Header';
-import OrdersMenu from './orders-menu/OrdersMenu';
+import OrdersInfo from './orders-info/OrdersInfo';
 
 const AdminContent = () => {
   const [menu, setMenu] = useState('orders');
 
   const switchContent = (menuValue: string) => {
     switch (menuValue) {
-      case 'orders': return <OrdersMenu />;
+      case 'orders': return <OrdersInfo />;
       default: return <div>Ошибка</div>;
     }
   };

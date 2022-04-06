@@ -4,15 +4,20 @@
   display: flex;
   width: 100%;
   background-color: $main-white-color;
-  height: 4rem;
+  min-height: 4rem;
   padding: 0 1.75rem;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .08);
 
+  &__burger-menu {
+    display: none;
+    border-right: 1px solid #CACEDB;
+  }
   &__search {
     display: flex;
     align-items: center;
     height: 100%;
     flex-grow: 1;
+    padding: 0 .5rem;
   }
   &__notice {
     width: 70px;
@@ -21,6 +26,12 @@
   }
   &__profile {
     width: 220px;
+  }
+  &__modal-search .input-field {
+    width: 90%;
+  }
+  &__modal-search .input-field__container {
+    width: 100%;
   }
 }
 
@@ -39,5 +50,37 @@
   }
   &__search .input-field__input {
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .admin-header {
+    &__burger-menu {
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 1.625rem;
+        margin-right: .5rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .admin-header__search {
+    cursor: pointer;
+  }
+  .admin-header__search .input-field {
+    display: none;
+  }
+  .admin-header__search .input-field__input {
+    display: none;
+    padding: 0;
+    margin: 0;
+  }
+  .admin-header__search .input-field__close-btn {
+    display: none;
+    padding: 0;
   }
 }

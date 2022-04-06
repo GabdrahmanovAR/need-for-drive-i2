@@ -48,13 +48,13 @@ const Order = () => {
         <section className="admin-order__car__info">
           <div>
             <span><strong>{name.toUpperCase() || 'Автомобиль'}</strong></span>
-            <span> в </span>
+            <span className="dim-text"> в </span>
             <span><strong>{cityName}</strong></span>
-            <span>{`, ${pointName}`}</span>
+            <span className="dim-text">{`, ${pointName}`}</span>
           </div>
-          <div>{`${rentalDuration.from} - ${rentalDuration.to}`}</div>
+          <div className="dim-text">{`${rentalDuration.from} - ${rentalDuration.to}`}</div>
           <div>
-            <span>Цвет: </span>
+            <span className="dim-text">Цвет: </span>
             <span><strong>{carColor}</strong></span>
           </div>
         </section>

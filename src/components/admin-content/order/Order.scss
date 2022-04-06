@@ -1,3 +1,5 @@
+@import "src/constants/styles/common";
+
 .admin-order {
   display: flex;
   width: 100%;
@@ -49,6 +51,10 @@
   }
 }
 
+.dim-text, div.dim-text {
+  color: $main-grey-color;
+}
+
 @media screen and (max-width: 1439px) {
   .admin-order {
     flex-direction: column;
@@ -71,5 +77,11 @@
   }
 }
 
-@media screen and (max-width: 1023px) {
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .admin-order {
+    &__car {
+      display: block;
+    }
+  }
 }
+
