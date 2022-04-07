@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/need-for-drive-i2/static/css/main.f09f0379.css",
+    "main.css": "/need-for-drive-i2/static/css/main.a6005eea.css",
     "main.js": "/need-for-drive-i2/static/js/main.e053c232.js",
     "static/media/car-picture.png": "/need-for-drive-i2/static/media/car-picture.a9d926c8d4161c8b877f.png",
     "static/media/error.png": "/need-for-drive-i2/static/media/error.c2c8bd4f135f792dae74.png",
@@ -29,11 +29,11 @@
     "static/media/right-arrow.svg": "/need-for-drive-i2/static/media/right-arrow.7591c327fb5160f95b31d713c84e5cc5.svg",
     "static/media/dropdown-icon.svg": "/need-for-drive-i2/static/media/dropdown-icon.e709e3e8126acd27b6f4998529bcde32.svg",
     "static/media/location-arrow.svg": "/need-for-drive-i2/static/media/location-arrow.3f54b55d7d55c4a8870ecaeb995be364.svg",
-    "main.f09f0379.css.map": "/need-for-drive-i2/static/css/main.f09f0379.css.map",
+    "main.a6005eea.css.map": "/need-for-drive-i2/static/css/main.a6005eea.css.map",
     "main.e053c232.js.map": "/need-for-drive-i2/static/js/main.e053c232.js.map"
   },
   "entrypoints": [
-    "static/css/main.f09f0379.css",
+    "static/css/main.a6005eea.css",
     "static/js/main.e053c232.js"
   ]
 }
