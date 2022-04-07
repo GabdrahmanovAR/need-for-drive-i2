@@ -3,7 +3,9 @@ import React, {
 } from 'react';
 import { Menu } from 'antd';
 import './Sidebar.scss';
-import { DiffOutlined, EditOutlined, UnorderedListOutlined } from '@ant-design/icons';
+import {
+  DiffOutlined, EditOutlined, ProfileOutlined, UnorderedListOutlined,
+} from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import logoIcon from '../../../assets/icons/login-icon.svg';
 import { windowWidth } from '../../../utils/WindowWidth';
@@ -84,6 +86,12 @@ const Sidebar: FC<ISideBarProps> = ({ setMenu }) => {
             icon={<UnorderedListOutlined />}
           >
             Список авто
+          </Menu.Item>
+          <Menu.Item
+            key="list-of-entities"
+            icon={<ProfileOutlined />}
+          >
+            Список основных сущностей
           </Menu.Item>
         </Menu>
       </div>

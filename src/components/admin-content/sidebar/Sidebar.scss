@@ -1,7 +1,6 @@
 @import "src/constants/styles/common";
 
 .admin-sidebar {
-  width: 285px;
   height: 100%;
   z-index: 1;
 
@@ -52,7 +51,7 @@
   .admin-sidebar {
     animation-name: unCollapse-menu;
     animation-duration: 150ms;
-    width: 285px;
+    min-width: 285px;
   }
 }
 
