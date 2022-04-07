@@ -10,6 +10,28 @@ import './OrderInfo.scss';
 import OrderFilters from '../order-filters/OrderFilters';
 import { resetRadioBtnAction } from '../../../redux/actions/RadioButtonAction';
 
+const selectorData = [{
+  name: 'interval',
+  placeholder: 'Интервал',
+  data: ['За день', 'За неделю', 'За месяц'],
+},
+{
+  name: 'car',
+  placeholder: 'Марка',
+  data: ['Mazda', 'Ferrari', 'Tesla Model S'],
+},
+{
+  name: 'city',
+  placeholder: 'Город',
+  data: ['Ульяновск', 'Уфа', 'Москва'],
+},
+{
+  name: 'status',
+  placeholder: 'Статус',
+  data: ['В процессе', 'Завершен', 'Отменен', 'Подтвержден'],
+},
+];
+
 const OrdersInfo = () => {
   const orderStatusState = useSelector(orderStatusSelector);
   const dispatch = useDispatch();
@@ -32,7 +54,7 @@ const OrdersInfo = () => {
       <h2>Заказы</h2>
       <section className="order-menu__info">
         <div className="order-menu__info__edit">
-          <OrderFilters />
+          <OrderFilters selectorData={selectorData} />
         </div>
         <div className={`order-menu__info__status ${orderStatusState.loading && 'order-menu__info__status_loading'}`}>
           {orderStatusState.loading ? <Spinner />
