@@ -8,5 +8,39 @@
     border-radius: 0.5rem;
     background-color: $main-white-color;
     box-shadow: 0 3px 6px -4px rgba(0, 0, 0, .12), 0 3px 6px 0 rgba(0, 0, 0, .1), 0 9px 28px 8px rgba(0, 0, 0, .05);
+
+    &__table {
+      flex-grow: 1;
+      padding: 0.5rem 1rem;
+      font-size: .75rem;
+      overflow: auto;
+
+      table {
+        width: 100%;
+
+        thead th:nth-child(-n+5) {
+          width: 12%;
+        }
+        thead th:nth-child(6) {
+          width: 20%;
+        }
+        thead th:nth-child(7) {
+          width: 20%;
+        }
+        th, td {
+          padding: .5rem;
+          text-align: start;
+        }
+        thead th:nth-child(6), td:nth-child(6) {
+          text-align: center;
+        }
+        thead th:nth-child(7) {
+          text-align: end;
+        }
+        tbody tr td:not(:first-child) {
+          color: #818EA3;
+        }
+      }
+    }
   }
 }

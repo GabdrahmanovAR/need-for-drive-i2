@@ -4,6 +4,8 @@ import OrderFilters from '../order-filters/OrderFilters';
 import { DEFAULT_PAGE_LIMIT } from '../../../constants/common';
 import './EntityList.scss';
 
+const data = [1, 2, 3, 4, 5, 6];
+
 const selectorData = [{
   name: 'field1',
   placeholder: 'Field',
@@ -40,7 +42,34 @@ const EntityList = () => {
         <div className="entity-list__info__edit">
           <OrderFilters selectorData={selectorData} />
         </div>
-        <div className="entity-list__info__table" />
+        <div className="entity-list__info__table">
+          <table>
+            <thead>
+              <tr>
+                <th>Header</th>
+                <th>Header</th>
+                <th>Header</th>
+                <th>Header</th>
+                <th>Header</th>
+                <th>Header</th>
+                <th>Header</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((index) => (
+                <tr key={index}>
+                  <td>Value</td>
+                  <td>19,291</td>
+                  <td>19,291</td>
+                  <td>19,291</td>
+                  <td>19,291</td>
+                  <td>19,291</td>
+                  <td />
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
         <div className="order-menu__info__pagination">
           <Pagination
             current={currentPage}
