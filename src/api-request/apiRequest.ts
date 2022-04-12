@@ -1,9 +1,10 @@
 import axios from 'axios';
 import moment from 'moment';
 import {
-  APP_ID_FIELD, APP_ID_VALUE, BASE_URL, CARS_URL, ORDER_URL, POINT_URL, RATE_URL,
+  APP_ID_FIELD, APP_ID_VALUE, AUTHORIZATION_URL, BASE_URL, CARS_URL, ORDER_URL, POINT_URL, RATE_URL, SECRET_KEY,
 } from '../constants/api/api';
 import { IOrderInfoState } from '../types/state';
+import { randomHash } from '../utils/RandomHash';
 
 const apiDB = axios.create({
   baseURL: BASE_URL,
@@ -36,3 +37,17 @@ export const registerOrder = (orderInfo: IOrderInfoState) => apiDB.post(ORDER_UR
 export const getOrderById = (orderId: string) => apiDB.get(`${ORDER_URL}/${orderId}`);
 
 export const deleteOrderById = (orderId: string) => apiDB.delete(`${ORDER_URL}/${orderId}`);
+
+export const apiAuth = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    [APP_ID_FIELD]: APP_ID_VALUE,
+    Authorization: `Basic ${btoa(`${randomHash()}:${SECRET_KEY}`)}`,
+    'Content-Type': 'application/json',
+  },
+});
+
+export const authorizationRequest = (username: string, password: string) => apiAuth.post(AUTHORIZATION_URL, {
+  username,
+  password,
+});
