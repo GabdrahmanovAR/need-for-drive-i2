@@ -1,6 +1,6 @@
 @import "src/constants/styles/common";
 
-.order-edit {
+.order-filter {
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid $main-lightgrey-color;
@@ -20,14 +20,24 @@
         font-size: 11px;
       }
     }
-    &__button .ant-form-item {
-      margin-right: 0;
+    &__button {
+      .ant-form-item {
+        margin-right: 0;
+      }
+      button {
+        width: 110px;
+        padding: 0;
+        font-size: .6875rem;
+      }
+      &__name {
+        font-size: .6875rem;
+      }
     }
   }
 }
 
 @media screen and (max-width: 540px) {
-  .order-edit {
+  .order-filter {
     padding: 1rem;
 
     &__form {

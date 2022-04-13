@@ -11,23 +11,18 @@ interface IFormResult {
 }
 
 const OrderFilters = () => {
-  const onFinish = (values: IFormResult) => {
-    console.log(values);
-  };
+  const onFinish = (values: IFormResult) => values;
 
   return (
-    <div className="order-edit">
+    <div className="order-filter">
       <Form
-        className="order-edit__form"
-        name="order-edit"
+        className="order-filter__form"
+        name="order-filter"
         onFinish={onFinish}
         layout="inline"
       >
-        <div className="order-edit__form__selectors">
-          <Form.Item
-            name="rate"
-            label=""
-          >
+        <div className="order-filter__form__selectors">
+          <Form.Item name="rate">
             <Select
               suffixIcon={<img src={dropdownIcon} alt="" />}
               placeholder="Интервал"
@@ -37,10 +32,7 @@ const OrderFilters = () => {
               <Option value="rate-3">За месяц</Option>
             </Select>
           </Form.Item>
-          <Form.Item
-            name="car"
-            label=""
-          >
+          <Form.Item name="car">
             <Select
               suffixIcon={<img src={dropdownIcon} alt="" />}
               placeholder="Марка"
@@ -49,10 +41,7 @@ const OrderFilters = () => {
               <Option value="car-2">Mazda</Option>
             </Select>
           </Form.Item>
-          <Form.Item
-            name="city"
-            label=""
-          >
+          <Form.Item name="city">
             <Select
               suffixIcon={<img src={dropdownIcon} alt="" />}
               placeholder="Город"
@@ -60,10 +49,7 @@ const OrderFilters = () => {
               <Option value="city-1">Ульяновск</Option>
             </Select>
           </Form.Item>
-          <Form.Item
-            name="status"
-            label=""
-          >
+          <Form.Item name="status">
             <Select
               suffixIcon={<img src={dropdownIcon} alt="" />}
               placeholder="Статус"
@@ -72,14 +58,13 @@ const OrderFilters = () => {
             </Select>
           </Form.Item>
         </div>
-        <div className="order-edit__form__button">
-          <Form.Item name="form-button" style={{ width: 110 }}>
+        <div className="order-filter__form__button">
+          <Form.Item name="form-button">
             <Button
               type="primary"
-              style={{ width: 110, padding: 0, fontSize: 11 }}
               htmlType="submit"
               className="form-login__button"
-              icon={<span style={{ fontSize: 11 }}>Применить</span>}
+              icon={<span className="order-filter__form__button__name">Применить</span>}
             />
           </Form.Item>
         </div>

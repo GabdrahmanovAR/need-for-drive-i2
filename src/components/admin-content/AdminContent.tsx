@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './AdminContent.scss';
-import { useNavigate } from 'react-router-dom';
 import Sidebar from './sidebar/Sidebar';
 import Header from './header/Header';
 import OrdersInfo from './orders-info/OrdersInfo';
-import { ADMIN_LOGIN_URL } from '../../constants/api/api';
 
 const AdminContent = () => {
   const [menu, setMenu] = useState('orders');
-  const navigate = useNavigate();
 
   const switchContent = (menuValue: string) => {
     switch (menuValue) {
@@ -16,10 +13,6 @@ const AdminContent = () => {
       default: return <div>Ошибка</div>;
     }
   };
-
-  useEffect(() => {
-    if (!localStorage.getItem('auth-token')) navigate(ADMIN_LOGIN_URL);
-  }, [localStorage.length]);
 
   return (
     <main className="admin-content">

@@ -16,7 +16,7 @@ import { changeOrderConfirmAction } from './OrderConfirmAction';
 import { clearOrderInfoAction } from './OrderInfoAction';
 import { resetRadioBtnAction } from './RadioButtonAction';
 import { resetTabsStateAction } from './OrderStepAction';
-import { EMPTY_STRING } from '../../constants/common';
+import { EMPTY_DATA, EMPTY_STRING } from '../../constants/common';
 
 const loadingOrderStart = (): IOrderStatusActionType => ({
   type: UPLOADING_ORDER_START,
@@ -49,8 +49,8 @@ const getOrderStatusData = (data: IOrderStatusResponse, count?: number): IOrderS
     isNeedChildChair: data.isNeedChildChair,
     isRightWheel: data.isRightWheel,
     price: data.price,
-    rate: data.rateId ? data.rateId.rateTypeId.name : EMPTY_STRING,
-    cityName: data.cityId.name,
+    rate: data.rateId ? data.rateId.rateTypeId.name : EMPTY_DATA,
+    cityName: data.cityId ? data.cityId.name : EMPTY_DATA,
     pointName: data.pointId.address,
   },
 });
@@ -105,8 +105,7 @@ export const adminGetCarOrderAction = (page: number) => async (dispatch: Dispatc
   dispatch(loadingOrderStart());
   try {
     const response: AxiosResponse<IAdminOrderStatusState> = await adminGetCarOrder(page);
-    if (response.status === 401) localStorage.removeItem('auth-token');
-    else dispatch(getOrderStatusData(response.data.data[0], response.data.count));
+    if (response) dispatch(getOrderStatusData(response.data.data[0], response.data.count));
   } catch (error) {
     console.log(error);
   } finally {

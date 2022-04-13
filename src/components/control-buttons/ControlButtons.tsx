@@ -5,9 +5,7 @@ import editIcon from '../../assets/icons/edit-icon.svg';
 import './ControlButtons.scss';
 
 const ControlButtons = () => {
-  const handleClickControlButton = (event: BaseSyntheticEvent) => {
-    console.log(event.target.innerText);
-  };
+  const handleClickControlButton = (event: BaseSyntheticEvent) => event.target.innerText;
 
   return (
     <div className="control-buttons">

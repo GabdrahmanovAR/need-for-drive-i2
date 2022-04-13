@@ -1,4 +1,3 @@
-import { ICarsFakeData } from '../constants/fake-data/cars';
 import { ICarsData, IPoint } from './api';
 import {
   IOrderStatusInfoState, IPointCityCoordsState, IPointMarkerCoordsState, IRateInfoState,
@@ -24,11 +23,6 @@ export interface IOrderLocationActionType {
   cityCoords?: Array<number>;
   markerCoords?: Array<number>;
   selectionCompleted?: boolean;
-}
-
-export interface ICarCardActionType extends IActionType {
-  activeCard?: string;
-  selectedCarInfo?: ICarsFakeData;
 }
 
 export interface IAdvancedTabActionType extends IActionType {

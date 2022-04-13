@@ -1,5 +1,6 @@
 export const EMPTY_STRING = '';
 export const EMPTY_ARRAY = [];
+export const EMPTY_DATA = '[Нет данных]';
 
 export const EMPTY_FUNC = () => {};
 export type EmptyFuncType = () => void;

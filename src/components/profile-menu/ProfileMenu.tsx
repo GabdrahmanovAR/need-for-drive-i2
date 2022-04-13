@@ -5,15 +5,12 @@ import userAvatar from '../../assets/images/user-avatar.png';
 import dropDownIcon from '../../assets/icons/dropdown-icon.svg';
 import './ProfileMenu.scss';
 import { setFocusedFieldAction } from '../../redux/actions/FocusedItemAction';
-import { outsideClickDetection } from '../../utils/OutsideClickDetection';
 import { EMPTY_STRING } from '../../constants/common';
 
 const ProfileMenu = () => {
   const [isDropDownMenuActive, setIsDropDownMenuActive] = useState(false);
   const dispatch = useDispatch();
   const wrapperRef = useRef(null);
-
-  outsideClickDetection(wrapperRef, setIsDropDownMenuActive);
 
   const handleImageClick = () => {
     setIsDropDownMenuActive(!isDropDownMenuActive);

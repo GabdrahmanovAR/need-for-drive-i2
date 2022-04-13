@@ -47,12 +47,38 @@ const apiAuth = axios.create({
   },
 });
 
+apiAuth.interceptors.request.use(
+  (config) => {
+    console.log(config);
+    return config;
+  },
+  (error) => Promise.reject(error),
+);
+
 export const authorizationRequest = (username: string, password: string) => apiAuth.post(AUTHORIZATION_URL, {
   username,
   password,
 });
 
-export const adminGetCarOrder = (page: number) => apiDB.get(`/db/order?page=${5420 + page}&limit=1`, {
+const apiDBWithToken = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    [APP_ID_FIELD]: APP_ID_VALUE,
+  },
+});
+
+apiDBWithToken.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response.status === 401) {
+      localStorage.removeItem('auth-token');
+      window.location.href = '#/admin/login';
+    }
+    return Promise.reject(error);
+  },
+);
+
+export const adminGetCarOrder = (page: number) => apiDBWithToken.get(`${ORDER_URL}?page=${5420 + page}&limit=1`, {
   headers: {
     Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
   },

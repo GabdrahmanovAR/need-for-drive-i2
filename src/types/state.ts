@@ -1,10 +1,8 @@
-import { ICarsFakeData } from '../constants/fake-data/cars';
 import { ICarInfoData, IPoint } from './api';
 
 export interface IState {
   sidebarMenu: ISidebarMenuState;
-  adminSidebarMenu: IAdminSidebarMenuState
-  carCard: ICarCardState;
+  adminSidebarMenu: IAdminSidebarMenuState;
   advancedTab: IAdvancedTabState;
   focusedItem: IFocusedItemState;
   orderConfirm: IOrderConfirmState;
@@ -23,11 +21,6 @@ export interface ISidebarMenuState {
 
 export interface IAdminSidebarMenuState {
   isOpen: boolean;
-}
-
-export interface ICarCardState {
-  activeCard: string;
-  selectedCarInfo: ICarsFakeData;
 }
 
 export interface IAdvancedTabState {
