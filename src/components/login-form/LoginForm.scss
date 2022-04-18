@@ -1,44 +1,59 @@
 @import '/src/constants/styles/common.scss';
 
 .login-form {
-    max-width: 400px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  margin: 0 auto;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  padding: 1rem;
+
+  &__header {
+    display: flex;
+    justify-content: center;
     padding: 1rem;
-    margin: 2rem auto;
 
-    &__header {
-        display: flex;
-        justify-content: center;
-        padding: 1rem;
+    h2 {
+      color: $main-lightblack-color;
+      margin: 0 0 0 1rem;
+    }
+    &__link {
+      color: $main-lightblack-color;
+      text-decoration: none;
+    }
+    &__link:hover {
+      cursor: pointer;
+      color: $main-lightblack-color;
+    }
+  }
+  &__container {
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 3px 6px -4px rgba(0, 0, 0, .12), 0 6px 16px 0 rgba(0, 0, 0, .08), 0 9px 28px 8px rgba(0, 0, 0, .05);
 
-        h2 {
-            color: $main-lightblack-color;
-            margin: 0 0 0 1rem;
-        }
-        &__link {
-            color: $main-lightblack-color;
-            text-decoration: none;
-          }
-          &__link:hover {
-            cursor: pointer;
-            color: $main-lightblack-color;
-          }
+    .ant-btn-icon-only {
+      width: 80px;
     }
-    &__container {
-        padding: 1rem;
-        border-radius: 10px;
-        background-color: white;
-        box-shadow: 0 3px 6px -4px rgba(0, 0, 0, .12), 0 6px 16px 0 rgba(0, 0, 0, .08), 0 9px 28px 8px rgba(0, 0, 0, .05);
-    }
-    &__footer {
-        display: flex;
-        justify-content: space-between;
+  }
+  &__footer {
+    display: flex;
+    justify-content: space-between;
 
-        div {
-            margin-bottom: 0;
-        }
+    div {
+      margin-bottom: 0;
     }
+  }
 }
 
 .login-form p {
-    color: $main-lightblack-color;
+  color: $main-lightblack-color;
+}
+
+
+@media screen and (max-width: 420px) {
+  .login-form {
+    width: 300px;
+  }
 }

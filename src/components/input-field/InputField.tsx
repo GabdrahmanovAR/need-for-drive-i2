@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { EMPTY_STRING, EmptyFuncType } from '../../constants/common';
 import deleteIcon from '../../assets/icons/delete-city.svg';
 import './InputField.scss';
-import { setFocusedFieldAction } from '../../redux/actions/InputFieldAction';
-import { inputFieldSelector } from '../../selectors/inputFieldSelector';
+import { setFocusedFieldAction } from '../../redux/actions/FocusedItemAction';
+import { focusedItemSelector } from '../../selectors/focusedItemSelector';
 
 interface IInputFieldProps {
   title: string,
@@ -29,10 +29,10 @@ const InputField: FC<IInputFieldProps> = (props) => {
     childComponent,
   } = props;
   const dispatch = useDispatch();
-  const inputFieldState = useSelector(inputFieldSelector);
+  const focusedItemState = useSelector(focusedItemSelector);
 
   const handleInputFieldClick = (event: BaseSyntheticEvent) => {
-    if (inputFieldState.focusedField === event.currentTarget.id) return;
+    if (focusedItemState.item === event.currentTarget.id) return;
     dispatch(setFocusedFieldAction(event.currentTarget.id));
   };
 

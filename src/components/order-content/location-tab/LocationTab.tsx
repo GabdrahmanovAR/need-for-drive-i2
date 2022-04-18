@@ -53,6 +53,7 @@ const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocati
   }, [cityName, markerName]);
 
   useEffect(() => {
+    dispatch(resetRadioBtnAction());
     if (city === EMPTY_STRING) return;
     pointsDataState.data.forEach((someCity: IPoint) => {
       if (someCity.cityId !== null && someCity.cityId.name === city) {
@@ -144,7 +145,7 @@ const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocati
           onClickBtnFunc={handleCityBtnClick}
           childComponent={(
             <DropDownMenu
-              pointData={pointsDataState}
+              data={pointsDataState}
               isActive={citiesMenuActive}
               onClickFunc={handleCityListItemClick}
               cityName={city}
@@ -160,7 +161,7 @@ const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocati
           onClickBtnFunc={handleMarkerBtnClick}
           childComponent={(
             <DropDownMenu
-              pointData={pointsDataState}
+              data={pointsDataState}
               isActive={markerMenuActive}
               onClickFunc={handleMarkerListItemClick}
             />

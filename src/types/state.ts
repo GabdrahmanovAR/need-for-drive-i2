@@ -1,11 +1,10 @@
-import { ICarsFakeData } from '../constants/fake-data/cars';
 import { ICarInfoData, IPoint } from './api';
 
 export interface IState {
   sidebarMenu: ISidebarMenuState;
-  carCard: ICarCardState;
+  adminSidebarMenu: IAdminSidebarMenuState;
   advancedTab: IAdvancedTabState;
-  inputField: IInputFieldState;
+  focusedItem: IFocusedItemState;
   orderConfirm: IOrderConfirmState;
   orderInfo: IOrderInfoState;
   orderStep: IOrderStepState;
@@ -20,9 +19,8 @@ export interface ISidebarMenuState {
   isOpen: boolean;
 }
 
-export interface ICarCardState {
-  activeCard: string;
-  selectedCarInfo: ICarsFakeData;
+export interface IAdminSidebarMenuState {
+  isOpen: boolean;
 }
 
 export interface IAdvancedTabState {
@@ -30,8 +28,9 @@ export interface IAdvancedTabState {
   endDay: string;
 }
 
-export interface IInputFieldState {
-  focusedField: string;
+export interface IFocusedItemState {
+  item: string;
+  isActive: boolean
 }
 
 export interface IOrderConfirmState {
@@ -134,6 +133,7 @@ interface IRateTypeInfoState {
 }
 
 export interface IOrderStatusState {
+  count: number;
   loading: boolean;
   statusInfo: IOrderStatusInfoState;
 }
@@ -143,6 +143,7 @@ export interface IOrderStatusInfoState {
     name: string;
     number: string;
     image: string;
+    tank: number;
   };
   cityName: string;
   color: string;

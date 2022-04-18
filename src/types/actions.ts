@@ -1,4 +1,3 @@
-import { ICarsFakeData } from '../constants/fake-data/cars';
 import { ICarsData, IPoint } from './api';
 import {
   IOrderStatusInfoState, IPointCityCoordsState, IPointMarkerCoordsState, IRateInfoState,
@@ -12,6 +11,10 @@ export interface ISidebarMenuActionType extends IActionType {
   menuOpen?: boolean;
 }
 
+export interface IAdminSidebarMenuActionType extends IActionType {
+  menuOpen?: boolean;
+}
+
 export interface IOrderLocationActionType {
   cityName?: string;
   cityId?: string;
@@ -22,18 +25,14 @@ export interface IOrderLocationActionType {
   selectionCompleted?: boolean;
 }
 
-export interface ICarCardActionType extends IActionType {
-  activeCard?: string;
-  selectedCarInfo?: ICarsFakeData;
-}
-
 export interface IAdvancedTabActionType extends IActionType {
   startDay?: string;
   endDay?: string;
 }
 
-export interface IInputFieldActionType extends IActionType{
-  focusedField?: string;
+export interface IFocusedItemActionType extends IActionType{
+  item?: string;
+  isActive?: boolean;
 }
 
 export interface IOrderConfirmActionType extends IActionType {
@@ -100,6 +99,7 @@ export interface IRateActionType extends IActionType {
 }
 
 export interface IOrderStatusActionType extends IActionType {
+  count?: number
   loading?: boolean;
   statusInfo?: IOrderStatusInfoState;
 }

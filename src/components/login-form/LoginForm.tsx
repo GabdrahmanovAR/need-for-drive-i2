@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AxiosResponse } from 'axios';
 import { Button, Form, Input } from 'antd';
 import { inputRules } from '../../constants/input-rules/inputRules';
 import './LoginForm.scss';
 import logoIcon from '../../assets/icons/login-icon.svg';
 import { authorizationRequest } from '../../api-request/apiRequest';
+import { IAuthToken } from '../../types/api';
 
 interface IFormResult {
   username: string;
@@ -11,8 +14,14 @@ interface IFormResult {
 }
 
 const LoginForm = () => {
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+
   const onFinish = (values: IFormResult) => {
-    authorizationRequest(values.username, values.password);
+    setIsLoading(true);
+    authorizationRequest(values.username, values.password)
+      .then((response: AxiosResponse<IAuthToken>) => localStorage.setItem('auth-token', response.data.access_token))
+      .finally(() => localStorage.getItem('auth-token') && navigate('/admin/panel'));
   };
 
   return (
@@ -32,10 +41,7 @@ const LoginForm = () => {
             label=""
             rules={inputRules.email}
           >
-            <Input
-              placeholder="Введите логин"
-              onChange={(event) => console.log(event.target.value)}
-            />
+            <Input placeholder="Введите логин" />
           </Form.Item>
           <p className="form-login__input-title">Пароль</p>
           <Form.Item
@@ -43,10 +49,7 @@ const LoginForm = () => {
             label=""
             rules={inputRules.password}
           >
-            <Input.Password
-              placeholder="Введите пароль"
-              onChange={(event) => console.log(event.target.value)}
-            />
+            <Input.Password placeholder="Введите пароль" />
           </Form.Item>
           <div className="login-form__footer">
             <a href="">Запросить доступ</a>
@@ -55,10 +58,9 @@ const LoginForm = () => {
                 type="primary"
                 htmlType="submit"
                 className="form-login__button"
-                onClick={() => console.log('Button clicked')}
-              >
-                Войти
-              </Button>
+                loading={isLoading}
+                icon={<span>Войти</span>}
+              />
             </Form.Item>
           </div>
         </Form>

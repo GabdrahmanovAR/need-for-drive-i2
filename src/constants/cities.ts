@@ -11,7 +11,7 @@ export interface ICityMarker {
 
 export const listOfCities = [
   {
-    name: 'Москва',
+    carName: 'Москва',
     coordinates: [55.753220, 37.622513],
     markers: [
       {
@@ -33,7 +33,7 @@ export const listOfCities = [
     ],
   },
   {
-    name: 'Санкт-Петербург',
+    carName: 'Санкт-Петербург',
     coordinates: [59.939099, 30.315877],
     markers: [
       {
@@ -55,7 +55,7 @@ export const listOfCities = [
     ],
   },
   {
-    name: 'Новосибирск',
+    carName: 'Новосибирск',
     coordinates: [55.030204, 82.920430],
     markers: [
       {
@@ -77,7 +77,7 @@ export const listOfCities = [
     ],
   },
   {
-    name: 'Екатеринбург',
+    carName: 'Екатеринбург',
     coordinates: [56.838011, 60.597474],
     markers: [
       {
@@ -99,7 +99,7 @@ export const listOfCities = [
     ],
   },
   {
-    name: 'Казань',
+    carName: 'Казань',
     coordinates: [55.796127, 49.106414],
     markers: [
       {
@@ -121,7 +121,7 @@ export const listOfCities = [
     ],
   },
   {
-    name: 'Самара',
+    carName: 'Самара',
     coordinates: [53.195878, 50.100202],
     markers: [
       {
@@ -143,7 +143,7 @@ export const listOfCities = [
     ],
   },
   {
-    name: 'Уфа',
+    carName: 'Уфа',
     coordinates: [54.735152, 55.958736],
     markers: [
       {
@@ -165,7 +165,7 @@ export const listOfCities = [
     ],
   },
   {
-    name: 'Набережные Челны',
+    carName: 'Набережные Челны',
     coordinates: [55.741272, 52.403662],
     markers: [
       {
@@ -187,7 +187,7 @@ export const listOfCities = [
     ],
   },
   {
-    name: 'Ульяновск',
+    carName: 'Ульяновск',
     coordinates: [54.314192, 48.403132],
     markers: [
       {

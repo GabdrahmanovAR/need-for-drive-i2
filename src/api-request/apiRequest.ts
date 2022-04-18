@@ -38,7 +38,7 @@ export const getOrderById = (orderId: string) => apiDB.get(`${ORDER_URL}/${order
 
 export const deleteOrderById = (orderId: string) => apiDB.delete(`${ORDER_URL}/${orderId}`);
 
-export const apiAuth = axios.create({
+const apiAuth = axios.create({
   baseURL: BASE_URL,
   headers: {
     [APP_ID_FIELD]: APP_ID_VALUE,
@@ -47,7 +47,39 @@ export const apiAuth = axios.create({
   },
 });
 
+apiAuth.interceptors.request.use(
+  (config) => {
+    console.log(config);
+    return config;
+  },
+  (error) => Promise.reject(error),
+);
+
 export const authorizationRequest = (username: string, password: string) => apiAuth.post(AUTHORIZATION_URL, {
   username,
   password,
+});
+
+const apiDBWithToken = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    [APP_ID_FIELD]: APP_ID_VALUE,
+  },
+});
+
+apiDBWithToken.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response.status === 401) {
+      localStorage.removeItem('auth-token');
+      window.location.href = '#/admin/login';
+    }
+    return Promise.reject(error);
+  },
+);
+
+export const adminGetCarOrder = (page: number) => apiDBWithToken.get(`${ORDER_URL}?page=${5420 + page}&limit=1`, {
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
+  },
 });
