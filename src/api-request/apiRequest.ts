@@ -2,7 +2,7 @@ import axios from 'axios';
 import moment from 'moment';
 import {
   APP_ID_FIELD, APP_ID_VALUE, AUTHORIZATION_URL, BASE_URL, CARS_URL, ORDER_URL, POINT_URL, RATE_URL, SECRET_KEY,
-} from '../constants/api/api';
+} from '../constants/api';
 import { IOrderInfoState } from '../types/state';
 import { randomHash } from '../utils/RandomHash';
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import cn from 'classnames';
 import RadioButton from '../../radio-button/RadioButton';
 import CarCard from '../car-card/CarCard';
 import './CarsTab.scss';
@@ -27,6 +28,10 @@ const CarsTab = () => {
 
   const [page, setPage] = useState(1);
   const [fetching, setFetching] = useState(false);
+
+  const classNameSpinner = cn('cars-tab__spinner', {
+    'cars-tab__spinner_visible': carsDataState.isLoading,
+  });
 
   useEffect(() => {
     ScrollToTop();
@@ -95,7 +100,7 @@ const CarsTab = () => {
       </header>
       <main className="cars-tab__car-list" onScroll={handleCarsScroll}>
         {displayCards()}
-        <div className={`cars-tab__spinner ${carsDataState.isLoading && 'cars-tab__spinner_visible'}`}>
+        <div className={classNameSpinner}>
           <Spinner />
         </div>
       </main>

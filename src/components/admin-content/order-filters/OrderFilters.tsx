@@ -16,9 +16,7 @@ interface IOrderFiltersProps {
 }
 
 const OrderFilters: FC<IOrderFiltersProps> = ({ selectorData }) => {
-  const onFinish = (values: any) => {
-    console.log(values);
-  };
+  const onFinish = () => {};
 
   return (
     <div className="order-filter">
@@ -54,22 +52,18 @@ const OrderFilters: FC<IOrderFiltersProps> = ({ selectorData }) => {
           <Form.Item className="reset-button-form" name="reset-button">
             <Button
               type="primary"
-              style={{
-                width: 110, padding: 0, fontSize: 11, marginRight: 16,
-              }}
               htmlType="reset"
               className="reset-button"
-              icon={<span style={{ fontSize: 11 }}>Сбросить</span>}
+              icon={<span className="order-filter__form__buttons__name">Сбросить</span>}
               danger
             />
           </Form.Item>
           <Form.Item className="apply-button-form" name="button-apply">
             <Button
               type="primary"
-              style={{ width: 110, padding: 0, fontSize: 11 }}
               htmlType="submit"
               className="apply-button"
-              icon={<span className="order-filter__form__button__name">Применить</span>}
+              icon={<span className="order-filter__form__buttons__name">Применить</span>}
             />
           </Form.Item>
         </div>

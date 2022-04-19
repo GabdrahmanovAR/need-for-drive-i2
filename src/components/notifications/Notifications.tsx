@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import DropDownMenu from '../dropdown-menu/DropDownMenu';
 import notificationIcon from '../../assets/icons/notifications.svg';
@@ -9,7 +9,6 @@ import { EMPTY_STRING } from '../../constants/common';
 const Notifications = () => {
   const [isDropDownMenuActive, setIsDropDownMenuActive] = useState(false);
   const dispatch = useDispatch();
-  const wrapperRef = useRef(null);
 
   const handleImageClick = () => {
     setIsDropDownMenuActive(!isDropDownMenuActive);
@@ -22,7 +21,7 @@ const Notifications = () => {
   };
 
   return (
-    <div className="notifications" ref={wrapperRef}>
+    <div className="notifications">
       <div className="notifications__bell">
         <img
           src={notificationIcon}

@@ -2,16 +2,16 @@ import { useDispatch } from 'react-redux';
 import { IOrderInfoState } from '../types/state';
 import {
   ADVANCED_URL_PATH,
-  EMPTY_STRING,
   MODELS_URL_PATH,
   ORDER_LOCATION_URL_PATH,
   RESULT_URL_PATH,
-} from '../constants/common';
+} from '../constants/routes';
 import {
   changeAdvTabStateAction,
   changeLocTabStateAction,
   changeModelTabStateAction,
 } from '../redux/actions/OrderStepAction';
+import { EMPTY_STRING } from '../constants/common';
 
 export const ButtonState = (currentLocation: string, orderInfo: IOrderInfoState) => {
   const dispatch = useDispatch();

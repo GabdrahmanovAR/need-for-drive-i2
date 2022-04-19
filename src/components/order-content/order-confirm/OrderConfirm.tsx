@@ -2,13 +2,15 @@ import React, { useEffect } from 'react';
 import './OrderConfirm.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import cn from 'classnames';
 import Button from '../../button/Button';
 import { orderConfirmSelector } from '../../../selectors/orderConfirmSelector';
 import { changeOrderConfirmAction } from '../../../redux/actions/OrderConfirmAction';
 import { orderInfoSelector } from '../../../selectors/orderInfoSelector';
 import { orderStatusAction } from '../../../redux/actions/OrderStatusAction';
 import { orderStatusSelector } from '../../../selectors/orderStatusSelector';
-import { EMPTY_STRING, ORDER_STATUS_URL_PATH } from '../../../constants/common';
+import { ORDER_STATUS_URL_PATH } from '../../../constants/routes';
+import { EMPTY_STRING } from '../../../constants/common';
 
 const OrderConfirm = () => {
   const orderConfirmState = useSelector(orderConfirmSelector);
@@ -16,6 +18,10 @@ const OrderConfirm = () => {
   const orderStatusState = useSelector(orderStatusSelector);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const classNameOrderConfirm = cn('order-confirm', {
+    'order-confirm_active': orderConfirmState.isActive,
+  });
 
   useEffect(() => {
     if (orderStatusState.statusInfo.id !== EMPTY_STRING) {
@@ -33,7 +39,7 @@ const OrderConfirm = () => {
   };
 
   return (
-    <div className={`order-confirm ${orderConfirmState.isActive && 'order-confirm_active'}`}>
+    <div className={classNameOrderConfirm}>
       <div className="order-confirm__block">
         <h1 className="order-confirm__block__title">Подтвердить заказ</h1>
         <div className="order-confirm__block__buttons">

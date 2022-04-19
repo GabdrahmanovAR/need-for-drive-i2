@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
 import { Button, Form, Input } from 'antd';
-import { inputRules } from '../../constants/input-rules/inputRules';
+import { inputRules } from '../../constants/inputRules';
 import './LoginForm.scss';
 import logoIcon from '../../assets/icons/login-icon.svg';
 import { authorizationRequest } from '../../api-request/apiRequest';
@@ -38,7 +38,6 @@ const LoginForm = () => {
           <p className="form-login__input-title">Логин</p>
           <Form.Item
             name="username"
-            label=""
             rules={inputRules.email}
           >
             <Input placeholder="Введите логин" />
@@ -46,7 +45,6 @@ const LoginForm = () => {
           <p className="form-login__input-title">Пароль</p>
           <Form.Item
             name="password"
-            label=""
             rules={inputRules.password}
           >
             <Input.Password placeholder="Введите пароль" />

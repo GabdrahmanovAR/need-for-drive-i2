@@ -1,6 +1,7 @@
 import React, { BaseSyntheticEvent, FC } from 'react';
 import './CarCard.scss';
 import { useDispatch, useSelector } from 'react-redux';
+import cn from 'classnames';
 import carPicture from '../../../assets/images/car-picture.png';
 import { changeCarInfoAction, resetCarInfoAction } from '../../../redux/actions/OrderInfoAction';
 import { ICarInfoData } from '../../../types/api';
@@ -18,6 +19,10 @@ const CarCard: FC<ICarCardProps> = ({ id, carInfo, activeCard }) => {
   const { car } = useSelector((orderInfoSelector));
   const dispatch = useDispatch();
   const regex = new RegExp(/^(data:image\/)(jpeg|png);base64/);
+
+  const classNameCarCard = cn('car-card', {
+    'car-card_active': activeCard === id,
+  });
 
   const handleCardClick = (event: BaseSyntheticEvent) => {
     if (car.name === EMPTY_STRING) {
@@ -51,7 +56,7 @@ const CarCard: FC<ICarCardProps> = ({ id, carInfo, activeCard }) => {
 
   return (
     <section
-      className={`car-card ${activeCard === id && 'car-card_active'}`}
+      className={classNameCarCard}
       onClick={handleCardClick}
       role="presentation"
       id={id}

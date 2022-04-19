@@ -7,6 +7,7 @@ import {
   DiffOutlined, EditOutlined, ProfileOutlined, UnorderedListOutlined,
 } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
+import cn from 'classnames';
 import logoIcon from '../../../assets/icons/login-icon.svg';
 import { windowWidth } from '../../../utils/WindowWidth';
 import menuButton from '../../../assets/icons/menu_btn_black.svg';
@@ -22,6 +23,10 @@ const Sidebar: FC<ISideBarProps> = ({ setMenu }) => {
   const [currentWindowWidth, setCurrentWindowWidth] = useState(window.innerWidth);
   const adminSidebarMenuState = useSelector(adminSidebarMenuSelector);
   const dispatch = useDispatch();
+
+  const classNameSidebar = cn('admin-sidebar__container', {
+    'admin-sidebar__container_visible': adminSidebarMenuState.isOpen,
+  });
 
   const wideScreenMenuButton = adminSidebarMenuState.isOpen ? menuButton : closeButton;
   const narrowScreenMenuButton = !adminSidebarMenuState.isOpen ? menuButton : closeButton;
@@ -43,7 +48,7 @@ const Sidebar: FC<ISideBarProps> = ({ setMenu }) => {
 
   return (
     <aside className="admin-sidebar">
-      <div className={`admin-sidebar__container ${adminSidebarMenuState.isOpen && 'admin-sidebar__container_visible'}`}>
+      <div className={classNameSidebar}>
         {currentWindowWidth < 1024
           ? (
             <header className="admin-sidebar__header">

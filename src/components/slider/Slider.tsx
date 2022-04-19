@@ -3,7 +3,7 @@ import Button from '../button/Button';
 import leftArrowIcon from '../../assets/icons/left-arrow.svg';
 import rightArrowIcon from '../../assets/icons/right-arrow.svg';
 import './Slider.scss';
-import { LEFT_ARROW, RIGHT_ARROW, Slides } from '../../constants/slides/slides';
+import { LEFT_ARROW, RIGHT_ARROW, Slides } from '../../constants/slides';
 import { EMPTY_STRING } from '../../constants/common';
 
 const Slider = () => {
@@ -46,7 +46,11 @@ const Slider = () => {
         </aside>
         <main className="slider__layer__block slider-content">
           {sliderContent(Slides[content].title, Slides[content].description)}
-          <div className="slider-content__dots" onClick={handleDotsClick} role="presentation">
+          <div
+            className="slider-content__dots"
+            onClick={handleDotsClick}
+            role="presentation"
+          >
             <div id="1" className={`${content === 1 && 'slider-content__dots_active'}`} />
             <div id="2" className={`${content === 2 && 'slider-content__dots_active'}`} />
             <div id="3" className={`${content === 3 && 'slider-content__dots_active'}`} />
