@@ -80,10 +80,24 @@
     width: 0;
 
     &__container {
-      display: none;
+      display: block;
+      width: 0;
+      animation-name: hide-menu;
+      animation-duration: 150ms;
+
+      ul {
+        display: none;
+      }
 
       &_visible {
         display: block;
+        width: 285px;
+        animation-name: show-hidden-menu;
+        animation-duration: 150ms;
+
+        ul {
+          display: block;
+        }
       }
     }
   }
@@ -104,5 +118,23 @@
   }
   to {
     width: 80px;
+  }
+}
+
+@keyframes show-hidden-menu {
+  from {
+    width: 0;
+  }
+  to {
+    width: 285px;
+  }
+}
+
+@keyframes hide-menu {
+  from {
+    width: 285px;
+  }
+  to {
+    width: 0;
   }
 }

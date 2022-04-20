@@ -1,0 +1,22 @@
+@import "src/constants/styles/common";
+
+.admin-car-card {
+  &__form {
+    display: flex;
+
+    &__description {
+      min-height: 386px;
+      border-radius: 0.5rem;
+      background-color: $main-white-color;
+      box-shadow: 0 3px 6px -4px rgba(0, 0, 0, .12), 0 3px 6px 0 rgba(0, 0, 0, .1), 0 9px 28px 8px rgba(0, 0, 0, .05);
+      margin-right: .875rem;
+    }
+    &__settings {
+      min-height: 386px;
+      border-radius: 0.5rem;
+      background-color: $main-white-color;
+      box-shadow: 0 3px 6px -4px rgba(0, 0, 0, .12), 0 3px 6px 0 rgba(0, 0, 0, .1), 0 9px 28px 8px rgba(0, 0, 0, .05);
+      margin-left: .875rem;
+    }
+  }
+}

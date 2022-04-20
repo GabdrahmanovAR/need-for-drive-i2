@@ -29,7 +29,18 @@
     border-right: 1px solid #CACEDB;
   }
   &__profile {
+    position: relative;
     width: 220px;
+
+    div.drop-down-menu {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+    }
+    nav.drop-down-menu__list_active-admin {
+      right: 0;
+    }
   }
   &__modal-search .input-field {
     width: 90%;

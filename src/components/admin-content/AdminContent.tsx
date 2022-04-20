@@ -4,6 +4,8 @@ import Sidebar from './sidebar/Sidebar';
 import Header from './header/Header';
 import OrdersInfo from './orders-info/OrdersInfo';
 import EntityList from './entity-list/EntityList';
+// eslint-disable-next-line import/no-named-as-default-member
+import CarCard from './car-card/CarCard';
 
 const AdminContent = () => {
   const [menu, setMenu] = useState('orders');
@@ -12,6 +14,7 @@ const AdminContent = () => {
     switch (menuValue) {
       case 'orders': return <OrdersInfo />;
       case 'list-of-entities': return <EntityList />;
+      case 'car': return <CarCard />;
       default: return <div>Ошибка</div>;
     }
   };

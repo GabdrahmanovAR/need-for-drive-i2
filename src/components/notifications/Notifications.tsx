@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { Button } from 'antd';
+import Modal from 'antd/lib/modal';
 import DropDownMenu from '../dropdown-menu/DropDownMenu';
 import notificationIcon from '../../assets/icons/notifications.svg';
 import './Notifications.scss';
@@ -8,16 +10,22 @@ import { EMPTY_STRING } from '../../constants/common';
 
 const Notifications = () => {
   const [isDropDownMenuActive, setIsDropDownMenuActive] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const dispatch = useDispatch();
 
   const handleImageClick = () => {
     setIsDropDownMenuActive(!isDropDownMenuActive);
-    dispatch(setFocusedFieldAction('notifications'));
+    dispatch(setFocusedFieldAction(isDropDownMenuActive ? EMPTY_STRING : 'notifications'));
   };
 
   const handleMenuClick = () => {
     setIsDropDownMenuActive(false);
     dispatch(setFocusedFieldAction(EMPTY_STRING));
+    setIsModalVisible(true);
+  };
+
+  const handleCancelClick = () => {
+    setIsModalVisible(false);
   };
 
   return (
@@ -32,6 +40,19 @@ const Notifications = () => {
         <div className="notifications__bell__count">2</div>
         <DropDownMenu data="" isActive={isDropDownMenuActive} onClickFunc={handleMenuClick} />
       </div>
+      <Modal
+        title="Сообщение"
+        visible={isModalVisible}
+        footer={[
+          <Button key="back" onClick={handleCancelClick}>
+            Назад
+          </Button>,
+        ]}
+      >
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+      </Modal>
     </div>
   );
 };
