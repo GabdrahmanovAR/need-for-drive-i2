@@ -1,6 +1,6 @@
 @import "src/constants/styles/common";
 
-.admin-order {
+.admin-order-block {
   &__info {
     display: flex;
     flex-direction: column;
@@ -26,9 +26,9 @@
 }
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
-  .admin-order {
+  .admin-order-block {
     &__info__status {
-    min-height: 380px
+      min-height: 380px;
     }
   }
 }
