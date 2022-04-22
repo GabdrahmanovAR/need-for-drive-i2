@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import cn from 'classnames';
 import menuButton from '../../assets/icons/menu_btn_black.svg';
 import locationIcon from '../../assets/icons/location-icon.svg';
 import { sidebarMenuAction } from '../../redux/actions/SidebarMenuAction';
@@ -15,13 +16,17 @@ const Header: FC<IHeaderProps> = ({ customClass }) => {
   const sidebarMenuState = useSelector(sidebarMenuSelector);
   const dispatch = useDispatch();
 
+  const classNameHeader = cn('header', {
+    [customClass || EMPTY_STRING]: customClass !== EMPTY_STRING,
+  });
+
   const handleMenuBtnClick = () => {
     dispatch(sidebarMenuAction(!sidebarMenuState.isOpen));
     document.body.style.overflow = 'hidden';
   };
 
   return (
-    <header className={`header ${customClass !== EMPTY_STRING && customClass}`}>
+    <header className={classNameHeader}>
       <section className="header__title">
         <button
           className="header__menu-btn"

@@ -1,10 +1,10 @@
+import { CONFIRM_TAB, EMPTY_STRING } from '../constants/common';
 import {
-  ADVANCED_URL_PATH, CONFIRM_TAB,
-  EMPTY_STRING,
+  ADVANCED_URL_PATH,
   MODELS_URL_PATH,
   ORDER_LOCATION_URL_PATH,
   RESULT_URL_PATH,
-} from '../constants/common';
+} from '../constants/routes';
 
 export const NextTabUrl = (currentLocation: string):string => {
   switch (currentLocation) {

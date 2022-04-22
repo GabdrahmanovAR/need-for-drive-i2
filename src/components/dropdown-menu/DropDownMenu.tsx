@@ -2,6 +2,7 @@ import React, { BaseSyntheticEvent, FC } from 'react';
 import { useSelector } from 'react-redux';
 import './DropDownMenu.scss';
 import { useLocation } from 'react-router-dom';
+import cn from 'classnames';
 import { EMPTY_STRING } from '../../constants/common';
 import { focusedItemSelector } from '../../selectors/focusedItemSelector';
 import { orderInfoSelector } from '../../selectors/orderInfoSelector';
@@ -25,15 +26,20 @@ const DropDownMenu: FC<IDropDownMenu> = (props) => {
   const { location } = useSelector(orderInfoSelector);
   const locationPath = useLocation();
 
+  const classNameAdminMenu = cn('drop-down-menu__list', {
+    'drop-down-menu__list_active': isActive,
+    'drop-down-menu__list_active-admin': focusedItemState.item === 'profile-menu',
+  });
+
+  const classNameDefaultMenu = cn('drop-down-menu__list', {
+    'drop-down-menu__list_active': isActive,
+  });
+
   if (locationPath.pathname.includes('admin')) {
     return (
       <div className="drop-down-menu">
         <nav
-          className={
-          `drop-down-menu__list 
-          ${isActive && 'drop-down-menu__list_active'}
-          ${focusedItemState.item === 'profile-menu' && 'drop-down-menu__list_active-admin'}`
-          }
+          className={classNameAdminMenu}
         >
           <ul>
             <li role="presentation" onClick={onClickFunc} className="list-item">Some text</li>
@@ -46,7 +52,7 @@ const DropDownMenu: FC<IDropDownMenu> = (props) => {
 
   return (
     <div className="drop-down-menu">
-      <nav className={`drop-down-menu__list ${isActive && 'drop-down-menu__list_active'}`}>
+      <nav className={classNameDefaultMenu}>
         <ul>
           {focusedItemState.item === 'city-field'
             ? (data.data.map((someCity: IPoint, index: number) => {

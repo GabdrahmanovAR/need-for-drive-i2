@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useLocation } from 'react-router-dom';
+import cn from 'classnames';
 import telegramIcon from '../../../assets/icons/telegram.svg';
 import './SidebarMenu.scss';
 import { IState } from '../../../types/state';
@@ -18,13 +19,17 @@ const SidebarMenu: FC<ISidebarMenuProps> = ({ isOpen, sidebarMenu }) => {
   const location = useLocation();
   const regexPath = new RegExp(/\/order\/[A-z]*/);
 
+  const classNameSideBar = cn('sidebar-menu', {
+    'sidebar-menu_open': isOpen,
+  });
+
   const handleSidebarBtnClick = () => {
     sidebarMenu(!isOpen);
     document.body.style.overflow = 'unset';
   };
 
   return (
-    <div className={`sidebar-menu ${isOpen && 'sidebar-menu_open'}`}>
+    <div className={classNameSideBar}>
       <div className="sidebar-menu__btn-block">
         <button
           className="sidebar-menu__button"

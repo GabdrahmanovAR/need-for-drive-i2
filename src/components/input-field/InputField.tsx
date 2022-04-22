@@ -1,5 +1,6 @@
 import React, { BaseSyntheticEvent, FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import cn from 'classnames';
 import { EMPTY_STRING, EmptyFuncType } from '../../constants/common';
 import deleteIcon from '../../assets/icons/delete-city.svg';
 import './InputField.scss';
@@ -31,6 +32,10 @@ const InputField: FC<IInputFieldProps> = (props) => {
   const dispatch = useDispatch();
   const focusedItemState = useSelector(focusedItemSelector);
 
+  const classNameDeleteIcon = cn('input-field__close-btn__icon', {
+    'input-field__close-btn__icon_active': fieldValue !== EMPTY_STRING,
+  });
+
   const handleInputFieldClick = (event: BaseSyntheticEvent) => {
     if (focusedItemState.item === event.currentTarget.id) return;
     dispatch(setFocusedFieldAction(event.currentTarget.id));
@@ -60,9 +65,7 @@ const InputField: FC<IInputFieldProps> = (props) => {
             onClick={onClickBtnFunc}
           >
             <img
-              className={`
-                input-field__close-btn__icon 
-                ${fieldValue !== EMPTY_STRING && 'input-field__close-btn__icon_active'}`}
+              className={classNameDeleteIcon}
               src={deleteIcon}
               alt="Delete"
             />

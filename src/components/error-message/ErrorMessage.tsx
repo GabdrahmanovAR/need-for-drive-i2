@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Header from '../header/Header';
 import errorImg from '../../assets/images/error.png';
-import { MAIN_PAGE_URL_PATH } from '../../constants/common';
+import { MAIN_PAGE_URL_PATH } from '../../constants/routes';
 import './ErrorMessage.scss';
 import { clearOrderInfoAction } from '../../redux/actions/OrderInfoAction';
 import { resetRadioBtnAction } from '../../redux/actions/RadioButtonAction';

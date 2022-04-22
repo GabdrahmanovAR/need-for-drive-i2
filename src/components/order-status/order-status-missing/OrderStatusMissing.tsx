@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../header/Header';
 import './OrderStatusMissing.scss';
-import { ORDER_LOCATION_URL_PATH } from '../../../constants/common';
+import { ORDER_LOCATION_URL_PATH } from '../../../constants/routes';
 import noDataImg from '../../../assets/images/no-data.png';
 
 const OrderStatusMissing = () => (

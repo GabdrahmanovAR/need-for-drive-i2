@@ -21,24 +21,23 @@
       font-size: .8125rem;
     }
   }
+  
   &__radio-buttons {
     display: flex;
     justify-content: center;
     width: 20%;
-  }
-  &__radio-buttons .form_radio__fieldset__name {
-    font-size: .8125rem;
+
+    input[type="checkbox"] {
+      -webkit-appearance: checkbox !important;
+      -moz-appearance: checkbox !important;
+      -ms-appearance: checkbox !important;
+      -o-appearance: checkbox !important;
+      appearance: checkbox !important;
+    }
   }
   &__radio-buttons .form_radio__fieldset__input {
     width: .8125rem;
     height: .8125rem;
-    border-radius: 2px;
-  }
-  &__radio-buttons .form_radio__fieldset__input:checked {
-    border: 1px solid #1890ff;
-    background-size: contain;
-    background: #1890ff url("../../../assets/icons/check-mark-white.svg") no-repeat center;
-    background-size: contain;
   }
   &__price {
     display: flex;

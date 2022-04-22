@@ -1,6 +1,7 @@
 import React, { BaseSyntheticEvent, FC } from 'react';
 import './RadioButton.scss';
 import { useDispatch, useSelector } from 'react-redux';
+import cn from 'classnames';
 import { EMPTY_STRING } from '../../constants/common';
 import {
   setBabyChairAction,
@@ -39,6 +40,14 @@ const RadioButton: FC<IRadioButtonProps> = (props) => {
   const radioBtnState = useSelector(radioButtonSelector);
   const dispatch = useDispatch();
 
+  const classNameFieldset = cn('form_radio__fieldset', {
+    form_radio__fieldset_column: direction !== EMPTY_STRING,
+  });
+
+  const classNameFieldsetInput = cn('form_radio__fieldset__input', {
+    form_radio__fieldset__input_checkbox: type === 'checkbox',
+  });
+
   const handleOnChangeEvent = (event: BaseSyntheticEvent) => {
     if (event.target.id.includes('cars')) dispatch(radioBtnCarIdAction(event.target.id));
     if (event.target.id.includes('color')) {
@@ -72,7 +81,7 @@ const RadioButton: FC<IRadioButtonProps> = (props) => {
 
   return (
     <form className="form_radio">
-      <fieldset className={`form_radio__fieldset ${direction !== EMPTY_STRING && 'form_radio__fieldset_column'}`}>
+      <fieldset className={classNameFieldset}>
         {btnNames.map((name: string, index: number) => (
           <div key={`radio-${index}`} className="form_radio__fieldset__r-button">
             <input
@@ -80,7 +89,7 @@ const RadioButton: FC<IRadioButtonProps> = (props) => {
                 ? `radio-${formName}-${index}`
                 : `checkbox-${formName}-${index}`
               }`}
-              className={`form_radio__fieldset__input ${type === 'checkbox' && 'form_radio__fieldset__input_checkbox'}`}
+              className={classNameFieldsetInput}
               type={type}
               name={`${type === 'radio'
                 ? 'radio-button'

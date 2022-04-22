@@ -3,6 +3,7 @@ import './AdminContent.scss';
 import Sidebar from './sidebar/Sidebar';
 import Header from './header/Header';
 import OrdersInfo from './orders-info/OrdersInfo';
+import EntityList from './entity-list/EntityList';
 
 const AdminContent = () => {
   const [menu, setMenu] = useState('orders');
@@ -10,6 +11,7 @@ const AdminContent = () => {
   const switchContent = (menuValue: string) => {
     switch (menuValue) {
       case 'orders': return <OrdersInfo />;
+      case 'list-of-entities': return <EntityList />;
       default: return <div>Ошибка</div>;
     }
   };

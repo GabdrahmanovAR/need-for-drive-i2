@@ -1,10 +1,9 @@
 import React, {
-  BaseSyntheticEvent, useEffect, useState,
+  BaseSyntheticEvent, useState,
 } from 'react';
 import './Header.scss';
 import { useDispatch } from 'react-redux';
 import { Modal } from 'antd';
-import { useNavigate } from 'react-router-dom';
 import InputField from '../../input-field/InputField';
 import searchIcon from '../../../assets/icons/search-icon.svg';
 import Notifications from '../../notifications/Notifications';
@@ -12,17 +11,11 @@ import ProfileMenu from '../../profile-menu/ProfileMenu';
 import { EMPTY_STRING } from '../../../constants/common';
 import menuButton from '../../../assets/icons/menu_btn_black.svg';
 import { adminSidebarMenuAction } from '../../../redux/actions/AdminSidebarMenuAction';
-import { ADMIN_LOGIN_URL } from '../../../constants/api/api';
 
 const Header = () => {
   const [searchText, setSearchText] = useState(EMPTY_STRING);
   const [searchFieldOpen, setSearchFieldOpen] = useState(false);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!localStorage.getItem('auth-token')) navigate(ADMIN_LOGIN_URL);
-  }, [localStorage.length]);
 
   const handleSearchInput = (event: BaseSyntheticEvent) => {
     setSearchText(event.target.value);
