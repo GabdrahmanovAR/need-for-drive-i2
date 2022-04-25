@@ -1,0 +1,43 @@
+@import 'src/constants/styles/common';
+
+.admin-error {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: fit-content;
+    align-items: center;
+    margin: 0 auto;
+
+    h1 {
+      font-size: 4.6875rem;
+      color: #CACEDB;
+      margin: 0;
+      line-height: 4rem;
+    }
+
+    h2 {
+      font-size: 3.125rem;
+      margin: 0;
+    }
+
+    p {
+      color: #818EA3;
+    }
+
+    button {
+      width: 100px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+  .admin-error h1 {
+    font-size: 3rem;
+  }
+  .admin-error h2 {
+    font-size: 1.5rem;
+  }
+  p {
+    font-size: .9rem;
+  }
+}
