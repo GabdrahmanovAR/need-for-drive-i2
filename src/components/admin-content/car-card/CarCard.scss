@@ -264,6 +264,11 @@
   }
 }
 
+.edit-description {
+  width: 100%;
+  min-height: 100px;
+}
+
 @media screen and (min-width: 1023px) and (max-width: 1222px) {
   .admin-car-card__form__settings__car {
     flex-direction: column;

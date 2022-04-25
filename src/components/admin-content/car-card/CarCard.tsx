@@ -1,4 +1,5 @@
 import React, { BaseSyntheticEvent, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   Button, Form, Input, Upload,
 } from 'antd';
@@ -12,6 +13,7 @@ import { EMPTY_STRING } from '../../../constants/common';
 import { formatString } from '../../../utils/FormatString';
 import Checkbox from '../checkbox/Checkbox';
 import { inputRules } from '../../../constants/inputRules';
+import { successfullSaveStateAction } from '../../../redux/actions/SuccessfullSaveAction';
 
 const colorsInitialState = ['Красный', 'Белый', 'Черный'];
 
@@ -19,8 +21,11 @@ const descriptionInitialState = 'Lorem ipsum dolor sit amet consectetur adipisic
 
 const CarCard = () => {
   const [file, setFile] = useState({} as RcFile);
+  const dispatch = useDispatch();
+
   const [colors, setColors] = useState(colorsInitialState);
   const [newColor, setNewColor] = useState(EMPTY_STRING);
+
   const [progressBarWidth, setProgressBarWidth] = useState('0%');
   const [placeholderImitation, setplaceholderImitation] = useState('Выберите файл...');
 
@@ -47,6 +52,7 @@ const CarCard = () => {
 
   const handleFinishButtonClick = (values: any) => {
     console.log(values);
+    dispatch(successfullSaveStateAction(true));
   };
 
   const handleResetButtonClcick = () => {
@@ -221,6 +227,7 @@ const CarCard = () => {
         closable
       >
         <textarea
+          className="edit-description"
           name="desciption"
           onInput={handleDescriptionInput}
           value={descriptionTextValue}

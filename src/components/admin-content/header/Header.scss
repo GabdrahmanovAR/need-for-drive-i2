@@ -1,6 +1,7 @@
 @import "src/constants/styles/common";
 
 .admin-header {
+  position: relative;
   display: flex;
   width: 100%;
   background-color: $main-white-color;
