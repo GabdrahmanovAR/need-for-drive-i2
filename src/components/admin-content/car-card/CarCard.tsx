@@ -9,6 +9,7 @@ import ProgressBar from '../../progress-bar/ProgressBar';
 import { EMPTY_STRING } from '../../../constants/common';
 import { formatString } from '../../../utils/FormatString';
 import Checkbox from '../checkbox/Checkbox';
+import { inputRules } from '../../../constants/inputRules';
 
 const colorsInitialState = ['Красный', 'Белый', 'Черный'];
 
@@ -17,6 +18,7 @@ const CarCard = () => {
   const [colors, setColors] = useState(colorsInitialState);
   const [newColor, setNewColor] = useState(EMPTY_STRING);
   const [progressBarWidth, setProgressBarWidth] = useState('0%');
+  const [inputValue, setInputValue] = useState('Выберите файл...');
 
   useEffect(() => {
     setProgressBarWidth('74%');
@@ -29,6 +31,11 @@ const CarCard = () => {
 
   const handleUploadingFile = (uploadedFile: RcFile) => {
     setFile(uploadedFile);
+    setInputValue(EMPTY_STRING);
+  };
+
+  const handleRemoveFile = () => {
+    setInputValue('Выберите файл...');
   };
 
   const handleFinishButtonClick = (values: any) => {
@@ -52,8 +59,7 @@ const CarCard = () => {
   };
 
   const removeColor = (item: string) => {
-    const index = colors.indexOf(item);
-    setColors([...colors.splice(index, 1)]);
+    setColors([...colors.filter((color: string) => color !== item)]);
   };
 
   return (
@@ -75,10 +81,11 @@ const CarCard = () => {
                   name="image-file"
                   beforeUpload={handleUploadingFile}
                   accept=".bmp, .jpeg, .jpg, .png"
+                  onRemove={handleRemoveFile}
                 >
                   <Input
                     name="file"
-                    // placeholder="Выберите файл..."
+                    value={inputValue}
                     suffix={<div className="upload-button">Обзор</div>}
                   />
                 </Upload>
@@ -106,13 +113,19 @@ const CarCard = () => {
           <div className="admin-car-card__form__settings__car">
             <div className="admin-car-card__form__settings__car_model">
               <span>Модель автомобиля</span>
-              <Form.Item name="car-model">
+              <Form.Item
+                name="car-model"
+                rules={inputRules.carModel}
+              >
                 <Input placeholder="Введите название..." />
               </Form.Item>
             </div>
             <div className="admin-car-card__form__settings__car_type">
               <span>Тип автомобиля</span>
-              <Form.Item name="car-type">
+              <Form.Item
+                name="car-type"
+                rules={inputRules.carType}
+              >
                 <Input placeholder="Введите тип..." />
               </Form.Item>
             </div>
@@ -121,7 +134,7 @@ const CarCard = () => {
           <div className="admin-car-card__form__settings__colors settings-colors">
             <div className="settings-colors__block">
               <div className="settings-colors__block__input">
-                <Form.Item>
+                <Form.Item name="car-color" rules={inputRules.carColor}>
                   <Input
                     placeholder="Введите цвет..."
                     onInput={handleInputColor}

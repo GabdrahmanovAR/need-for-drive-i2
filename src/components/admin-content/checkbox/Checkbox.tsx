@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
 import cn from 'classnames';
 import deleteIcon from '../../../assets/icons/menu_close_btn_black.svg';
+import './Checkbox.scss';
 
 interface ICheckboxProps {
   text: string;
@@ -23,7 +24,6 @@ const Checkbox: FC<ICheckboxProps> = ({ text, onRemove }) => {
   };
 
   const handleClickDeleteIcon = () => {
-    console.log('UPDATE');
     onRemove(text);
   };
 
