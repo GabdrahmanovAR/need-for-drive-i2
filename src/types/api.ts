@@ -45,7 +45,13 @@ export interface ICarThumbnail {
   mimetype: string;
 }
 
+export interface IAdminOrderStatusState {
+  count: number;
+  data: IOrderStatusResponse[];
+}
+
 export interface IOrderStatus {
+  count: number;
   data: IOrderStatusResponse;
   fields: {
     'orderStatusId': {
@@ -153,6 +159,7 @@ export interface IOrderStatusResponse {
     'priceMax': number,
     'name': string,
     'number': string,
+    'tank': number,
     'categoryId': {
       'name': string,
       'description': string,
@@ -184,4 +191,12 @@ export interface IOrderStatusResponse {
   'isNeedChildChair': boolean,
   'isRightWheel': boolean,
   'id': string,
+}
+
+export interface IAuthToken {
+  access_token: string;
+  expires_in: number;
+  refresh_token: string;
+  token_type: string;
+  user_id: string;
 }

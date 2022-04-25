@@ -1,0 +1,93 @@
+@import "src/constants/styles/common";
+
+.admin-order {
+  display: flex;
+  width: 100%;
+
+  &__car {
+    display: flex;
+    width: 50%;
+
+    &__car-img {
+      display: flex;
+      align-items: center;
+      img {
+        height: 60px;
+        margin-right: 1.5rem;
+      }
+    }
+    &__info {
+      width: 100%;
+      font-size: .8125rem;
+    }
+  }
+  
+  &__radio-buttons {
+    display: flex;
+    justify-content: center;
+    width: 20%;
+
+    input[type="checkbox"] {
+      -webkit-appearance: checkbox !important;
+      -moz-appearance: checkbox !important;
+      -ms-appearance: checkbox !important;
+      -o-appearance: checkbox !important;
+      appearance: checkbox !important;
+    }
+  }
+  &__radio-buttons .form_radio__fieldset__input {
+    width: .8125rem;
+    height: .8125rem;
+  }
+  &__price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+
+    h2 {
+      margin-bottom: 0;
+    }
+  }
+  &__control-buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 20%;
+  }
+}
+
+.dim-text, div.dim-text {
+  color: $main-grey-color;
+}
+
+@media screen and (max-width: 1439px) {
+  .admin-order {
+    flex-direction: column;
+
+    section {
+      margin: .5rem 0;
+      justify-content: flex-start;
+      width: 100%;
+    }
+    section.admin-order__radio-buttons {
+      margin-top: 1rem;
+    }
+    &__car {
+      width: 100%;
+
+      section.admin-order__car__car-img {
+        width: auto;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .admin-order {
+    &__car {
+      display: block;
+    }
+  }
+}
+

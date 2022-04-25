@@ -14,7 +14,7 @@ import { GetCoordinates } from '../../utils/GetCoordinates';
 import { IPointCityCoordsState, IPointMarkerCoordsState } from '../../types/state';
 import { changeCityCoords, changeMarkerCoords } from '../../redux/actions/PointsDataAction';
 import { IPoint } from '../../types/api';
-import { YMAPS_API_KEY } from '../../constants/api/api';
+import { YMAPS_API_KEY } from '../../constants/api';
 import { MapError } from './map-error/MapError';
 
 const YandexMaps = () => {

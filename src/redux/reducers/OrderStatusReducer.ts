@@ -10,12 +10,14 @@ import {
 import { EMPTY_STRING } from '../../constants/common';
 
 const initialState: IOrderStatusState = {
+  count: 0,
   loading: false,
   statusInfo: {
     car: {
       name: EMPTY_STRING,
       number: EMPTY_STRING,
       image: EMPTY_STRING,
+      tank: 0,
     },
     cityName: EMPTY_STRING,
     color: EMPTY_STRING,
@@ -41,10 +43,11 @@ const uploadingEnd = (draft: IOrderStatusState) => {
   return draft;
 };
 
-const getOrderStatusData = (draft: IOrderStatusState, data?: IOrderStatusInfoState) => {
+const getOrderStatusData = (draft: IOrderStatusState, data?: IOrderStatusInfoState, count?: number) => {
   if (data) {
     draft.statusInfo = data;
   }
+  if (count) draft.count = count - 5421;
   return draft;
 };
 
@@ -59,7 +62,7 @@ export default (state = initialState, action: IOrderStatusActionType) => produce
     switch (action.type) {
       case UPLOADING_ORDER_START: return uploadingStart(draft);
       case UPLOADING_ORDER_END: return uploadingEnd(draft);
-      case GET_ORDER_STATUS_DATA: return getOrderStatusData(draft, action.statusInfo);
+      case GET_ORDER_STATUS_DATA: return getOrderStatusData(draft, action.statusInfo, action.count);
       case DELETE_ORDER_STATUS_DATA: return deleteOrderStatusData(draft);
       default: return state;
     }

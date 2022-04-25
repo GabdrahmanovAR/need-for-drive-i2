@@ -10,7 +10,7 @@ import { orderInfoSelector } from '../../../selectors/orderInfoSelector';
 import { CarNumber } from '../../../utils/CarNumber';
 import { CalculateTotalCost } from '../../../utils/CalculateTotalCost';
 import { setTotalCostAction } from '../../../redux/actions/OrderInfoAction';
-import { ORDER_LOCATION_URL_PATH, ORDER_STATUS_URL_PATH, RESULT_URL_PATH } from '../../../constants/common';
+import { ORDER_LOCATION_URL_PATH, ORDER_STATUS_URL_PATH, RESULT_URL_PATH } from '../../../constants/routes';
 import { orderStatusSelector } from '../../../selectors/orderStatusSelector';
 import { orderStepSelector } from '../../../selectors/orderStepSelector';
 import { orderStepInitialState } from '../../../redux/reducers/OrderStepReducer';

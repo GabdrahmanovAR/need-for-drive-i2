@@ -1,0 +1,71 @@
+@import "src/constants/styles/common";
+
+.order-filter {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid $main-lightgrey-color;
+  padding: 1rem 1rem 0 1rem;
+
+  &__form {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    &__selectors {
+      display: flex;
+      margin-bottom: 1rem;
+
+      div {
+        width: 95px;
+        font-size: 11px;
+      }
+    }
+    &__buttons {
+      display: flex;
+      margin-bottom: 1rem;
+
+      button {
+        width: 110px;
+        padding: 0;
+        font-size: .6875rem;
+      }
+      &__name {
+        font-size: .6875rem;
+      }
+    }
+  }
+}
+
+.apply-button-form, .reset-button {
+  margin-right: 0 !important;
+}
+
+@media screen and (max-width: 540px) {
+  .order-filter {
+    padding: 1rem;
+
+    &__form {
+      flex-direction: column;
+
+      &__selectors {
+        flex-direction: column;
+
+        div:not(:last-child) {
+          margin-bottom: .25rem;
+        }
+        div {
+          width: 100%;
+        }
+      }
+      &__buttons {
+        justify-content: space-between;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .reset-button, .apply-button {
+    width: 95px !important;
+  }
+}

@@ -1,0 +1,35 @@
+.profile-menu {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding-left: 1.5rem;
+
+  &__info {
+    display: flex;
+    align-items: center;
+    width: 90%;
+
+    &__avatar {
+      overflow: hidden;
+      border-radius: 100%;
+      margin-right: 1rem;
+    }
+  }
+  &__dropdown-menu {
+    width: 10%;
+    text-align: center;
+
+    img {
+      width: 1rem;
+    }
+    img:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .profile-menu {
+    padding-left: .5rem;
+  }
+}

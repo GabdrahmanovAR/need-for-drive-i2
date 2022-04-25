@@ -26,6 +26,9 @@
     border: none;
     padding: 0;
   }
+  &__menu-btn:hover {
+    cursor: pointer;
+  }
   &__sidebar-btn:hover {
     cursor: pointer;
   }

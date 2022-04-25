@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import cn from 'classnames';
 import RadioButton from '../../radio-button/RadioButton';
 import CarCard from '../car-card/CarCard';
 import './CarsTab.scss';
@@ -11,7 +12,7 @@ import { getCarsAction } from '../../../redux/actions/CarsDataAction';
 import { ICarInfoData } from '../../../types/api';
 import Spinner from '../../Spinner/Spinner';
 import { radioButtonSelector } from '../../../selectors/radioButtonSelector';
-import { LIMIT_PER_PAGE } from '../../../constants/common';
+import { CARS_LIMIT_PER_PAGE } from '../../../constants/common';
 import { ScrollToTop } from '../../../utils/ScrollToTop';
 
 const CarsTab = () => {
@@ -28,23 +29,27 @@ const CarsTab = () => {
   const [page, setPage] = useState(1);
   const [fetching, setFetching] = useState(false);
 
+  const classNameSpinner = cn('cars-tab__spinner', {
+    'cars-tab__spinner_visible': carsDataState.isLoading,
+  });
+
   useEffect(() => {
     ScrollToTop();
     if (carsDataState.data.length === 0) {
-      dispatch(getCarsAction('0', LIMIT_PER_PAGE));
+      dispatch(getCarsAction('0', CARS_LIMIT_PER_PAGE));
     }
   }, []);
 
   useEffect(() => {
     if (fetching && carsDataState.data.length < carsDataState.count) {
-      dispatch(getCarsAction(page.toString(), LIMIT_PER_PAGE));
+      dispatch(getCarsAction(page.toString(), CARS_LIMIT_PER_PAGE));
       setPage((prevState) => prevState + 1);
       setFetching(false);
     }
   }, [fetching]);
 
   const handleCarsScroll = (event: any) => {
-    if (event.target.scrollHeight - event.target.scrollTop <= event.target.clientHeight) {
+    if (event.target.scrollHeight - event.target.scrollTop <= event.target.clientHeight && !carsDataState.isLoading) {
       setFetching(true);
     }
   };
@@ -95,7 +100,7 @@ const CarsTab = () => {
       </header>
       <main className="cars-tab__car-list" onScroll={handleCarsScroll}>
         {displayCards()}
-        <div className={`cars-tab__spinner ${carsDataState.isLoading && 'cars-tab__spinner_visible'}`}>
+        <div className={classNameSpinner}>
           <Spinner />
         </div>
       </main>

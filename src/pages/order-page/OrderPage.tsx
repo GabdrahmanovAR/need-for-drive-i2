@@ -8,7 +8,7 @@ import Header from '../../components/header/Header';
 import OrderStep from '../../components/order-step/OrderStep';
 import { getPointsAction } from '../../redux/actions/PointsDataAction';
 import { pointsDataSelector } from '../../selectors/pointsDataSelector';
-import { ORDER_STATUS_URL_PATH } from '../../constants/common';
+import { ORDER_STATUS_URL_PATH } from '../../constants/routes';
 import OrderStatus from '../../components/order-status/OrderStatus';
 
 const OrderPage = () => {

@@ -47,6 +47,7 @@
     &__input_checkbox:checked {
       border: 2px solid $main-green-color;
       background: url("../../assets/icons/check-mark.svg") no-repeat;
+      background-size: contain;
     }
 
     &__input_checkbox:checked + span {

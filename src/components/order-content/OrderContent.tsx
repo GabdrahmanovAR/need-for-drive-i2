@@ -6,7 +6,7 @@ import OrderLocation from './location-tab/LocationTab';
 import CarsTab from './cars-tab/CarsTab';
 import AdvancedTab from './advanced-tab/AdvancedTab';
 import ResultTab from './result-tab/ResultTab';
-import { ORDER_LOCATION_URL_PATH } from '../../constants/common';
+import { ORDER_LOCATION_URL_PATH } from '../../constants/routes';
 
 const OrderContent = () => (
   <section className="order-content">
