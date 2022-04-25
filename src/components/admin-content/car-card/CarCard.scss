@@ -96,6 +96,23 @@
         :last-child {
           color: #3D5170;
         }
+
+        &__title {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .anticon {
+          opacity: 0;
+          animation: hide 250ms ease-in;
+          cursor: pointer;
+        }
+      }
+      &__text:hover {
+        .anticon {
+          opacity: 100%;
+          animation: show 250ms ease-in;
+        }
       }
     }
 

@@ -43,6 +43,7 @@ const Notifications = () => {
       <Modal
         title="Сообщение"
         visible={isModalVisible}
+        closable
         footer={[
           <Button key="back" onClick={handleCancelClick}>
             Назад

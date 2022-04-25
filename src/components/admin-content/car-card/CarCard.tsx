@@ -3,6 +3,8 @@ import {
   Button, Form, Input, Upload,
 } from 'antd';
 import { RcFile } from 'antd/lib/upload';
+import { EditOutlined } from '@ant-design/icons';
+import Modal from 'antd/lib/modal/Modal';
 import carImage from '../../../assets/images/car.png';
 import './CarCard.scss';
 import ProgressBar from '../../progress-bar/ProgressBar';
@@ -13,12 +15,18 @@ import { inputRules } from '../../../constants/inputRules';
 
 const colorsInitialState = ['Красный', 'Белый', 'Черный'];
 
+const descriptionInitialState = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio eaque, quidem, commodi soluta qui quae quod dolorum sint alias, possimus illum assumenda eligendi cumque?';
+
 const CarCard = () => {
   const [file, setFile] = useState({} as RcFile);
   const [colors, setColors] = useState(colorsInitialState);
   const [newColor, setNewColor] = useState(EMPTY_STRING);
   const [progressBarWidth, setProgressBarWidth] = useState('0%');
-  const [inputValue, setInputValue] = useState('Выберите файл...');
+  const [placeholderImitation, setplaceholderImitation] = useState('Выберите файл...');
+
+  const [description, setDescription] = useState(descriptionInitialState);
+  const [descriptionTextValue, setDescriptionTextValue] = useState(descriptionInitialState);
+  const [isModalDescriptionVisible, setIsModalDescriptionVisible] = useState(false);
 
   useEffect(() => {
     setProgressBarWidth('74%');
@@ -26,16 +34,15 @@ const CarCard = () => {
   }, []);
 
   useEffect(() => {
-    console.log(colors);
   }, [colors.length]);
 
   const handleUploadingFile = (uploadedFile: RcFile) => {
     setFile(uploadedFile);
-    setInputValue(EMPTY_STRING);
+    setplaceholderImitation(EMPTY_STRING);
   };
 
   const handleRemoveFile = () => {
-    setInputValue('Выберите файл...');
+    setplaceholderImitation('Выберите файл...');
   };
 
   const handleFinishButtonClick = (values: any) => {
@@ -62,6 +69,23 @@ const CarCard = () => {
     setColors([...colors.filter((color: string) => color !== item)]);
   };
 
+  const handleClickEditDescriptionIcon = () => {
+    setIsModalDescriptionVisible(true);
+  };
+
+  const handleClickOkDescriptionModal = () => {
+    setDescription(descriptionTextValue);
+    setIsModalDescriptionVisible(false);
+  };
+
+  const handleClickCancelDescriptionModal = () => {
+    setIsModalDescriptionVisible(false);
+  };
+
+  const handleDescriptionInput = (event: BaseSyntheticEvent) => {
+    setDescriptionTextValue(event.target.value);
+  };
+
   return (
     <div className="admin-car-card">
       <h2>Карточка автомобиля</h2>
@@ -85,7 +109,7 @@ const CarCard = () => {
                 >
                   <Input
                     name="file"
-                    value={inputValue}
+                    value={placeholderImitation}
                     suffix={<div className="upload-button">Обзор</div>}
                   />
                 </Upload>
@@ -100,12 +124,11 @@ const CarCard = () => {
             <ProgressBar progressBarWidth={progressBarWidth} />
           </div>
           <div className="admin-car-card__form__description__text">
-            <p>Описание</p>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Odio eaque, quidem, commodi soluta qui quae quod dolorum sint alias,
-              possimus illum assumenda eligendi cumque?
-            </p>
+            <div className="admin-car-card__form__description__text__title">
+              <p>Описание</p>
+              <EditOutlined onClick={handleClickEditDescriptionIcon} />
+            </div>
+            <p>{description}</p>
           </div>
         </div>
         <div className="admin-car-card__form__settings">
@@ -190,6 +213,19 @@ const CarCard = () => {
           </div>
         </div>
       </Form>
+      <Modal
+        title="Описание"
+        visible={isModalDescriptionVisible}
+        onOk={handleClickOkDescriptionModal}
+        onCancel={handleClickCancelDescriptionModal}
+        closable
+      >
+        <textarea
+          name="desciption"
+          onInput={handleDescriptionInput}
+          value={descriptionTextValue}
+        />
+      </Modal>
     </div>
   );
 };
