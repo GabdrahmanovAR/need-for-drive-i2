@@ -77,6 +77,11 @@
             background-color: $main-lightgrey-color;
           }
         }
+
+        img {
+          width: 100%;
+          max-width: 300px;
+        }
       }
 
       &__progress {
@@ -256,6 +261,90 @@
   &_visible {
     opacity: 100%;
     animation: show 250ms ease-in;
+  }
+}
+
+@media screen and (min-width: 1023px) and (max-width: 1222px) {
+  .admin-car-card__form__settings__car {
+    flex-direction: column;
+
+    &_model {
+      margin-right: 0;
+    }
+    &_type {
+      margin-left: 0;
+    }
+  }
+
+  .admin-car-card__form__settings .settings-colors__block {
+    width: 100%;
+  }
+
+  .settings__footer {
+    flex-direction: column;
+    justify-content: baseline;
+
+    &__edit-buttons {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+@media screen and (max-width: 1022px) {
+  .admin-car-card__form {
+    flex-direction: column;
+
+    &__description {
+      max-width: 100%;
+      margin-bottom: .5rem;
+      margin-right: 0;
+    }
+
+    &__settings {
+      margin-top: .5rem;
+      margin-left: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 660px) {
+  .admin-car-card__form__settings__car {
+    flex-direction: column;
+
+    &_model {
+      margin-right: 0;
+    }
+    &_type {
+      margin-left: 0;
+    }
+  }
+
+  .admin-car-card__form__settings .settings-colors__block {
+    width: 100%;
+  }
+
+  .settings__footer {
+    flex-direction: column;
+    justify-content: baseline;
+
+    &__edit-buttons {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .admin-car-card__form__settings .settings__footer__edit-buttons {
+    flex-direction: column;
+
+    &__save {
+      margin-right: 0;
+      margin-bottom: 1rem;
+    }
+
+    &__cancel {
+      margin-left: 0;
+    }
   }
 }
 
