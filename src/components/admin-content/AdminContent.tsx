@@ -1,18 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './AdminContent.scss';
+import { useDispatch, useSelector } from 'react-redux';
 import Sidebar from './sidebar/Sidebar';
 import Header from './header/Header';
 import OrdersInfo from './orders-info/OrdersInfo';
 import EntityList from './entity-list/EntityList';
+import CarCard from './car-card/CarCard';
+import ErrorPage from './error-page/ErrorPage';
+import { successfullSaveSelector } from '../../selectors/successfulSaveSelector';
+import { successfullSaveStateAction } from '../../redux/actions/SuccessfullSaveAction';
 
 const AdminContent = () => {
   const [menu, setMenu] = useState('orders');
+  const successfulSaveState = useSelector(successfullSaveSelector);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (menu !== 'car' && successfulSaveState.isActive) {
+      dispatch(successfullSaveStateAction(false));
+    }
+  }, [menu]);
 
   const switchContent = (menuValue: string) => {
     switch (menuValue) {
       case 'orders': return <OrdersInfo />;
       case 'list-of-entities': return <EntityList />;
-      default: return <div>Ошибка</div>;
+      case 'car': return <CarCard />;
+      default: return <ErrorPage />;
     }
   };
 

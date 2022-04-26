@@ -1,0 +1,372 @@
+@import "src/constants/styles/common";
+
+.admin-car-card {
+  &__form {
+    display: flex;
+
+    &__description {
+      width: 100%;
+      max-width: 335px;
+      min-height: 386px;
+      border-radius: 0.5rem;
+      background-color: $main-white-color;
+      box-shadow: 0 3px 6px -4px rgba(0, 0, 0, .12), 0 3px 6px 0 rgba(0, 0, 0, .1), 0 9px 28px 8px rgba(0, 0, 0, .05);
+      margin-right: .875rem;
+
+
+      p {
+        color: $main-grey-color;
+      }
+
+      &__img {
+        padding: 1rem;
+        text-align: center;
+
+        h2 {
+          margin-bottom: 0;
+        }
+
+        p {
+          margin-top: 0;
+        }
+
+        .upload-button {
+          font-size: .6875rem;
+        }
+
+        .upload-button:hover {
+          cursor: pointer;
+        }
+
+        &__upload {
+          position: relative;
+
+          .ant-upload-list {
+            float: left;
+            position: absolute;
+            top: -3px;
+            left: 52px;
+            z-index: 1;
+          }
+
+          .ant-upload-span {
+            font-size: .6875rem;
+          }
+
+          .ant-upload-text-icon {
+            display: none;
+          }
+
+          .ant-upload-list-item-name {
+            max-width: 100px;
+          }
+
+          .ant-input-affix-wrapper {
+            padding: 0 0 0 .6875rem;
+          }
+
+          input {
+            font-size: .6875rem;
+            caret-color: transparent;
+            color: #a9a9a9;
+          }
+
+          .ant-input-suffix {
+            line-height: 1.8rem;
+            padding: 0 1rem;
+            background-color: $main-lightgrey-color;
+          }
+        }
+
+        img {
+          width: 100%;
+          max-width: 300px;
+        }
+      }
+
+      &__progress {
+        padding: 1rem;
+        border-top: 1px solid #CACEDB;
+        border-bottom: 1px solid #CACEDB;
+
+        div {
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+
+      &__text {
+        padding: 1rem;
+
+        :last-child {
+          color: #3D5170;
+        }
+
+        &__title {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .anticon {
+          opacity: 0;
+          animation: hide 250ms ease-in;
+          cursor: pointer;
+        }
+      }
+      &__text:hover {
+        .anticon {
+          opacity: 100%;
+          animation: show 250ms ease-in;
+        }
+      }
+    }
+
+    &__settings {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      width: 100%;
+      min-height: 386px;
+      border-radius: 0.5rem;
+      background-color: $main-white-color;
+      box-shadow: 0 3px 6px -4px rgba(0, 0, 0, .12), 0 3px 6px 0 rgba(0, 0, 0, .1), 0 9px 28px 8px rgba(0, 0, 0, .05);
+      margin-left: .875rem;
+
+      span {
+        font-size: .6875rem;
+      }
+
+      input {
+        font-size: .6875rem;
+        height: 2rem;
+      }
+
+      &__car {
+        display: flex;
+
+        &_model {
+          margin-right: .5rem;
+          width: 100%;
+        }
+        &_type {
+          margin-left: .5rem;
+          width: 100%;
+        }
+      }
+
+      .settings-colors {
+        flex-grow: 1;
+
+        &__block {
+          display: flex;
+          flex-grow: 1;
+          width: calc(50% - 0.5rem);
+
+          &__input {
+            margin-right: .5rem;
+            width: 100%;
+          }
+
+          &__add {
+            margin-left: .5rem;
+
+            button {
+              display: flex;
+              align-items: center;
+              width: 32px;
+              justify-content: center;
+
+              span {
+                font-size: 1.5rem;
+                font-weight: 100;
+                color: #a9a9a9;
+              }
+
+              span:hover {
+                color: #40a9ff;
+              }
+            }
+          }
+        }
+
+        &__checkbox {
+          width: calc(50% - .5rem);
+
+          &__block {
+            display: flex;
+            justify-content: space-between;
+
+            img {
+              width: .6875rem;
+            }
+
+            &__value {
+              display: flex;
+              align-items: center;
+              margin-bottom: .25rem;
+  
+              input {
+                margin-right: .5rem;
+              }
+            }
+          }
+
+          &__block:hover {
+            cursor: pointer;
+          }
+        }
+        .ant-form-item-control-input {
+          align-items: flex-start;
+        }
+      }
+
+      .settings__footer {
+        display: flex;
+        justify-content: space-between;
+
+        button {
+          width: 110px;
+          padding: 0;
+          font-size: .6875rem;
+        }
+
+        &__edit-buttons {
+          display: inherit;
+
+          &__save {
+            margin-right: .5rem;
+          }
+          
+          &__cancel {
+            margin-left: .5rem;
+          }
+        }
+
+        .ant-form-item {
+          margin-bottom: 0;
+        }
+      }
+
+      .ant-form-item-explain-error {
+        font-size: .625rem;
+      }
+    }
+  }
+}
+
+.colors-delete-icon {
+  opacity: 0;
+  animation: hide 250ms ease-in;
+
+  &_visible {
+    opacity: 100%;
+    animation: show 250ms ease-in;
+  }
+}
+
+.edit-description {
+  width: 100%;
+  min-height: 100px;
+}
+
+@media screen and (min-width: 1023px) and (max-width: 1222px) {
+  .admin-car-card__form__settings__car {
+    flex-direction: column;
+
+    &_model {
+      margin-right: 0;
+    }
+    &_type {
+      margin-left: 0;
+    }
+  }
+
+  .admin-car-card__form__settings .settings-colors__block {
+    width: 100%;
+  }
+
+  .settings__footer {
+    flex-direction: column;
+    justify-content: baseline;
+
+    &__edit-buttons {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+@media screen and (max-width: 1022px) {
+  .admin-car-card__form {
+    flex-direction: column;
+
+    &__description {
+      max-width: 100%;
+      margin-bottom: .5rem;
+      margin-right: 0;
+    }
+
+    &__settings {
+      margin-top: .5rem;
+      margin-left: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 660px) {
+  .admin-car-card__form__settings__car {
+    flex-direction: column;
+
+    &_model {
+      margin-right: 0;
+    }
+    &_type {
+      margin-left: 0;
+    }
+  }
+
+  .admin-car-card__form__settings .settings-colors__block {
+    width: 100%;
+  }
+
+  .settings__footer {
+    flex-direction: column;
+    justify-content: baseline;
+
+    &__edit-buttons {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .admin-car-card__form__settings .settings__footer__edit-buttons {
+    flex-direction: column;
+
+    &__save {
+      margin-right: 0;
+      margin-bottom: 1rem;
+    }
+
+    &__cancel {
+      margin-left: 0;
+    }
+  }
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 100%;
+  }
+}
+
+@keyframes hide {
+  from {
+    opacity: 100%;
+  }
+  to {
+    opacity: 0;
+  }
+}

@@ -103,3 +103,7 @@ export interface IOrderStatusActionType extends IActionType {
   loading?: boolean;
   statusInfo?: IOrderStatusInfoState;
 }
+
+export interface ISuccessfullSaveACtionType extends IActionType {
+  isActive?: boolean;
+}

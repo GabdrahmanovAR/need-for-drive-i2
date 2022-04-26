@@ -70,7 +70,7 @@ const EntityList = () => {
             </tbody>
           </table>
         </div>
-        <div className="order-menu__info__pagination">
+        <div className="entity-list__pagination">
           <Pagination
             current={currentPage}
             size="small"

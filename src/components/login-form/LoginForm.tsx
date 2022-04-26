@@ -38,7 +38,7 @@ const LoginForm = () => {
           <p className="form-login__input-title">Логин</p>
           <Form.Item
             name="username"
-            rules={inputRules.email}
+            rules={inputRules.login}
           >
             <Input placeholder="Введите логин" />
           </Form.Item>

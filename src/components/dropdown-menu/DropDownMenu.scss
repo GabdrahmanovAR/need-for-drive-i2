@@ -42,11 +42,15 @@
 }
 
 @keyframes dropDownMenu {
-  from {
+  0% {
     max-height: 0;
     overflow: hidden;
   }
-  to {
+  25% {
+    max-height: 1,65625;
+    overflow: hidden;
+  }
+  100% {
     max-height: 6.625rem;
     overflow: auto;
   }

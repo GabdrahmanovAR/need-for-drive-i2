@@ -1,12 +1,14 @@
 @import "src/constants/styles/common";
 
 .admin-header {
+  position: relative;
   display: flex;
   width: 100%;
   background-color: $main-white-color;
   min-height: 4rem;
   padding: 0 1.75rem;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, .08);
+  z-index: 1;
 
   &__burger-menu {
     display: none;
@@ -29,7 +31,18 @@
     border-right: 1px solid #CACEDB;
   }
   &__profile {
+    position: relative;
     width: 220px;
+
+    div.drop-down-menu {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+    }
+    nav.drop-down-menu__list_active-admin {
+      right: 0;
+    }
   }
   &__modal-search .input-field {
     width: 90%;

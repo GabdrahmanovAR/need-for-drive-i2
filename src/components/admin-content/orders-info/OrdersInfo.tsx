@@ -38,8 +38,8 @@ const OrdersInfo = () => {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
 
-  const classNameOrder = cn('order-menu__info__status', {
-    'order-menu__info__status_loading': orderStatusState.loading,
+  const classNameOrder = cn('admin-order-block__info__status', {
+    'admin-order-block__info__status_loading': orderStatusState.loading,
   });
 
   useEffect(() => {
@@ -55,17 +55,17 @@ const OrdersInfo = () => {
   };
 
   return (
-    <main className="order-menu">
+    <main className="admin-order-block">
       <h2>Заказы</h2>
-      <section className="order-menu__info">
-        <div className="order-menu__info__edit">
+      <section className="admin-order-block__info">
+        <div className="admin-order-block__info__edit">
           <OrderFilters selectorData={selectorData} />
         </div>
         <div className={classNameOrder}>
           {orderStatusState.loading ? <Spinner />
             : <Order />}
         </div>
-        <div className="order-menu__info__pagination">
+        <div className="admin-order-block__info__pagination">
           <Pagination
             current={currentPage}
             size="small"

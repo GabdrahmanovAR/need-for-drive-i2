@@ -13,6 +13,7 @@ export interface IState {
   radioButton: IRadioButtonState;
   rate: IRateState;
   orderStatus: IOrderStatusState;
+  successfullSave: ISuccessfullSaveState;
 }
 
 export interface ISidebarMenuState {
@@ -156,4 +157,8 @@ export interface IOrderStatusInfoState {
   pointName: string;
   price: number;
   rate: string;
+}
+
+export interface ISuccessfullSaveState {
+  isActive: boolean;
 }
