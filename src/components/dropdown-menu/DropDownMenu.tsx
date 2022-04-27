@@ -41,10 +41,19 @@ const DropDownMenu: FC<IDropDownMenu> = (props) => {
         <nav
           className={classNameAdminMenu}
         >
-          <ul>
-            <li role="presentation" onClick={onClickFunc} className="list-item">Some text</li>
-            <li role="presentation" onClick={onClickFunc} className="list-item">Some text</li>
-          </ul>
+          {focusedItemState.item === 'profile-menu'
+            ? (
+              <ul>
+                <li role="presentation" onClick={onClickFunc} className="list-item">Изменить профиль</li>
+                <li role="presentation" onClick={onClickFunc} className="list-item">Выйти</li>
+              </ul>
+            )
+            : (
+              <ul>
+                <li role="presentation" onClick={onClickFunc} className="list-item">Some text</li>
+                <li role="presentation" onClick={onClickFunc} className="list-item">Some text</li>
+              </ul>
+            )}
         </nav>
       </div>
     );

@@ -13,6 +13,7 @@ import radioButtonReducer from './reducers/RadioButtonReducer';
 import rateReducer from './reducers/RateReducer';
 import orderStatusReducer from './reducers/OrderStatusReducer';
 import adminSidebarMenuReducer from './reducers/AdminSidebarMenuReducer';
+import succesfullSaveReducer from './reducers/SuccesfullSaveReducer';
 
 export const store = createStore(
   combineReducers({
@@ -28,6 +29,7 @@ export const store = createStore(
     radioButton: radioButtonReducer,
     rate: rateReducer,
     orderStatus: orderStatusReducer,
+    successfullSave: succesfullSaveReducer,
   }),
   composeWithDevTools(applyMiddleware(thunk)),
 );

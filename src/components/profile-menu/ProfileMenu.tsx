@@ -1,29 +1,35 @@
-import React, { useRef, useState } from 'react';
+import React, { BaseSyntheticEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import DropDownMenu from '../dropdown-menu/DropDownMenu';
 import userAvatar from '../../assets/images/user-avatar.png';
 import dropDownIcon from '../../assets/icons/dropdown-icon.svg';
 import './ProfileMenu.scss';
 import { setFocusedFieldAction } from '../../redux/actions/FocusedItemAction';
 import { EMPTY_STRING } from '../../constants/common';
+import { ADMIN_LOGIN_URL } from '../../constants/api';
 
 const ProfileMenu = () => {
   const [isDropDownMenuActive, setIsDropDownMenuActive] = useState(false);
   const dispatch = useDispatch();
-  const wrapperRef = useRef(null);
+  const navigate = useNavigate();
 
   const handleImageClick = () => {
     setIsDropDownMenuActive(!isDropDownMenuActive);
-    dispatch(setFocusedFieldAction('profile-menu'));
+    dispatch(setFocusedFieldAction(isDropDownMenuActive ? EMPTY_STRING : 'profile-menu'));
   };
 
-  const handleMenuClick = () => {
+  const handleMenuClick = (event: BaseSyntheticEvent) => {
     dispatch(setFocusedFieldAction(EMPTY_STRING));
     setIsDropDownMenuActive(false);
+    if (event.target.innerText === 'Выйти') {
+      localStorage.removeItem('auth-token');
+      navigate(ADMIN_LOGIN_URL);
+    }
   };
 
   return (
-    <div className="profile-menu" ref={wrapperRef}>
+    <div className="profile-menu">
       <section className="profile-menu__info">
         <div className="profile-menu__info__avatar">
           <img src={userAvatar} alt="User avatar" />
@@ -38,9 +44,9 @@ const ProfileMenu = () => {
             onClick={handleImageClick}
             role="presentation"
           />
-          <DropDownMenu data="" isActive={isDropDownMenuActive} onClickFunc={handleMenuClick} />
         </div>
       </section>
+      <DropDownMenu data="" isActive={isDropDownMenuActive} onClickFunc={handleMenuClick} />
     </div>
   );
 };

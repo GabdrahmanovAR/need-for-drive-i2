@@ -38,6 +38,12 @@ const Sidebar: FC<ISideBarProps> = ({ setMenu }) => {
 
   const handleMenuClick = (event: any) => {
     setMenu(event.key);
+    if (currentWindowWidth < 767) {
+      dispatch(adminSidebarMenuAction(!adminSidebarMenuState.isOpen));
+    }
+    if (currentWindowWidth > 767 && currentWindowWidth < 1024 && !adminSidebarMenuState.isOpen) {
+      dispatch(adminSidebarMenuAction(!adminSidebarMenuState.isOpen));
+    }
   };
 
   const handleCollapsedMenuButtonClick = () => {

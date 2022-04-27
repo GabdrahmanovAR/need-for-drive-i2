@@ -11,6 +11,7 @@ import ProfileMenu from '../../profile-menu/ProfileMenu';
 import { EMPTY_STRING } from '../../../constants/common';
 import menuButton from '../../../assets/icons/menu_btn_black.svg';
 import { adminSidebarMenuAction } from '../../../redux/actions/AdminSidebarMenuAction';
+import SuccessfulSave from '../successful-save/SuccessfulSave';
 
 const Header = () => {
   const [searchText, setSearchText] = useState(EMPTY_STRING);
@@ -86,6 +87,7 @@ const Header = () => {
           />
         </div>
       </Modal>
+      <SuccessfulSave />
     </main>
   );
 };
