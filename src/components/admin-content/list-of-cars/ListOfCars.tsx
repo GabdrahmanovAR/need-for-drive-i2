@@ -3,12 +3,14 @@ import { Pagination } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import OrderFilters from '../order-filters/OrderFilters';
-import './EntityList.scss';
+import './ListOfCars.scss';
 import { getCarsAction } from '../../../redux/actions/CarsDataAction';
 import { carsDataSelector } from '../../../selectors/carsDataSelector';
 import { ICarInfoData } from '../../../types/api';
 import Spinner from '../../Spinner/Spinner';
 import { formatString } from '../../../utils/FormatString';
+import { adminCarCardChangeStateAction } from '../../../redux/actions/AdminCarCardAction';
+import { adminSidebarChangeMenuAction } from '../../../redux/actions/AdminSidebarMenuAction';
 
 const selectorData = [{
   name: 'field1',
@@ -45,6 +47,11 @@ const EntityList = () => {
     setCurrentPage(page);
   };
 
+  const handleTableRowClick = (car: ICarInfoData) => {
+    dispatch(adminCarCardChangeStateAction('edit', car));
+    dispatch(adminSidebarChangeMenuAction('car'));
+  };
+
   return (
     <main className="entity-list">
       <h2>Список автомобилей</h2>
@@ -59,7 +66,7 @@ const EntityList = () => {
               <table>
                 <thead>
                   <tr>
-                    <th />
+                    <th>Вид</th>
                     <th>Название</th>
                     <th>Категория</th>
                     <th>Гос. номер</th>
@@ -71,7 +78,10 @@ const EntityList = () => {
                 </thead>
                 <tbody>
                   {carsDataState.dataAdminPart.map((car: ICarInfoData, index: number) => (
-                    <tr key={index}>
+                    <tr
+                      key={index}
+                      onClick={() => handleTableRowClick(car)}
+                    >
                       <td><img src={car.thumbnail.path} alt="Car" /></td>
                       <td>{car.name}</td>
                       <td>{car.categoryId.name}</td>

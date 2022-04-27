@@ -1,4 +1,4 @@
-import { ICarsData, IPoint } from './api';
+import { ICarInfoData, ICarsData, IPoint } from './api';
 import {
   IOrderStatusInfoState, IPointCityCoordsState, IPointMarkerCoordsState, IRateInfoState,
 } from './state';
@@ -13,6 +13,7 @@ export interface ISidebarMenuActionType extends IActionType {
 
 export interface IAdminSidebarMenuActionType extends IActionType {
   menuOpen?: boolean;
+  selectedMenu?: string;
 }
 
 export interface IOrderLocationActionType {
@@ -107,4 +108,9 @@ export interface IOrderStatusActionType extends IActionType {
 
 export interface ISuccessfullSaveACtionType extends IActionType {
   isActive?: boolean;
+}
+
+export interface IAdminCarCardActionType extends IActionType {
+  cardState?: string;
+  data?: ICarInfoData;
 }

@@ -1,5 +1,7 @@
-import React, { BaseSyntheticEvent, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, {
+  BaseSyntheticEvent, useEffect, useState,
+} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Button, Form, Input, Upload,
 } from 'antd';
@@ -14,6 +16,7 @@ import { formatString } from '../../../utils/FormatString';
 import Checkbox from '../checkbox/Checkbox';
 import { inputRules } from '../../../constants/inputRules';
 import { successfullSaveStateAction } from '../../../redux/actions/SuccessfullSaveAction';
+import { adminCarCardSelector } from '../../../selectors/adminCarCardSelector';
 
 const colorsInitialState = ['Красный', 'Белый', 'Черный'];
 
@@ -21,6 +24,7 @@ const descriptionInitialState = 'Lorem ipsum dolor sit amet consectetur adipisic
 
 const CarCard = () => {
   const [file, setFile] = useState({} as RcFile);
+  const { cardState, data } = useSelector(adminCarCardSelector);
   const dispatch = useDispatch();
 
   const [colors, setColors] = useState(colorsInitialState);
@@ -37,9 +41,6 @@ const CarCard = () => {
     setProgressBarWidth('74%');
     console.log(file);
   }, []);
-
-  useEffect(() => {
-  }, [colors.length]);
 
   const handleUploadingFile = (uploadedFile: RcFile) => {
     setFile(uploadedFile);
@@ -92,6 +93,15 @@ const CarCard = () => {
     setDescriptionTextValue(event.target.value);
   };
 
+  if (cardState === 'create') {
+    return (
+      <div className="admin-car-card">
+        <h2>Добавьте новую карточку автомобиля</h2>
+        <Button type="primary">Добавить</Button>
+      </div>
+    );
+  }
+
   return (
     <div className="admin-car-card">
       <h2>Карточка автомобиля</h2>
@@ -103,8 +113,8 @@ const CarCard = () => {
         <div className="admin-car-card__form__description">
           <div className="admin-car-card__form__description__img">
             <img src={carImage} alt="Car" />
-            <h2>Hyndai, i30 N</h2>
-            <p>Компакт-кар</p>
+            <h2>{data ? data.name : 'Название автомобиля'}</h2>
+            <p>{data ? data.categoryId.name : 'Тип автомобиля'}</p>
             <div className="admin-car-card__form__description__img__upload">
               <Form.Item name="file">
                 <Upload

@@ -1,6 +1,4 @@
-import React, {
-  FC, SetStateAction, useEffect, useState,
-} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Menu } from 'antd';
 import './Sidebar.scss';
 import {
@@ -13,13 +11,14 @@ import { windowWidth } from '../../../utils/WindowWidth';
 import menuButton from '../../../assets/icons/menu_btn_black.svg';
 import closeButton from '../../../assets/icons/menu_close_btn_black.svg';
 import { adminSidebarMenuSelector } from '../../../selectors/adminSidebarMenuSelector';
-import { adminSidebarMenuAction } from '../../../redux/actions/AdminSidebarMenuAction';
+import {
+  adminSidebarChangeMenuAction,
+  adminSidebarMenuStateAction,
+} from '../../../redux/actions/AdminSidebarMenuAction';
+import { adminCarCardChangeStateAction } from '../../../redux/actions/AdminCarCardAction';
+import { ICarInfoData } from '../../../types/api';
 
-interface ISideBarProps {
-  setMenu: SetStateAction<any>;
-}
-
-const Sidebar: FC<ISideBarProps> = ({ setMenu }) => {
+const Sidebar = () => {
   const [currentWindowWidth, setCurrentWindowWidth] = useState(window.innerWidth);
   const adminSidebarMenuState = useSelector(adminSidebarMenuSelector);
   const dispatch = useDispatch();
@@ -32,22 +31,23 @@ const Sidebar: FC<ISideBarProps> = ({ setMenu }) => {
   const narrowScreenMenuButton = !adminSidebarMenuState.isOpen ? menuButton : closeButton;
 
   useEffect(() => {
-    if (currentWindowWidth > 767 && currentWindowWidth < 1024) dispatch(adminSidebarMenuAction(true));
-    else dispatch(adminSidebarMenuAction(false));
+    if (currentWindowWidth > 767 && currentWindowWidth < 1024) dispatch(adminSidebarMenuStateAction(true));
+    else dispatch(adminSidebarMenuStateAction(false));
   }, [currentWindowWidth]);
 
   const handleMenuClick = (event: any) => {
-    setMenu(event.key);
+    dispatch(adminSidebarChangeMenuAction(event.key));
+    if (event.key === 'car') dispatch(adminCarCardChangeStateAction('create', {} as ICarInfoData));
     if (currentWindowWidth < 767) {
-      dispatch(adminSidebarMenuAction(!adminSidebarMenuState.isOpen));
+      dispatch(adminSidebarMenuStateAction(!adminSidebarMenuState.isOpen));
     }
     if (currentWindowWidth > 767 && currentWindowWidth < 1024 && !adminSidebarMenuState.isOpen) {
-      dispatch(adminSidebarMenuAction(!adminSidebarMenuState.isOpen));
+      dispatch(adminSidebarMenuStateAction(!adminSidebarMenuState.isOpen));
     }
   };
 
   const handleCollapsedMenuButtonClick = () => {
-    dispatch(adminSidebarMenuAction(!adminSidebarMenuState.isOpen));
+    dispatch(adminSidebarMenuStateAction(!adminSidebarMenuState.isOpen));
   };
 
   windowWidth(setCurrentWindowWidth);
@@ -99,10 +99,10 @@ const Sidebar: FC<ISideBarProps> = ({ setMenu }) => {
             Список авто
           </Menu.Item>
           <Menu.Item
-            key="list-of-entities"
+            key="new"
             icon={<ProfileOutlined />}
           >
-            Список основных сущностей
+            Новая сущность
           </Menu.Item>
         </Menu>
       </div>

@@ -14,6 +14,7 @@ export interface IState {
   rate: IRateState;
   orderStatus: IOrderStatusState;
   successfullSave: ISuccessfullSaveState;
+  adminCarCard: IAdminCarCardState;
 }
 
 export interface ISidebarMenuState {
@@ -22,6 +23,7 @@ export interface ISidebarMenuState {
 
 export interface IAdminSidebarMenuState {
   isOpen: boolean;
+  selectedMenu: string;
 }
 
 export interface IAdvancedTabState {
@@ -162,4 +164,9 @@ export interface IOrderStatusInfoState {
 
 export interface ISuccessfullSaveState {
   isActive: boolean;
+}
+
+export interface IAdminCarCardState {
+  cardState: string;
+  data: ICarInfoData;
 }

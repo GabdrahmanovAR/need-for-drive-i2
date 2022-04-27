@@ -1,30 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './AdminContent.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import Sidebar from './sidebar/Sidebar';
 import Header from './header/Header';
 import OrdersInfo from './orders-info/OrdersInfo';
-import EntityList from './entity-list/EntityList';
+import ListOfCars from './list-of-cars/ListOfCars';
 import CarCard from './car-card/CarCard';
 import ErrorPage from './error-page/ErrorPage';
 import { successfullSaveSelector } from '../../selectors/successfulSaveSelector';
 import { successfullSaveStateAction } from '../../redux/actions/SuccessfullSaveAction';
+import { adminSidebarMenuSelector } from '../../selectors/adminSidebarMenuSelector';
 
 const AdminContent = () => {
-  const [menu, setMenu] = useState('orders');
   const successfulSaveState = useSelector(successfullSaveSelector);
+  const adminSidebarState = useSelector(adminSidebarMenuSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (menu !== 'car' && successfulSaveState.isActive) {
+    if (adminSidebarState.selectedMenu !== 'car' && successfulSaveState.isActive) {
       dispatch(successfullSaveStateAction(false));
     }
-  }, [menu]);
+  }, [adminSidebarState.selectedMenu]);
 
   const switchContent = (menuValue: string) => {
     switch (menuValue) {
       case 'orders': return <OrdersInfo />;
-      case 'list-of-entities': return <EntityList />;
+      case 'list-of-cars': return <ListOfCars />;
       case 'car': return <CarCard />;
       default: return <ErrorPage />;
     }
@@ -32,11 +33,11 @@ const AdminContent = () => {
 
   return (
     <main className="admin-content">
-      <Sidebar setMenu={setMenu} />
+      <Sidebar />
       <section className="admin-content__main">
         <Header />
         <div className="admin-content__main__container">
-          {switchContent(menu)}
+          {switchContent(adminSidebarState.selectedMenu)}
         </div>
         <footer className="admin-content__main__footer admin-footer">
           <div className="admin-footer__links">

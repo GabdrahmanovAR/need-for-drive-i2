@@ -23,27 +23,35 @@
         thead th:nth-child(-n+6) {
           width: 10%;
         }
+
         thead th:nth-child(7) {
           width: 20%;
         }
+
         thead th:nth-child(8) {
           width: 20%;
         }
+
         th, td {
           padding: .5rem;
           text-align: start;
         }
-        thead th:nth-child(7), td:nth-child(7) {
+
+        thead th:nth-child(7), thead th:nth-child(8), td:nth-child(7) {
           text-align: center;
         }
-        thead th:nth-child(8) {
-          text-align: end;
-        }
+
         tbody tr td:not(:first-child) {
           color: #818EA3;
         }
+
         img {
-          width: 2rem;
+          width: 3rem;
+        }
+        
+        tr:hover {
+          background-color: $main-lightgrey-color;
+          cursor: pointer;
         }
       }
     }
