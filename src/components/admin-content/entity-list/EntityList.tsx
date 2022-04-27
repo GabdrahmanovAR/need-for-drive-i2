@@ -1,10 +1,14 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import { Pagination } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import OrderFilters from '../order-filters/OrderFilters';
-import { DEFAULT_PAGE_LIMIT } from '../../../constants/common';
 import './EntityList.scss';
-
-const data = [1, 2, 3, 4, 5, 6];
+import { getCarsAction } from '../../../redux/actions/CarsDataAction';
+import { carsDataSelector } from '../../../selectors/carsDataSelector';
+import { ICarInfoData } from '../../../types/api';
+import Spinner from '../../Spinner/Spinner';
+import { formatString } from '../../../utils/FormatString';
 
 const selectorData = [{
   name: 'field1',
@@ -30,6 +34,12 @@ const selectorData = [{
 
 const EntityList = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const carsDataState = useSelector(carsDataSelector);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCarsAction((currentPage - 1).toString(), '5'));
+  }, [currentPage]);
 
   const handlePaginationChange = (page: number) => {
     setCurrentPage(page);
@@ -37,48 +47,55 @@ const EntityList = () => {
 
   return (
     <main className="entity-list">
-      <h2>Список основных сущностей системы</h2>
+      <h2>Список автомобилей</h2>
       <section className="entity-list__info">
         <div className="entity-list__info__edit">
           <OrderFilters selectorData={selectorData} />
         </div>
         <div className="entity-list__info__table">
-          <table>
-            <thead>
-              <tr>
-                <th>Header</th>
-                <th>Header</th>
-                <th>Header</th>
-                <th>Header</th>
-                <th>Header</th>
-                <th>Header</th>
-                <th>Header</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((index) => (
-                <tr key={index}>
-                  <td>Value</td>
-                  <td>19,291</td>
-                  <td>19,291</td>
-                  <td>19,291</td>
-                  <td>19,291</td>
-                  <td>19,291</td>
-                  <td />
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          {carsDataState.isLoading
+            ? <Spinner />
+            : (
+              <table>
+                <thead>
+                  <tr>
+                    <th />
+                    <th>Название</th>
+                    <th>Категория</th>
+                    <th>Гос. номер</th>
+                    <th>Топливо, %</th>
+                    <th>Цвета</th>
+                    <th>Цена, ₽</th>
+                    <th>Об автомобиле</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {carsDataState.dataAdminPart.map((car: ICarInfoData, index: number) => (
+                    <tr key={index}>
+                      <td><img src={car.thumbnail.path} alt="Car" /></td>
+                      <td>{car.name}</td>
+                      <td>{car.categoryId.name}</td>
+                      <td>{car.number}</td>
+                      <td>{car.tank}</td>
+                      <td>
+                        {car.colors.map((color) => `${formatString(color)} \n`)}
+                      </td>
+                      <td>{`${car.priceMin} - ${car.priceMax}`}</td>
+                      <td>{car.description}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
         </div>
         <div className="entity-list__pagination">
           <Pagination
             current={currentPage}
             size="small"
-            total={1}
+            total={carsDataState.count}
             showSizeChanger={false}
-            pageSize={DEFAULT_PAGE_LIMIT}
+            pageSize={5}
             onChange={handlePaginationChange}
-            disabled
           />
         </div>
       </section>

@@ -103,6 +103,7 @@ export interface IPointMarkerCoordsState {
 export interface ICarsDataState {
   count: number;
   data: Array<ICarInfoData>;
+  dataAdminPart: Array<ICarInfoData>;
   isLoading: boolean;
 }
 

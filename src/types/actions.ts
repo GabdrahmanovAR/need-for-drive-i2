@@ -83,6 +83,7 @@ export interface IPointsDataActionType extends IActionType {
 
 export interface ICarsDataActionType extends IActionType {
   data?: ICarsData;
+  dataAdminPart?: ICarsData;
 }
 
 export interface IRadioButtonActionType extends IActionType {
