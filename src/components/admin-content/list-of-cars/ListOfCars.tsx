@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import { Pagination } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,29 +11,30 @@ import { formatString } from '../../../utils/FormatString';
 import { adminCarCardChangeStateAction } from '../../../redux/actions/AdminCarCardAction';
 import { adminSidebarChangeMenuAction } from '../../../redux/actions/AdminSidebarMenuAction';
 
-const selectorData = [{
-  name: 'field1',
-  placeholder: 'Field',
-  data: ['Field'],
-},
-{
-  name: 'field2',
-  placeholder: 'Field',
-  data: ['Field'],
-},
-{
-  name: 'field3',
-  placeholder: 'Field',
-  data: ['Field'],
-},
-{
-  name: 'field4',
-  placeholder: 'Field',
-  data: ['Field'],
-},
+const selectorData = [
+  {
+    name: 'field1',
+    placeholder: 'Field',
+    data: ['Field'],
+  },
+  {
+    name: 'field2',
+    placeholder: 'Field',
+    data: ['Field'],
+  },
+  {
+    name: 'field3',
+    placeholder: 'Field',
+    data: ['Field'],
+  },
+  {
+    name: 'field4',
+    placeholder: 'Field',
+    data: ['Field'],
+  },
 ];
 
-const EntityList = () => {
+const ListOfCars = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const carsDataState = useSelector(carsDataSelector);
   const dispatch = useDispatch();
@@ -53,13 +53,13 @@ const EntityList = () => {
   };
 
   return (
-    <main className="entity-list">
+    <main className="list-of-cars">
       <h2>Список автомобилей</h2>
-      <section className="entity-list__info">
-        <div className="entity-list__info__edit">
+      <section className="list-of-cars__info">
+        <div className="list-of-cars__info__edit">
           <OrderFilters selectorData={selectorData} />
         </div>
-        <div className="entity-list__info__table">
+        <div className="list-of-cars__info__table">
           {carsDataState.isLoading
             ? <Spinner />
             : (
@@ -88,7 +88,7 @@ const EntityList = () => {
                       <td>{car.number}</td>
                       <td>{car.tank}</td>
                       <td>
-                        {car.colors.map((color) => `${formatString(color)} \n`)}
+                        {car.colors.map((color) => <div>{formatString(color)}</div>)}
                       </td>
                       <td>{`${car.priceMin} - ${car.priceMax}`}</td>
                       <td>{car.description}</td>
@@ -98,7 +98,7 @@ const EntityList = () => {
               </table>
             )}
         </div>
-        <div className="entity-list__pagination">
+        <div className="list-of-cars__pagination">
           <Pagination
             current={currentPage}
             size="small"
@@ -113,4 +113,4 @@ const EntityList = () => {
   );
 };
 
-export default EntityList;
+export default ListOfCars;

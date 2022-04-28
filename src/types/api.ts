@@ -12,6 +12,18 @@ export interface IPoint {
   name: string,
 }
 
+export interface ICities {
+  count: number;
+  data: Array<ICityInfo>;
+}
+
+export interface ICityInfo {
+  updatedAt: number;
+  createdAt: number;
+  name: string;
+  id: string;
+}
+
 export interface ICarsData {
   count: number;
   data: Array<ICarInfoData>;

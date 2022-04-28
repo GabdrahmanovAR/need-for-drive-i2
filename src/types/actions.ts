@@ -1,4 +1,6 @@
-import { ICarInfoData, ICarsData, IPoint } from './api';
+import {
+  ICarInfoData, ICarsData, ICities, IPoint,
+} from './api';
 import {
   IOrderStatusInfoState, IPointCityCoordsState, IPointMarkerCoordsState, IRateInfoState,
 } from './state';
@@ -80,6 +82,7 @@ export interface IPointsDataActionType extends IActionType {
   cityCoords?: Array<IPointCityCoordsState>;
   markerCoords?: Array<IPointMarkerCoordsState>;
   isLoading?: boolean;
+  cities?: ICities;
 }
 
 export interface ICarsDataActionType extends IActionType {

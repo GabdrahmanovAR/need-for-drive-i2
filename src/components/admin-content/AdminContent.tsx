@@ -10,6 +10,7 @@ import ErrorPage from './error-page/ErrorPage';
 import { successfullSaveSelector } from '../../selectors/successfulSaveSelector';
 import { successfullSaveStateAction } from '../../redux/actions/SuccessfullSaveAction';
 import { adminSidebarMenuSelector } from '../../selectors/adminSidebarMenuSelector';
+import PickUpPoints from './pick-up-point/PickUpPoint';
 
 const AdminContent = () => {
   const successfulSaveState = useSelector(successfullSaveSelector);
@@ -27,6 +28,7 @@ const AdminContent = () => {
       case 'orders': return <OrdersInfo />;
       case 'list-of-cars': return <ListOfCars />;
       case 'car': return <CarCard />;
+      case 'points': return <PickUpPoints />;
       default: return <ErrorPage />;
     }
   };

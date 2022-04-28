@@ -4,6 +4,7 @@ export const METHOD_PUT = 'PUT';
 
 export const BASE_URL = 'https://api-factory.simbirsoft1.com/api';
 export const POINT_URL = '/db/point';
+export const CITY_URL = '/db/city';
 export const CARS_URL = '/db/car';
 export const RATE_URL = '/db/rate';
 export const ORDER_URL = '/db/order';

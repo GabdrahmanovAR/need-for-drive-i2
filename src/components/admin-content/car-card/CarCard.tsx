@@ -8,17 +8,17 @@ import {
 import { RcFile } from 'antd/lib/upload';
 import { EditOutlined } from '@ant-design/icons';
 import Modal from 'antd/lib/modal/Modal';
-import carImage from '../../../assets/images/car.png';
+import noFoto from '../../../assets/images/no-foto.png';
 import './CarCard.scss';
 import ProgressBar from '../../progress-bar/ProgressBar';
-import { EMPTY_STRING } from '../../../constants/common';
+import { EMPTY_ARRAY, EMPTY_STRING } from '../../../constants/common';
 import { formatString } from '../../../utils/FormatString';
 import Checkbox from '../checkbox/Checkbox';
 import { inputRules } from '../../../constants/inputRules';
 import { successfullSaveStateAction } from '../../../redux/actions/SuccessfullSaveAction';
 import { adminCarCardSelector } from '../../../selectors/adminCarCardSelector';
-
-const colorsInitialState = ['Красный', 'Белый', 'Черный'];
+import { adminCarCardChangeStateAction } from '../../../redux/actions/AdminCarCardAction';
+import { ICarInfoData } from '../../../types/api';
 
 const descriptionInitialState = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio eaque, quidem, commodi soluta qui quae quod dolorum sint alias, possimus illum assumenda eligendi cumque?';
 
@@ -27,28 +27,33 @@ const CarCard = () => {
   const { cardState, data } = useSelector(adminCarCardSelector);
   const dispatch = useDispatch();
 
-  const [colors, setColors] = useState(colorsInitialState);
-  const [newColor, setNewColor] = useState(EMPTY_STRING);
+  const [carModelInput, setCarModelInput] = useState(EMPTY_STRING);
+  const [carTypeInput, setCarTypeInput] = useState(EMPTY_STRING);
 
-  const [progressBarWidth, setProgressBarWidth] = useState('0%');
-  const [placeholderImitation, setplaceholderImitation] = useState('Выберите файл...');
+  const initialState = {
+    colors: data.id ? data.colors : [] as string[],
+    newColor: EMPTY_STRING,
+    progressBarWidth: '0%',
+    placeholderImitation: 'Выберите файл...',
+    description: data.id ? data.description : descriptionInitialState,
+    descriptionTextValue: data.id ? data.description : descriptionInitialState,
+  };
 
-  const [description, setDescription] = useState(descriptionInitialState);
-  const [descriptionTextValue, setDescriptionTextValue] = useState(descriptionInitialState);
+  const [propsState, setPropsState] = useState(initialState);
   const [isModalDescriptionVisible, setIsModalDescriptionVisible] = useState(false);
 
   useEffect(() => {
-    setProgressBarWidth('74%');
+    setPropsState((prevState) => ({ ...prevState, progressBarWidth: '74%' }));
     console.log(file);
   }, []);
 
   const handleUploadingFile = (uploadedFile: RcFile) => {
     setFile(uploadedFile);
-    setplaceholderImitation(EMPTY_STRING);
+    setPropsState((prevState) => ({ ...prevState, placeholderImitation: EMPTY_STRING }));
   };
 
   const handleRemoveFile = () => {
-    setplaceholderImitation('Выберите файл...');
+    setPropsState((prevState) => ({ ...prevState, placeholderImitation: 'Выберите файл...' }));
   };
 
   const handleFinishButtonClick = (values: any) => {
@@ -57,23 +62,27 @@ const CarCard = () => {
   };
 
   const handleResetButtonClcick = () => {
-    setNewColor(EMPTY_STRING);
-    setColors(colorsInitialState);
+    setPropsState((prevState) => ({ ...prevState, colors: EMPTY_ARRAY, newColor: EMPTY_STRING }));
   };
 
   const handleInputColor = (event: BaseSyntheticEvent) => {
-    setNewColor(event.target.value);
+    setPropsState((prevState) => ({ ...prevState, newColor: event.target.value }));
   };
 
-  const handleAddButtonClick = () => {
-    if (colors.indexOf(newColor) === -1 && newColor !== EMPTY_STRING) {
-      setNewColor(EMPTY_STRING);
-      setColors([...colors, formatString(newColor)]);
-    } else if (newColor !== EMPTY_STRING) setNewColor(EMPTY_STRING);
+  const handleAddColorButtonClick = () => {
+    if (propsState.colors.indexOf(propsState.newColor) === -1 && propsState.newColor !== EMPTY_STRING) {
+      setPropsState((prevState) => ({
+        ...prevState, colors: [...propsState.colors, formatString(propsState.newColor)], newColor: EMPTY_STRING,
+      }));
+    } else if (propsState.newColor !== EMPTY_STRING) {
+      setPropsState((prevState) => ({ ...prevState, newColor: EMPTY_STRING }));
+    }
   };
 
   const removeColor = (item: string) => {
-    setColors([...colors.filter((color: string) => color !== item)]);
+    setPropsState((prevState) => ({
+      ...prevState, colors: [...propsState.colors.filter((color: string) => color !== item)],
+    }));
   };
 
   const handleClickEditDescriptionIcon = () => {
@@ -81,7 +90,7 @@ const CarCard = () => {
   };
 
   const handleClickOkDescriptionModal = () => {
-    setDescription(descriptionTextValue);
+    setPropsState((prevState) => ({ ...prevState, description: propsState.descriptionTextValue }));
     setIsModalDescriptionVisible(false);
   };
 
@@ -90,14 +99,36 @@ const CarCard = () => {
   };
 
   const handleDescriptionInput = (event: BaseSyntheticEvent) => {
-    setDescriptionTextValue(event.target.value);
+    setPropsState((prevState) => ({ ...prevState, descriptionTextValue: event.target.value }));
+  };
+
+  const handleAddCardButtonClick = () => {
+    dispatch(adminCarCardChangeStateAction('edit', {} as ICarInfoData));
+  };
+
+  const handleCancelButtonClick = () => {
+    dispatch(adminCarCardChangeStateAction('create', {} as ICarInfoData));
+    setPropsState(initialState);
+  };
+
+  const handleCarModelInput = (event: BaseSyntheticEvent) => {
+    setCarModelInput(event.target.value);
+  };
+
+  const handleCarTypeInput = (event: BaseSyntheticEvent) => {
+    setCarTypeInput(event.target.value);
   };
 
   if (cardState === 'create') {
     return (
       <div className="admin-car-card">
         <h2>Добавьте новую карточку автомобиля</h2>
-        <Button type="primary">Добавить</Button>
+        <Button
+          type="primary"
+          onClick={handleAddCardButtonClick}
+        >
+          Добавить
+        </Button>
       </div>
     );
   }
@@ -112,9 +143,9 @@ const CarCard = () => {
       >
         <div className="admin-car-card__form__description">
           <div className="admin-car-card__form__description__img">
-            <img src={carImage} alt="Car" />
-            <h2>{data ? data.name : 'Название автомобиля'}</h2>
-            <p>{data ? data.categoryId.name : 'Тип автомобиля'}</p>
+            <img src={data.id ? data.thumbnail.path : noFoto} alt="Car" />
+            <h2>{data.id ? data.name : 'Название автомобиля'}</h2>
+            <p>{data.id ? data.categoryId.name : 'Тип автомобиля'}</p>
             <div className="admin-car-card__form__description__img__upload">
               <Form.Item name="file">
                 <Upload
@@ -125,7 +156,7 @@ const CarCard = () => {
                 >
                   <Input
                     name="file"
-                    value={placeholderImitation}
+                    value={propsState.placeholderImitation}
                     suffix={<div className="upload-button">Обзор</div>}
                   />
                 </Upload>
@@ -135,16 +166,16 @@ const CarCard = () => {
           <div className="admin-car-card__form__description__progress">
             <div>
               <p>Заполнено</p>
-              <p>{progressBarWidth}</p>
+              <p>{propsState.progressBarWidth}</p>
             </div>
-            <ProgressBar progressBarWidth={progressBarWidth} />
+            <ProgressBar progressBarWidth={propsState.progressBarWidth} />
           </div>
           <div className="admin-car-card__form__description__text">
             <div className="admin-car-card__form__description__text__title">
               <p>Описание</p>
               <EditOutlined onClick={handleClickEditDescriptionIcon} />
             </div>
-            <p>{description}</p>
+            <p>{propsState.description}</p>
           </div>
         </div>
         <div className="admin-car-card__form__settings">
@@ -156,7 +187,12 @@ const CarCard = () => {
                 name="car-model"
                 rules={inputRules.carModel}
               >
-                <Input placeholder="Введите название..." />
+                <Input
+                  placeholder="Введите название..."
+                  defaultValue={data.id ? data.name : EMPTY_STRING}
+                  value={carModelInput}
+                  onInput={handleCarModelInput}
+                />
               </Form.Item>
             </div>
             <div className="admin-car-card__form__settings__car_type">
@@ -165,7 +201,12 @@ const CarCard = () => {
                 name="car-type"
                 rules={inputRules.carType}
               >
-                <Input placeholder="Введите тип..." />
+                <Input
+                  placeholder="Введите тип..."
+                  defaultValue={data.id ? data.categoryId.name : EMPTY_STRING}
+                  value={carTypeInput}
+                  onInput={handleCarTypeInput}
+                />
               </Form.Item>
             </div>
           </div>
@@ -177,14 +218,14 @@ const CarCard = () => {
                   <Input
                     placeholder="Введите цвет..."
                     onInput={handleInputColor}
-                    value={newColor}
+                    value={propsState.newColor}
                   />
                 </Form.Item>
               </div>
               <div className="settings-colors__block__add">
                 <Button
                   type="default"
-                  onClick={handleAddButtonClick}
+                  onClick={handleAddColorButtonClick}
                 >
                   +
                 </Button>
@@ -192,7 +233,7 @@ const CarCard = () => {
             </div>
             <div className="settings-colors__checkbox">
               <Form.Item>
-                {colors.map((color: string, index: number) => (
+                {propsState.colors.map((color: string, index: number) => (
                   <Checkbox
                     text={color}
                     key={index}
@@ -213,7 +254,11 @@ const CarCard = () => {
               </div>
               <div className="settings__footer__edit-buttons__cancel">
                 <Form.Item>
-                  <Button type="primary" htmlType="reset">
+                  <Button
+                    type="primary"
+                    htmlType="reset"
+                    onClick={handleCancelButtonClick}
+                  >
                     Отменить
                   </Button>
                 </Form.Item>
@@ -240,7 +285,7 @@ const CarCard = () => {
           className="edit-description"
           name="desciption"
           onInput={handleDescriptionInput}
-          value={descriptionTextValue}
+          value={propsState.descriptionTextValue}
         />
       </Modal>
     </div>

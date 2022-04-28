@@ -1,4 +1,4 @@
-import { ICarInfoData, IPoint } from './api';
+import { ICarInfoData, ICities, IPoint } from './api';
 
 export interface IState {
   sidebarMenu: ISidebarMenuState;
@@ -90,6 +90,7 @@ export interface IPointsDataState {
   cityCoords: Array<IPointCityCoordsState>;
   markerCoords: Array<IPointMarkerCoordsState>;
   isLoading: boolean;
+  cities: ICities;
 }
 
 export interface IPointCityCoordsState {

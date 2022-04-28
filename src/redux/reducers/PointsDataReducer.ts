@@ -4,19 +4,30 @@ import { IPointCityCoordsState, IPointMarkerCoordsState, IPointsDataState } from
 import {
   CHANGE_CITY_COORDS, CHANGE_MARKER_COORDS,
   HIDE_POINTS_LOADER,
+  LOAD_CITIES_SUCCESS,
   LOAD_POINTS_SUCCESS,
   SHOW_POINTS_LOADER,
 } from '../../constants/actions/pointsData';
+import { ICities, ICityInfo, IPoint } from '../../types/api';
 
 const initialState: IPointsDataState = {
-  data: [],
+  data: [] as IPoint[],
   cityCoords: [] as IPointCityCoordsState[],
   markerCoords: [] as IPointMarkerCoordsState[],
   isLoading: false,
+  cities: {
+    count: 0,
+    data: [] as ICityInfo[],
+  } as ICities,
 };
 
-const loadPointsData = (draft: IPointsDataState, data?: any) => {
+const loadPointsData = (draft: IPointsDataState, data?: IPoint[]) => {
   draft.data = data || [];
+  return draft;
+};
+
+const loadCitiesData = (draft: IPointsDataState, cities?: ICities) => {
+  draft.cities = cities || {} as ICities;
   return draft;
 };
 
@@ -45,6 +56,7 @@ export default (state = initialState, action: IPointsDataActionType) => produce(
   (draft: IPointsDataState) => {
     switch (action.type) {
       case LOAD_POINTS_SUCCESS: return loadPointsData(draft, action.data);
+      case LOAD_CITIES_SUCCESS: return loadCitiesData(draft, action.cities);
       case SHOW_POINTS_LOADER: return showLoader(draft);
       case HIDE_POINTS_LOADER: return hideLoader(draft);
       case CHANGE_CITY_COORDS: return changeCityCoords(draft, action.cityCoords);

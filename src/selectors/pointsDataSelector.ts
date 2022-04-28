@@ -5,4 +5,5 @@ export const pointsDataSelector = (state: IState) => ({
   cityCoords: state.pointsData.cityCoords,
   markerCoords: state.pointsData.markerCoords,
   isLoading: state.pointsData.isLoading,
+  cities: state.pointsData.cities,
 });

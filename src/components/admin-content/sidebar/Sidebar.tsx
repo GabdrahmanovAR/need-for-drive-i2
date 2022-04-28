@@ -76,6 +76,7 @@ const Sidebar = () => {
         <Menu
           className="admin-sidebar__menu"
           defaultSelectedKeys={['orders']}
+          selectedKeys={[adminSidebarMenuState.selectedMenu]}
           mode="inline"
           onClick={handleMenuClick}
           inlineCollapsed={currentWindowWidth > 767 ? adminSidebarMenuState.isOpen : !adminSidebarMenuState.isOpen}
@@ -99,10 +100,10 @@ const Sidebar = () => {
             Список авто
           </Menu.Item>
           <Menu.Item
-            key="new"
+            key="points"
             icon={<ProfileOutlined />}
           >
-            Новая сущность
+            Пункты выдачи
           </Menu.Item>
         </Menu>
       </div>

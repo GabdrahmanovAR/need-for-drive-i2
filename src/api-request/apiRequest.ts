@@ -1,25 +1,25 @@
 import axios from 'axios';
 import moment from 'moment';
-import {
-  APP_ID_FIELD, APP_ID_VALUE, AUTHORIZATION_URL, BASE_URL, CARS_URL, ORDER_URL, POINT_URL, RATE_URL, SECRET_KEY,
-} from '../constants/api';
+import * as api from '../constants/api';
 import { IOrderInfoState } from '../types/state';
 import { randomHash } from '../utils/RandomHash';
 
 const apiDB = axios.create({
-  baseURL: BASE_URL,
+  baseURL: api.BASE_URL,
   headers: {
-    [APP_ID_FIELD]: APP_ID_VALUE,
+    [api.APP_ID_FIELD]: api.APP_ID_VALUE,
   },
 });
 
-export const getPickupPoints = () => apiDB.get(POINT_URL);
+export const getPickupPoints = () => apiDB.get(api.POINT_URL);
 
-export const getCars = (page: string, limit: string) => apiDB.get(`${CARS_URL}?page=${page}&limit=${limit}`);
+export const getCities = () => apiDB.get(api.CITY_URL);
 
-export const getRate = () => apiDB.get(RATE_URL);
+export const getCars = (page: string, limit: string) => apiDB.get(`${api.CARS_URL}?page=${page}&limit=${limit}`);
 
-export const registerOrder = (orderInfo: IOrderInfoState) => apiDB.post(ORDER_URL, {
+export const getRate = () => apiDB.get(api.RATE_URL);
+
+export const registerOrder = (orderInfo: IOrderInfoState) => apiDB.post(api.ORDER_URL, {
   orderStatusId: { id: '5e26a191099b810b946c5d89' },
   cityId: { id: orderInfo.location.cityId },
   pointId: { id: orderInfo.location.markerId },
@@ -34,15 +34,15 @@ export const registerOrder = (orderInfo: IOrderInfoState) => apiDB.post(ORDER_UR
   isRightWheel: orderInfo.car.rightHandDrive,
 });
 
-export const getOrderById = (orderId: string) => apiDB.get(`${ORDER_URL}/${orderId}`);
+export const getOrderById = (orderId: string) => apiDB.get(`${api.ORDER_URL}/${orderId}`);
 
-export const deleteOrderById = (orderId: string) => apiDB.delete(`${ORDER_URL}/${orderId}`);
+export const deleteOrderById = (orderId: string) => apiDB.delete(`${api.ORDER_URL}/${orderId}`);
 
 const apiAuth = axios.create({
-  baseURL: BASE_URL,
+  baseURL: api.BASE_URL,
   headers: {
-    [APP_ID_FIELD]: APP_ID_VALUE,
-    Authorization: `Basic ${btoa(`${randomHash()}:${SECRET_KEY}`)}`,
+    [api.APP_ID_FIELD]: api.APP_ID_VALUE,
+    Authorization: `Basic ${btoa(`${randomHash()}:${api.SECRET_KEY}`)}`,
     'Content-Type': 'application/json',
   },
 });
@@ -55,15 +55,15 @@ apiAuth.interceptors.request.use(
   (error) => Promise.reject(error),
 );
 
-export const authorizationRequest = (username: string, password: string) => apiAuth.post(AUTHORIZATION_URL, {
+export const authorizationRequest = (username: string, password: string) => apiAuth.post(api.AUTHORIZATION_URL, {
   username,
   password,
 });
 
 const apiDBWithToken = axios.create({
-  baseURL: BASE_URL,
+  baseURL: api.BASE_URL,
   headers: {
-    [APP_ID_FIELD]: APP_ID_VALUE,
+    [api.APP_ID_FIELD]: api.APP_ID_VALUE,
   },
 });
 
@@ -78,7 +78,7 @@ apiDBWithToken.interceptors.response.use(
   },
 );
 
-export const adminGetCarOrder = (page: number) => apiDBWithToken.get(`${ORDER_URL}?page=${5420 + page}&limit=1`, {
+export const adminGetCarOrder = (page: number) => apiDBWithToken.get(`${api.ORDER_URL}?page=${5420 + page}&limit=1`, {
   headers: {
     Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
   },
