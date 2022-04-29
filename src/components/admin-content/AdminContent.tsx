@@ -11,7 +11,6 @@ import { successfullSaveSelector } from '../../selectors/successfulSaveSelector'
 import { successfullSaveStateAction } from '../../redux/actions/SuccessfullSaveAction';
 import { adminSidebarMenuSelector } from '../../selectors/adminSidebarMenuSelector';
 import PickUpPoints from './pick-up-point/PickUpPoint';
-// eslint-disable-next-line import/no-named-as-default-member
 import Category from './category/Category';
 import ListOfRates from './list-of-rates/ListOfRates';
 
