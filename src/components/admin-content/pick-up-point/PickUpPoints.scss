@@ -13,12 +13,24 @@
       display: flex;
       align-items: flex-start;
       flex-grow: 1;
-      padding: 0.5rem 1rem;
+      padding: 1rem;
       font-size: .75rem;
       overflow: auto;
 
       table {
         width: 100%;
+
+        thead tr, tbody tr {
+          border-bottom: 1px solid white;
+
+          :not(:last-child) {
+            border-right: 1px solid $main-white-color;
+          }
+        }
+
+        thead th {
+          background-color: #EDEDED;
+        }
 
         thead th:nth-child(1) {
           width: 20%;
@@ -30,7 +42,7 @@
 
         th, td {
           padding: .5rem;
-          text-align: start;
+          text-align: center;
         }
 
         tbody tr td:not(:first-child) {
@@ -41,10 +53,18 @@
           width: 3rem;
         }
         
+        tbody tr:nth-child(even) {
+          background-color: #F8F8F8;
+        }
+        
         tbody tr:hover {
           background-color: $main-lightgrey-color;
           cursor: pointer;
         }
+      }
+
+      &_loading {
+        align-items: center;
       }
     }
   }

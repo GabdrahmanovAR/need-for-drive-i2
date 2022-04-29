@@ -212,3 +212,16 @@ export interface IAuthToken {
   token_type: string;
   user_id: string;
 }
+
+export interface IEntityCategory {
+  count: number;
+  data: Array<ICategory>;
+}
+
+export interface ICategory {
+  updatedAt: number;
+  createdAt: number;
+  name: string;
+  description: string;
+  id: string;
+}

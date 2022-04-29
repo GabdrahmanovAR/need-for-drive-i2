@@ -105,6 +105,12 @@ const Sidebar = () => {
           >
             Пункты выдачи
           </Menu.Item>
+          <Menu.Item
+            key="category"
+            icon={<ProfileOutlined />}
+          >
+            Категории автомобилей
+          </Menu.Item>
         </Menu>
       </div>
     </aside>

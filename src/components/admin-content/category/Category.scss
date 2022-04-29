@@ -1,6 +1,6 @@
 @import "src/constants/styles/common";
 
-.list-of-cars {
+.category {
   &__info {
     display: flex;
     flex-direction: column;
@@ -8,10 +8,6 @@
     border-radius: 0.5rem;
     background-color: $main-white-color;
     box-shadow: 0 3px 6px -4px rgba(0, 0, 0, .12), 0 3px 6px 0 rgba(0, 0, 0, .1), 0 9px 28px 8px rgba(0, 0, 0, .05);
-
-    .ant-select-open {
-      font-size: 11px;
-    }
 
     &__table {
       display: flex;
@@ -36,16 +32,12 @@
           background-color: #EDEDED;
         }
 
-        thead th:nth-child(-n+6) {
-          width: 10%;
-        }
-
-        thead th:nth-child(7) {
+        thead th:nth-child(1) {
           width: 20%;
         }
 
-        thead th:nth-child(8) {
-          width: 20%;
+        thead th:nth-last-child(-n+2) {
+          width: 40%;
         }
 
         th, td {
@@ -60,7 +52,7 @@
         img {
           width: 3rem;
         }
-
+        
         tbody tr:nth-child(even) {
           background-color: #F8F8F8;
         }

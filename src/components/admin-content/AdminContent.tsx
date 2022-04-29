@@ -11,6 +11,8 @@ import { successfullSaveSelector } from '../../selectors/successfulSaveSelector'
 import { successfullSaveStateAction } from '../../redux/actions/SuccessfullSaveAction';
 import { adminSidebarMenuSelector } from '../../selectors/adminSidebarMenuSelector';
 import PickUpPoints from './pick-up-point/PickUpPoint';
+// eslint-disable-next-line import/no-named-as-default-member
+import Category from './category/Category';
 
 const AdminContent = () => {
   const successfulSaveState = useSelector(successfullSaveSelector);
@@ -29,6 +31,7 @@ const AdminContent = () => {
       case 'list-of-cars': return <ListOfCars />;
       case 'car': return <CarCard />;
       case 'points': return <PickUpPoints />;
+      case 'category': return <Category />;
       default: return <ErrorPage />;
     }
   };

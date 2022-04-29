@@ -1,6 +1,7 @@
 import { Pagination } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import cn from 'classnames';
 import OrderFilters from '../order-filters/OrderFilters';
 import './ListOfCars.scss';
 import { getCarsAction } from '../../../redux/actions/CarsDataAction';
@@ -10,6 +11,7 @@ import Spinner from '../../Spinner/Spinner';
 import { formatString } from '../../../utils/FormatString';
 import { adminCarCardChangeStateAction } from '../../../redux/actions/AdminCarCardAction';
 import { adminSidebarChangeMenuAction } from '../../../redux/actions/AdminSidebarMenuAction';
+import { CarNumber } from '../../../utils/CarNumber';
 
 const selectorData = [
   {
@@ -39,6 +41,10 @@ const ListOfCars = () => {
   const carsDataState = useSelector(carsDataSelector);
   const dispatch = useDispatch();
 
+  const tableClassName = cn('list-of-cars__info__table', {
+    'list-of-cars__info__table_loading': carsDataState.isLoading,
+  });
+
   useEffect(() => {
     dispatch(getCarsAction((currentPage - 1).toString(), '5'));
   }, [currentPage]);
@@ -59,7 +65,7 @@ const ListOfCars = () => {
         <div className="list-of-cars__info__edit">
           <OrderFilters selectorData={selectorData} />
         </div>
-        <div className="list-of-cars__info__table">
+        <div className={tableClassName}>
           {carsDataState.isLoading
             ? <Spinner />
             : (
@@ -85,7 +91,7 @@ const ListOfCars = () => {
                       <td><img src={car.thumbnail.path} alt="Car" /></td>
                       <td>{car.name}</td>
                       <td>{car.categoryId.name}</td>
-                      <td>{car.number}</td>
+                      <td>{CarNumber(car.number)}</td>
                       <td>{car.tank}</td>
                       <td>
                         {car.colors.map((color) => <div>{formatString(color)}</div>)}

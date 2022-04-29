@@ -1,4 +1,6 @@
-import { ICarInfoData, ICities, IPoint } from './api';
+import {
+  ICarInfoData, ICities, IEntityCategory, IPoint,
+} from './api';
 
 export interface IState {
   sidebarMenu: ISidebarMenuState;
@@ -15,6 +17,7 @@ export interface IState {
   orderStatus: IOrderStatusState;
   successfullSave: ISuccessfullSaveState;
   adminCarCard: IAdminCarCardState;
+  entityTypes: IEntityTypesState;
 }
 
 export interface ISidebarMenuState {
@@ -170,4 +173,9 @@ export interface ISuccessfullSaveState {
 export interface IAdminCarCardState {
   cardState: string;
   data: ICarInfoData;
+}
+
+export interface IEntityTypesState {
+  category: IEntityCategory;
+  isLoading: boolean;
 }

@@ -29,7 +29,7 @@ export const getCarsAction = (page: string, limit: string) => async (dispatch: D
   dispatch(showCarsLoader());
   try {
     const response: AxiosResponse<ICarsData> = await getCars(page, limit);
-    dispatch(Number(limit) > 1 ? loadCarsDataAdminPart(response.data) : loadCarsData(response.data));
+    dispatch(Number(limit) === 5 ? loadCarsDataAdminPart(response.data) : loadCarsData(response.data));
   } catch (error) {
     console.log(error);
   } finally {

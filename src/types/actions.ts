@@ -1,5 +1,5 @@
 import {
-  ICarInfoData, ICarsData, ICities, IPoint,
+  ICarInfoData, ICarsData, ICities, IEntityCategory, IPoint,
 } from './api';
 import {
   IOrderStatusInfoState, IPointCityCoordsState, IPointMarkerCoordsState, IRateInfoState,
@@ -116,4 +116,9 @@ export interface ISuccessfullSaveACtionType extends IActionType {
 export interface IAdminCarCardActionType extends IActionType {
   cardState?: string;
   data?: ICarInfoData;
+}
+
+export interface IEntityTypesActionType extends IActionType {
+  category?: IEntityCategory;
+  isLoading?: boolean;
 }

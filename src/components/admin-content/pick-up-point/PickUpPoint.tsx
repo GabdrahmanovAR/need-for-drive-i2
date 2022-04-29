@@ -1,6 +1,7 @@
 import { Pagination } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import cn from 'classnames';
 import { getPointsAction } from '../../../redux/actions/PointsDataAction';
 import { pointsDataSelector } from '../../../selectors/pointsDataSelector';
 import { ICityInfo, IPoint } from '../../../types/api';
@@ -29,6 +30,10 @@ const PickUpPoints = () => {
   const dispatch = useDispatch();
   const pointsDataState = useSelector(pointsDataSelector);
 
+  const tableClassName = cn('points__info__table', {
+    points__info__table_loading: pointsDataState.isLoading,
+  });
+
   useEffect(() => {
     dispatch(getPointsAction('admin'));
   }, []);
@@ -52,7 +57,7 @@ const PickUpPoints = () => {
         <div className="points__info__filters">
           <OrderFilters selectorData={selectorData} />
         </div>
-        <div className="points__info__table">
+        <div className={tableClassName}>
           {pointsDataState.isLoading
             ? <Spinner />
             : (
@@ -97,6 +102,7 @@ const PickUpPoints = () => {
             showSizeChanger={false}
             pageSize={pageLimit}
             onChange={handlePaginationChange}
+            disabled={pointsDataState.cities.count <= pageLimit}
           />
         </div>
       </section>

@@ -7,6 +7,7 @@ export const POINT_URL = '/db/point';
 export const CITY_URL = '/db/city';
 export const CARS_URL = '/db/car';
 export const RATE_URL = '/db/rate';
+export const CATEGORY_URL = '/db/category';
 export const ORDER_URL = '/db/order';
 export const AUTHORIZATION_URL = '/auth/login';
 export const REGISTRATION_URL = '/auth/register';

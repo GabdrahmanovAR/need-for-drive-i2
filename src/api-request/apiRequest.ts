@@ -19,6 +19,8 @@ export const getCars = (page: string, limit: string) => apiDB.get(`${api.CARS_UR
 
 export const getRate = () => apiDB.get(api.RATE_URL);
 
+export const getCategory = () => apiDB.get(api.CATEGORY_URL);
+
 export const registerOrder = (orderInfo: IOrderInfoState) => apiDB.post(api.ORDER_URL, {
   orderStatusId: { id: '5e26a191099b810b946c5d89' },
   cityId: { id: orderInfo.location.cityId },
@@ -37,6 +39,8 @@ export const registerOrder = (orderInfo: IOrderInfoState) => apiDB.post(api.ORDE
 export const getOrderById = (orderId: string) => apiDB.get(`${api.ORDER_URL}/${orderId}`);
 
 export const deleteOrderById = (orderId: string) => apiDB.delete(`${api.ORDER_URL}/${orderId}`);
+
+//-----------------------------------------------------------------------------------------------
 
 const apiAuth = axios.create({
   baseURL: api.BASE_URL,
