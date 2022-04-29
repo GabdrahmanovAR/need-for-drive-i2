@@ -99,7 +99,7 @@ const Sidebar = () => {
             key="list-of-cars"
             icon={<UnorderedListOutlined />}
           >
-            Список авто
+            Список автомобилей
           </Menu.Item>
           <Menu.Item
             key="points"

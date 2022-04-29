@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { LIMIT_PER_PAGE } from '../../../constants/common';
 import { getPointsAction } from '../../../redux/actions/PointsDataAction';
 import { pointsDataSelector } from '../../../selectors/pointsDataSelector';
 import { ICityInfo, IPoint } from '../../../types/api';
@@ -21,11 +22,22 @@ const selectorData = [
 ];
 
 const PickUpPoints = () => {
-  const pageLimit = 5;
   const [currentPage, setCurrentPage] = useState(1);
-  const [elementsOnPage, setElementsOnPage] = useState([] as ICityInfo[]);
+  const [pointElementsOnPage, setPointElementsOnPage] = useState([] as ICityInfo[]);
   const dispatch = useDispatch();
   const pointsDataState = useSelector(pointsDataSelector);
+
+  useEffect(() => {
+    if (pointsDataState.cities.data.length === 0) dispatch(getPointsAction('admin'));
+  }, []);
+
+  useEffect(() => {
+    setPointElementsOnPage(limitPerPage(pointsDataState.cities.data, currentPage - 1, LIMIT_PER_PAGE));
+  }, [pointsDataState]);
+
+  useEffect(() => {
+    setPointElementsOnPage(limitPerPage(pointsDataState.cities.data, currentPage - 1, LIMIT_PER_PAGE));
+  }, [currentPage]);
 
   const table = (
     <table className="pick-up-point">
@@ -37,7 +49,7 @@ const PickUpPoints = () => {
         </tr>
       </thead>
       <tbody>
-        {elementsOnPage.map((cityInfo: ICityInfo, index: number) => (
+        {pointElementsOnPage.map((cityInfo: ICityInfo, index: number) => (
           <tr
             key={index}
             onClick={() => {}}
@@ -61,18 +73,6 @@ const PickUpPoints = () => {
     </table>
   );
 
-  useEffect(() => {
-    dispatch(getPointsAction('admin'));
-  }, []);
-
-  useEffect(() => {
-    setElementsOnPage(limitPerPage(pointsDataState.cities.data, currentPage - 1, pageLimit));
-  }, [pointsDataState]);
-
-  useEffect(() => {
-    setElementsOnPage(limitPerPage(pointsDataState.cities.data, currentPage - 1, pageLimit));
-  }, [currentPage]);
-
   return (
     <>
       <EntityListContainer
@@ -81,7 +81,7 @@ const PickUpPoints = () => {
         dataCount={pointsDataState.cities.count}
         filterFields={selectorData}
         isLoading={pointsDataState.isLoading}
-        pageLimit={pageLimit}
+        pageLimit={LIMIT_PER_PAGE}
         setCustomCurrentPage={setCurrentPage}
       />
     </>
