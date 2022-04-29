@@ -4,8 +4,8 @@ import { getPointsAction } from '../../../redux/actions/PointsDataAction';
 import { pointsDataSelector } from '../../../selectors/pointsDataSelector';
 import { ICityInfo, IPoint } from '../../../types/api';
 import { limitPerPage } from '../../../utils/LimitPerPage';
-import './PickUpPoints.scss';
 import EntityListContainer from '../../entity-list-container/EntityListContainer';
+import './PickUpPoint.scss';
 
 const selectorData = [
   {
@@ -28,7 +28,7 @@ const PickUpPoints = () => {
   const pointsDataState = useSelector(pointsDataSelector);
 
   const table = (
-    <table>
+    <table className="pick-up-point">
       <thead>
         <tr>
           <th>Город</th>
@@ -76,6 +76,7 @@ const PickUpPoints = () => {
   return (
     <>
       <EntityListContainer
+        title="Пункты выдачи"
         childComponent={table}
         dataCount={pointsDataState.cities.count}
         filterFields={selectorData}

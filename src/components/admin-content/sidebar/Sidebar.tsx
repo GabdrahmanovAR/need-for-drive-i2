@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Menu } from 'antd';
 import './Sidebar.scss';
 import {
-  DiffOutlined, EditOutlined, ProfileOutlined, UnorderedListOutlined,
+  CarOutlined,
+  DatabaseOutlined,
+  DiffOutlined, EnvironmentOutlined, UnorderedListOutlined,
 } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
@@ -89,7 +91,7 @@ const Sidebar = () => {
           </Menu.Item>
           <Menu.Item
             key="car"
-            icon={<EditOutlined />}
+            icon={<CarOutlined />}
           >
             Карточка автомобиля
           </Menu.Item>
@@ -101,15 +103,21 @@ const Sidebar = () => {
           </Menu.Item>
           <Menu.Item
             key="points"
-            icon={<ProfileOutlined />}
+            icon={<EnvironmentOutlined />}
           >
             Пункты выдачи
           </Menu.Item>
           <Menu.Item
             key="category"
-            icon={<ProfileOutlined />}
+            icon={<DatabaseOutlined />}
           >
             Категории автомобилей
+          </Menu.Item>
+          <Menu.Item
+            key="rate"
+            icon={<UnorderedListOutlined />}
+          >
+            Список тарифов
           </Menu.Item>
         </Menu>
       </div>

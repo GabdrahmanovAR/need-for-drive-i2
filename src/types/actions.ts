@@ -2,7 +2,7 @@ import {
   ICarInfoData, ICarsData, ICities, IEntityCategory, IPoint,
 } from './api';
 import {
-  IOrderStatusInfoState, IPointCityCoordsState, IPointMarkerCoordsState, IRateInfoState,
+  IOrderStatusInfoState, IPointCityCoordsState, IPointMarkerCoordsState, IRateInfoState, IRateState,
 } from './state';
 
 export interface IActionType {
@@ -120,5 +120,6 @@ export interface IAdminCarCardActionType extends IActionType {
 
 export interface IEntityTypesActionType extends IActionType {
   category?: IEntityCategory;
+  rates?: IRateState;
   isLoading?: boolean;
 }

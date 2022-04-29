@@ -15,6 +15,7 @@ interface IFilterFields {
 }
 
 interface IEntityListContainerProps {
+  title: string;
   pageLimit: number;
   isLoading: boolean;
   filterFields: IFilterFields[];
@@ -25,6 +26,7 @@ interface IEntityListContainerProps {
 
 const EntityListContainer: FC<IEntityListContainerProps> = (props) => {
   const {
+    title,
     pageLimit,
     isLoading,
     filterFields,
@@ -51,7 +53,7 @@ const EntityListContainer: FC<IEntityListContainerProps> = (props) => {
 
   return (
     <main className="entity-container">
-      <h2>Категории автомобилей</h2>
+      <h2>{title}</h2>
       <section className="entity-container__info">
         <div className="entity-container__info__filters">
           <OrderFilters selectorData={filterFields} />

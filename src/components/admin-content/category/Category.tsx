@@ -1,27 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-import './Category.scss';
 import { entityTypesSelector } from '../../../selectors/entityTypesSelector';
 import { loadCategoryAction } from '../../../redux/actions/EntityTypesAction';
 import { ICategory } from '../../../types/api';
 import EntityListContainer from '../../entity-list-container/EntityListContainer';
-
-const selectorData = [
-  {
-    name: 'field1',
-    placeholder: 'Field',
-    data: ['Field'],
-  },
-  {
-    name: 'field2',
-    placeholder: 'Field',
-    data: ['Field'],
-  },
-];
+import { LIMIT_PER_PAGE, selectorData } from '../../../constants/common';
+import './Category.scss';
 
 const Category = () => {
-  const pageLimit = 10;
   const dispatch = useDispatch();
   const { category, isLoading } = useSelector(entityTypesSelector);
 
@@ -30,7 +17,7 @@ const Category = () => {
   }, []);
 
   const table = (
-    <table>
+    <table className="category">
       <thead>
         <tr>
           <th>Название</th>
@@ -46,7 +33,7 @@ const Category = () => {
           >
             <td>{categoryInfo.name}</td>
             <td>{categoryInfo.description}</td>
-            <td>{moment(categoryInfo.updatedAt).format('DD MMMM YYYY')}</td>
+            <td>{moment(categoryInfo.updatedAt).format('DD.MM.YYYY')}</td>
           </tr>
         ))}
       </tbody>
@@ -56,11 +43,12 @@ const Category = () => {
   return (
     <>
       <EntityListContainer
+        title="Категории автомобилей"
         childComponent={table}
         dataCount={category.count}
         filterFields={selectorData}
         isLoading={isLoading}
-        pageLimit={pageLimit}
+        pageLimit={LIMIT_PER_PAGE}
       />
     </>
   );

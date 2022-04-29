@@ -177,5 +177,6 @@ export interface IAdminCarCardState {
 
 export interface IEntityTypesState {
   category: IEntityCategory;
+  rates: IRateState;
   isLoading: boolean;
 }

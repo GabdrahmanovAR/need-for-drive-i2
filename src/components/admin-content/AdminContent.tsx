@@ -13,6 +13,7 @@ import { adminSidebarMenuSelector } from '../../selectors/adminSidebarMenuSelect
 import PickUpPoints from './pick-up-point/PickUpPoint';
 // eslint-disable-next-line import/no-named-as-default-member
 import Category from './category/Category';
+import ListOfRates from './list-of-rates/ListOfRates';
 
 const AdminContent = () => {
   const successfulSaveState = useSelector(successfullSaveSelector);
@@ -32,6 +33,7 @@ const AdminContent = () => {
       case 'car': return <CarCard />;
       case 'points': return <PickUpPoints />;
       case 'category': return <Category />;
+      case 'rate': return <ListOfRates />;
       default: return <ErrorPage />;
     }
   };
