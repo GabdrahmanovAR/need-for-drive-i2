@@ -7,7 +7,7 @@ export type EmptyFuncType = () => void;
 
 export const ENG_LANG = 'Eng';
 export const RU_LANG = 'Рус';
-export const CARS_LIMIT_PER_PAGE = '10';
+export const LIMIT_PER_PAGE = 10;
 export const DEFAULT_PAGE_LIMIT = 1;
 
 export const CONFIRM_TAB = 'order-confirm';
@@ -15,3 +15,16 @@ export const CONFIRM_TAB = 'order-confirm';
 export const MOSCOW_CITY_COORDS = [55.753215, 37.622504];
 export const CITY_KEY = 'city';
 export const MARKER_KEY = 'marker';
+
+export const selectorData = [
+  {
+    name: 'field1',
+    placeholder: 'Field',
+    data: ['Field'],
+  },
+  {
+    name: 'field2',
+    placeholder: 'Field',
+    data: ['Field'],
+  },
+];

@@ -12,6 +12,18 @@ export interface IPoint {
   name: string,
 }
 
+export interface ICities {
+  count: number;
+  data: Array<ICityInfo>;
+}
+
+export interface ICityInfo {
+  updatedAt: number;
+  createdAt: number;
+  name: string;
+  id: string;
+}
+
 export interface ICarsData {
   count: number;
   data: Array<ICarInfoData>;
@@ -199,4 +211,17 @@ export interface IAuthToken {
   refresh_token: string;
   token_type: string;
   user_id: string;
+}
+
+export interface IEntityCategory {
+  count: number;
+  data: Array<ICategory>;
+}
+
+export interface ICategory {
+  updatedAt: number;
+  createdAt: number;
+  name: string;
+  description: string;
+  id: string;
 }

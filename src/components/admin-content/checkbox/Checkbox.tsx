@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react';
 import cn from 'classnames';
 import deleteIcon from '../../../assets/icons/menu_close_btn_black.svg';
 import './Checkbox.scss';
+import { formatString } from '../../../utils/FormatString';
 
 interface ICheckboxProps {
   text: string;
@@ -34,8 +35,8 @@ const Checkbox: FC<ICheckboxProps> = ({ text, onRemove }) => {
       onMouseLeave={handleColorFieldMouseLeave}
     >
       <div className="settings-colors__checkbox__block__value">
-        <input type="checkbox" value={text} />
-        <span>{text}</span>
+        <input type="checkbox" value={text} defaultChecked />
+        <span>{formatString(text)}</span>
       </div>
       <img
         className={classNameIcon}

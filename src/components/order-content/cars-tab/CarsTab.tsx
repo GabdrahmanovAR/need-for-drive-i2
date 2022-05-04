@@ -12,7 +12,7 @@ import { getCarsAction } from '../../../redux/actions/CarsDataAction';
 import { ICarInfoData } from '../../../types/api';
 import Spinner from '../../Spinner/Spinner';
 import { radioButtonSelector } from '../../../selectors/radioButtonSelector';
-import { CARS_LIMIT_PER_PAGE } from '../../../constants/common';
+import { LIMIT_PER_PAGE } from '../../../constants/common';
 import { ScrollToTop } from '../../../utils/ScrollToTop';
 
 const CarsTab = () => {
@@ -36,13 +36,13 @@ const CarsTab = () => {
   useEffect(() => {
     ScrollToTop();
     if (carsDataState.data.length === 0) {
-      dispatch(getCarsAction('0', CARS_LIMIT_PER_PAGE));
+      dispatch(getCarsAction('0', LIMIT_PER_PAGE.toString()));
     }
   }, []);
 
   useEffect(() => {
     if (fetching && carsDataState.data.length < carsDataState.count) {
-      dispatch(getCarsAction(page.toString(), CARS_LIMIT_PER_PAGE));
+      dispatch(getCarsAction(page.toString(), LIMIT_PER_PAGE.toString()));
       setPage((prevState) => prevState + 1);
       setFetching(false);
     }

@@ -1,4 +1,6 @@
-import { ICarInfoData, IPoint } from './api';
+import {
+  ICarInfoData, ICities, IEntityCategory, IPoint,
+} from './api';
 
 export interface IState {
   sidebarMenu: ISidebarMenuState;
@@ -14,6 +16,8 @@ export interface IState {
   rate: IRateState;
   orderStatus: IOrderStatusState;
   successfullSave: ISuccessfullSaveState;
+  adminCarCard: IAdminCarCardState;
+  entityTypes: IEntityTypesState;
 }
 
 export interface ISidebarMenuState {
@@ -22,6 +26,7 @@ export interface ISidebarMenuState {
 
 export interface IAdminSidebarMenuState {
   isOpen: boolean;
+  selectedMenu: string;
 }
 
 export interface IAdvancedTabState {
@@ -88,6 +93,7 @@ export interface IPointsDataState {
   cityCoords: Array<IPointCityCoordsState>;
   markerCoords: Array<IPointMarkerCoordsState>;
   isLoading: boolean;
+  cities: ICities;
 }
 
 export interface IPointCityCoordsState {
@@ -103,6 +109,7 @@ export interface IPointMarkerCoordsState {
 export interface ICarsDataState {
   count: number;
   data: Array<ICarInfoData>;
+  dataAdminPart: Array<ICarInfoData>;
   isLoading: boolean;
 }
 
@@ -161,4 +168,15 @@ export interface IOrderStatusInfoState {
 
 export interface ISuccessfullSaveState {
   isActive: boolean;
+}
+
+export interface IAdminCarCardState {
+  cardState: string;
+  data: ICarInfoData;
+}
+
+export interface IEntityTypesState {
+  category: IEntityCategory;
+  rates: IRateState;
+  isLoading: boolean;
 }

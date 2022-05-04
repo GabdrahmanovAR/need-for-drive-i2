@@ -14,6 +14,8 @@ import rateReducer from './reducers/RateReducer';
 import orderStatusReducer from './reducers/OrderStatusReducer';
 import adminSidebarMenuReducer from './reducers/AdminSidebarMenuReducer';
 import succesfullSaveReducer from './reducers/SuccesfullSaveReducer';
+import adminCarCardReducer from './reducers/AdminCarCardReducer';
+import entityTypesReducer from './reducers/EntityTypesReducer';
 
 export const store = createStore(
   combineReducers({
@@ -30,6 +32,8 @@ export const store = createStore(
     rate: rateReducer,
     orderStatus: orderStatusReducer,
     successfullSave: succesfullSaveReducer,
+    adminCarCard: adminCarCardReducer,
+    entityTypes: entityTypesReducer,
   }),
   composeWithDevTools(applyMiddleware(thunk)),
 );

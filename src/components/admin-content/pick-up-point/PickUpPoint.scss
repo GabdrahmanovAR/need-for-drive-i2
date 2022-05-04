@@ -1,0 +1,9 @@
+.pick-up-point {
+  thead th:nth-child(1) {
+    width: 20%;
+  }
+
+  thead th:nth-last-child(-n+2) {
+    width: 40%;
+  }
+}
