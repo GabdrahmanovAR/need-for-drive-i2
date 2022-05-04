@@ -121,5 +121,7 @@ export interface IAdminCarCardActionType extends IActionType {
 export interface IEntityTypesActionType extends IActionType {
   category?: IEntityCategory;
   rates?: IRateState;
+  selectedRate?: IRateInfoState;
+  rateModalVisible?: boolean;
   isLoading?: boolean;
 }

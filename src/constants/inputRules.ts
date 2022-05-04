@@ -17,7 +17,7 @@ export const inputRules = {
       message: 'Пожалуйста введите модель автомобиля',
     },
     {
-      pattern: new RegExp(/^[A-z|А-я|0-9]*$/, 'g'),
+      pattern: new RegExp(/^[A-z|А-я|0-9| ]*$/, 'g'),
       message: 'Используйте только буквы и цифры',
     },
   ],
@@ -27,7 +27,7 @@ export const inputRules = {
       message: 'Пожалуйста введите тип автомобиля',
     },
     {
-      pattern: new RegExp(/^[А-я]*$/, 'g'),
+      pattern: new RegExp(/^[А-я| ]*$/, 'g'),
       message: 'Используйте буквы кириллиического алфавита',
     },
   ],
@@ -35,6 +35,36 @@ export const inputRules = {
     {
       pattern: new RegExp(/^[А-я]*$/, 'g'),
       message: 'Используйте буквы кириллиического алфавита',
+    },
+  ],
+  rate: [
+    {
+      required: true,
+      message: 'Пожалуйста введите название тарифа',
+    },
+    {
+      pattern: new RegExp(/^[А-я|0-9| ]*$/, 'g'),
+      message: 'Используйте буквы кириллиического алфавита и пробелы',
+    },
+  ],
+  unit: [
+    {
+      required: true,
+      message: 'Пожалуйста введите единицу измерения тарифа',
+    },
+    {
+      pattern: new RegExp(/^[A-z|А-я|0-9| ]*$/, 'g'),
+      message: 'Используйте только буквы и цифры',
+    },
+  ],
+  price: [
+    {
+      required: true,
+      message: 'Пожалуйста введите стоимость тарифа',
+    },
+    {
+      pattern: new RegExp(/^[0-9]*$/, 'g'),
+      message: 'Используйте только цифры',
     },
   ],
 };

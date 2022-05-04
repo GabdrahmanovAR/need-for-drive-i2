@@ -38,12 +38,12 @@ const Notifications = () => {
           role="presentation"
         />
         <div className="notifications__bell__count">2</div>
-        <DropDownMenu data="" isActive={isDropDownMenuActive} onClickFunc={handleMenuClick} />
       </div>
       <Modal
         title="Сообщение"
         visible={isModalVisible}
         closable
+        onCancel={handleCancelClick}
         footer={[
           <Button key="back" onClick={handleCancelClick}>
             Назад
@@ -54,6 +54,7 @@ const Notifications = () => {
         <p>Some contents...</p>
         <p>Some contents...</p>
       </Modal>
+      <DropDownMenu data="" isActive={isDropDownMenuActive} onClickFunc={handleMenuClick} />
     </div>
   );
 };

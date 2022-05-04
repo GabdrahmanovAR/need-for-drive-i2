@@ -1,5 +1,54 @@
 .list-of-rates {
-  thead th {
-    width: 25%;
+  &__table {
+    thead th {
+      width: 25%;
+    }
   }
+  
+  &__edit-title {
+    font-size: .6875rem;
+  }
+
+  &__edit {
+
+    .ant-form-item {
+      margin-bottom: .875rem;
+    }
+
+    input, input::placeholder {
+      font-size: .6875rem;
+    }
+  }
+  
+  &__modal {
+    .ant-form-item-explain-error {
+      font-size: .625rem;
+    }
+  }
+
+  &__form-buttons {
+    .ant-form-item-control-input-content {
+      display: flex;
+      justify-content: flex-end;
+
+      div:first-child {
+        margin-right: 1rem;
+      }
+    }
+
+    button {
+      min-width: 110px;
+      padding: 0 .5rem;
+      font-size: .6875rem;
+    }
+
+    .ant-form-item {
+      margin-bottom: 0;
+      margin-top: 1.5rem;
+    }
+  }
+}
+
+.hidden-span {
+  display: none;
 }

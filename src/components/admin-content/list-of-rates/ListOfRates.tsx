@@ -1,22 +1,23 @@
-import moment from 'moment';
 import React, { useEffect, useState } from 'react';
+import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
-import { LIMIT_PER_PAGE, selectorData } from '../../../constants/common';
-import { loadRatesAction } from '../../../redux/actions/EntityTypesAction';
+import { EMPTY_STRING, LIMIT_PER_PAGE, selectorData } from '../../../constants/common';
+import { loadRatesAction, rateModalWindowStateAction, selectedRateDataAction } from '../../../redux/actions/EntityTypesAction';
 import { entityTypesSelector } from '../../../selectors/entityTypesSelector';
 import { IRateInfoState } from '../../../types/state';
 import { limitPerPage } from '../../../utils/LimitPerPage';
 import EntityListContainer from '../../entity-list-container/EntityListContainer';
 import './ListOfRates.scss';
+import EditRates from './edit-rates/EditRates';
 
 const ListOfRates = () => {
   const dispatch = useDispatch();
-  const { rates, isLoading } = useSelector(entityTypesSelector);
+  const { rates, isLoading, selectedRate } = useSelector(entityTypesSelector);
   const [currentPage, setCurrentPage] = useState(1);
   const [rateElementsOnPage, setRateElementsOnPage] = useState([] as IRateInfoState[]);
 
   useEffect(() => {
-    if (rates.data.length === 0) dispatch(loadRatesAction());
+    dispatch(loadRatesAction());
   }, []);
 
   useEffect(() => {
@@ -27,8 +28,13 @@ const ListOfRates = () => {
     setRateElementsOnPage(limitPerPage(rates.data, currentPage - 1, LIMIT_PER_PAGE));
   }, [currentPage]);
 
+  const handleTableRowClick = (rate: IRateInfoState) => {
+    dispatch(selectedRateDataAction(rate));
+    dispatch(rateModalWindowStateAction(true));
+  };
+
   const table = (
-    <table className="list-of-rates">
+    <table className="list-of-rates__table">
       <thead>
         <tr>
           <th>Название</th>
@@ -41,7 +47,7 @@ const ListOfRates = () => {
         {rateElementsOnPage.map((rate: IRateInfoState, index: number) => (
           <tr
             key={index}
-            onClick={() => {}}
+            onClick={() => handleTableRowClick(rate)}
           >
             <td>{rate.rateTypeId.name}</td>
             <td>{rate.rateTypeId.unit}</td>
@@ -64,6 +70,9 @@ const ListOfRates = () => {
         pageLimit={LIMIT_PER_PAGE}
         setCustomCurrentPage={setCurrentPage}
       />
+      {selectedRate.id !== EMPTY_STRING && (
+        <EditRates />
+      )}
     </>
   );
 };

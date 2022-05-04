@@ -87,3 +87,16 @@ export const adminGetCarOrder = (page: number) => apiDBWithToken.get(`${api.ORDE
     Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
   },
 });
+
+//-----------------------------------------------------------------------------------------------
+
+export const changeRatePrice = (rateId: string, rateTypeId: string, price: number) => (
+  apiDB.put(`${api.RATE_URL}/${rateId}`, {
+    rateTypeId: { id: rateTypeId },
+    price,
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
+    },
+  }));
