@@ -14,5 +14,5 @@ You will also see any lint errors in the console.
 
 ## Ссылки
 
-Сайт каршеринга [Need for drive](https://gabdrahmanovar.github.io/need-for-drive-i2/).
-Админская часть сайт [Need for drive admin](https://gabdrahmanovar.github.io/need-for-drive-i2/#/admin).
+Сайт каршеринга [Need for drive](https://gabdrahmanovar.github.io/need-for-drive-i2/).\
+Админская часть сайта [Need for drive admin](https://gabdrahmanovar.github.io/need-for-drive-i2/#/admin).

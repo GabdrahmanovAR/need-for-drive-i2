@@ -10,7 +10,7 @@ import Notifications from '../../notifications/Notifications';
 import ProfileMenu from '../../profile-menu/ProfileMenu';
 import { EMPTY_STRING } from '../../../constants/common';
 import menuButton from '../../../assets/icons/menu_btn_black.svg';
-import { adminSidebarMenuAction } from '../../../redux/actions/AdminSidebarMenuAction';
+import { adminSidebarMenuStateAction } from '../../../redux/actions/AdminSidebarMenuAction';
 import SuccessfulSave from '../successful-save/SuccessfulSave';
 
 const Header = () => {
@@ -23,7 +23,7 @@ const Header = () => {
   };
 
   const handleMenuButtonClick = () => {
-    dispatch(adminSidebarMenuAction(true));
+    dispatch(adminSidebarMenuStateAction(true));
   };
 
   const handleResetButtonClick = () => {

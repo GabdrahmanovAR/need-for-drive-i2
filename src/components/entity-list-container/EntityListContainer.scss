@@ -1,6 +1,6 @@
 @import "src/constants/styles/common";
 
-.entity-list {
+.entity-container {
   &__info {
     display: flex;
     flex-direction: column;
@@ -10,36 +10,53 @@
     box-shadow: 0 3px 6px -4px rgba(0, 0, 0, .12), 0 3px 6px 0 rgba(0, 0, 0, .1), 0 9px 28px 8px rgba(0, 0, 0, .05);
 
     &__table {
+      display: flex;
+      align-items: flex-start;
       flex-grow: 1;
-      padding: 0.5rem 1rem;
+      padding: 1rem;
       font-size: .75rem;
       overflow: auto;
 
       table {
         width: 100%;
 
-        thead th:nth-child(-n+5) {
-          width: 12%;
+        thead tr, tbody tr {
+          border-bottom: 1px solid white;
+
+          :not(:last-child) {
+            border-right: 1px solid $main-white-color;
+          }
         }
-        thead th:nth-child(6) {
-          width: 20%;
+
+        thead th {
+          background-color: #EDEDED;
         }
-        thead th:nth-child(7) {
-          width: 20%;
-        }
+
         th, td {
           padding: .5rem;
-          text-align: start;
-        }
-        thead th:nth-child(6), td:nth-child(6) {
           text-align: center;
         }
-        thead th:nth-child(7) {
-          text-align: end;
-        }
+
         tbody tr td:not(:first-child) {
           color: #818EA3;
         }
+
+        img {
+          width: 3rem;
+        }
+        
+        tbody tr:nth-child(even) {
+          background-color: #F8F8F8;
+        }
+        
+        tbody tr:hover {
+          background-color: $main-lightgrey-color;
+          cursor: pointer;
+        }
+      }
+
+      &_loading {
+        align-items: center;
       }
     }
   }

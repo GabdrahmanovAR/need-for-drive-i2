@@ -1,6 +1,8 @@
-import { ICarsData, IPoint } from './api';
 import {
-  IOrderStatusInfoState, IPointCityCoordsState, IPointMarkerCoordsState, IRateInfoState,
+  ICarInfoData, ICarsData, ICities, IEntityCategory, IPoint,
+} from './api';
+import {
+  IOrderStatusInfoState, IPointCityCoordsState, IPointMarkerCoordsState, IRateInfoState, IRateState,
 } from './state';
 
 export interface IActionType {
@@ -13,6 +15,7 @@ export interface ISidebarMenuActionType extends IActionType {
 
 export interface IAdminSidebarMenuActionType extends IActionType {
   menuOpen?: boolean;
+  selectedMenu?: string;
 }
 
 export interface IOrderLocationActionType {
@@ -79,10 +82,12 @@ export interface IPointsDataActionType extends IActionType {
   cityCoords?: Array<IPointCityCoordsState>;
   markerCoords?: Array<IPointMarkerCoordsState>;
   isLoading?: boolean;
+  cities?: ICities;
 }
 
 export interface ICarsDataActionType extends IActionType {
   data?: ICarsData;
+  dataAdminPart?: ICarsData;
 }
 
 export interface IRadioButtonActionType extends IActionType {
@@ -106,4 +111,15 @@ export interface IOrderStatusActionType extends IActionType {
 
 export interface ISuccessfullSaveACtionType extends IActionType {
   isActive?: boolean;
+}
+
+export interface IAdminCarCardActionType extends IActionType {
+  cardState?: string;
+  data?: ICarInfoData;
+}
+
+export interface IEntityTypesActionType extends IActionType {
+  category?: IEntityCategory;
+  rates?: IRateState;
+  isLoading?: boolean;
 }
