@@ -11,7 +11,7 @@ import Modal from 'antd/lib/modal/Modal';
 import noFoto from '../../../assets/images/no-foto.png';
 import './CarCard.scss';
 import ProgressBar from '../../progress-bar/ProgressBar';
-import { EMPTY_ARRAY, EMPTY_STRING } from '../../../constants/common';
+import { CAR_SAVED, EMPTY_ARRAY, EMPTY_STRING } from '../../../constants/common';
 import { formatString } from '../../../utils/FormatString';
 import Checkbox from '../checkbox/Checkbox';
 import { inputRules } from '../../../constants/inputRules';
@@ -58,7 +58,7 @@ const CarCard = () => {
 
   const handleFinishButtonClick = (values: any) => {
     console.log(values);
-    dispatch(successfullSaveStateAction(true));
+    dispatch(successfullSaveStateAction(CAR_SAVED, true));
   };
 
   const handleResetButtonClcick = () => {

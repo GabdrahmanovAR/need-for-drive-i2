@@ -99,4 +99,33 @@ export const changeRatePrice = (rateId: string, rateTypeId: string, price: numbe
     headers: {
       Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
     },
-  }));
+  })
+);
+
+export const changeRateType = (rateTypeId: string, name: string, unit: string) => (
+  apiDB.put(`${api.RATE_TYPE_URL}/${rateTypeId}`, {
+    name,
+    unit,
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
+    },
+  })
+);
+
+export const deleteRate = (rateId: string) => (
+  apiDB.delete((`${api.RATE_URL}/${rateId}`), {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
+    },
+  })
+);
+
+export const deleteRateType = (rateTypeId: string) => (
+  apiDB.delete((`${api.RATE_TYPE_URL}/${rateTypeId}`), {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
+    },
+  })
+);

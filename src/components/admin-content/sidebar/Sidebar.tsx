@@ -19,10 +19,14 @@ import {
 } from '../../../redux/actions/AdminSidebarMenuAction';
 import { adminCarCardChangeStateAction } from '../../../redux/actions/AdminCarCardAction';
 import { ICarInfoData } from '../../../types/api';
+import { successfullSaveSelector } from '../../../selectors/successfulSaveSelector';
+import { successfullSaveStateAction } from '../../../redux/actions/SuccessfullSaveAction';
+import { EMPTY_STRING } from '../../../constants/common';
 
 const Sidebar = () => {
   const [currentWindowWidth, setCurrentWindowWidth] = useState(window.innerWidth);
   const adminSidebarMenuState = useSelector(adminSidebarMenuSelector);
+  const successfulSaveState = useSelector(successfullSaveSelector);
   const dispatch = useDispatch();
 
   const classNameSidebar = cn('admin-sidebar__container', {
@@ -46,6 +50,7 @@ const Sidebar = () => {
     if (currentWindowWidth > 767 && currentWindowWidth < 1024 && !adminSidebarMenuState.isOpen) {
       dispatch(adminSidebarMenuStateAction(!adminSidebarMenuState.isOpen));
     }
+    if (successfulSaveState.isActive) dispatch(successfullSaveStateAction(EMPTY_STRING, false));
   };
 
   const handleCollapsedMenuButtonClick = () => {

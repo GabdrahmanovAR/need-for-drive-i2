@@ -110,6 +110,7 @@ export interface IOrderStatusActionType extends IActionType {
 }
 
 export interface ISuccessfullSaveACtionType extends IActionType {
+  message?: string;
   isActive?: boolean;
 }
 
@@ -120,8 +121,14 @@ export interface IAdminCarCardActionType extends IActionType {
 
 export interface IEntityTypesActionType extends IActionType {
   category?: IEntityCategory;
-  rates?: IRateState;
+  rates?: IEntityRateStateActionType;
+  isLoading?: boolean;
+}
+
+export interface IEntityRateStateActionType {
+  data?: IRateState;
+  updatedData?: IRateInfoState;
   selectedRate?: IRateInfoState;
   rateModalVisible?: boolean;
-  isLoading?: boolean;
+  changedDataIndex?: number;
 }

@@ -134,10 +134,28 @@ export interface IRateInfoState {
   id: string;
 }
 
-interface IRateTypeInfoState {
+export interface IChangedRateInfoState {
+  data: {
+    updatedAt: number;
+    createdAt: number;
+    price: number;
+    rateTypeId: IRateTypeInfoState;
+    id: string;
+  };
+}
+
+export interface IRateTypeInfoState {
   unit: string;
   name: string;
   id: string;
+}
+
+export interface IChangedRateTypeInfoState {
+  data: {
+    unit: string;
+    name: string;
+    id: string;
+  };
 }
 
 export interface IOrderStatusState {
@@ -167,6 +185,7 @@ export interface IOrderStatusInfoState {
 }
 
 export interface ISuccessfullSaveState {
+  message: string;
   isActive: boolean;
 }
 
@@ -177,8 +196,14 @@ export interface IAdminCarCardState {
 
 export interface IEntityTypesState {
   category: IEntityCategory;
-  rates: IRateState;
+  rates: IEntityRateState;
+  isLoading: boolean;
+}
+
+export interface IEntityRateState {
+  data: IRateState;
+  updatedData: IRateInfoState;
   selectedRate: IRateInfoState;
   rateModalVisible: boolean;
-  isLoading: boolean;
+  changedDataIndex: number;
 }

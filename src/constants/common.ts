@@ -28,3 +28,7 @@ export const selectorData = [
     data: ['Field'],
   },
 ];
+
+export const CAR_SAVED = 'Машина сохранена';
+export const RATE_SAVED = 'Изменение тарифа сохранено';
+export const RATE_DELETED = 'Тариф удален';
