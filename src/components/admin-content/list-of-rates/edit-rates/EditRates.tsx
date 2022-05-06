@@ -6,7 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { EMPTY_STRING } from '../../../../constants/common';
 import { inputRules } from '../../../../constants/inputRules';
 import {
-  changeRatePriceAction, changeRateTypeAction, deleteRateAction, rateModalWindowStateAction, selectedRateDataCLearAction,
+  changeRatePriceAction,
+  changeRateTypeAction,
+  deleteRateAction,
+  rateModalWindowStateAction,
+  selectedRateDataCLearAction,
 } from '../../../../redux/actions/EntityTypesAction';
 import { entityTypesSelector } from '../../../../selectors/entityTypesSelector';
 
@@ -162,6 +166,16 @@ const EditRates = () => {
           <Form.Item>
             <div>
               <Button
+                type="primary"
+                htmlType="reset"
+                onClick={handleDeleteClick}
+                danger
+              >
+                Удалить
+              </Button>
+            </div>
+            <div>
+              <Button
                 type="default"
                 htmlType="submit"
                 disabled={
@@ -178,16 +192,6 @@ const EditRates = () => {
                 onClick={handleCancelClick}
               >
                 Отмена
-              </Button>
-            </div>
-            <div>
-              <Button
-                type="primary"
-                htmlType="reset"
-                onClick={handleDeleteClick}
-                danger
-              >
-                Удалить
               </Button>
             </div>
           </Form.Item>

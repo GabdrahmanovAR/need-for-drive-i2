@@ -31,8 +31,13 @@
       display: flex;
       justify-content: flex-end;
 
-      div:first-child {
-        margin-right: 1rem;
+      div:not(:first-child) {
+        width: 100%;
+        text-align: end;
+
+        button {
+          margin-left: 1rem;
+        }
       }
     }
 

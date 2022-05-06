@@ -129,3 +129,23 @@ export const deleteRateType = (rateTypeId: string) => (
     },
   })
 );
+
+export const changeCategory = (categoryId: string, name: string, description: string) => (
+  apiDB.put(`${api.CATEGORY_URL}/${categoryId}`, {
+    name,
+    description,
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
+    },
+  })
+);
+
+export const deleteCategory = (categoryId: string) => (
+  apiDB.delete(`${api.CATEGORY_URL}/${categoryId}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
+    },
+  })
+);

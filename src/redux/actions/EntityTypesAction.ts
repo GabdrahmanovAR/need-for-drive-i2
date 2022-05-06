@@ -1,22 +1,28 @@
 import { AxiosResponse } from 'axios';
 import { Dispatch } from 'redux';
 import {
-  changeRatePrice, changeRateType, deleteRate, deleteRateType, getCategory, getRate,
+  changeCategory,
+  changeRatePrice, changeRateType, deleteCategory, deleteRate, deleteRateType, getCategory, getRate,
 } from '../../api-request/apiRequest';
 import {
+  CATEGORY_MODAL_STATE,
+  CLEAR_SELECTED_CATEGORY_DATA,
   CLEAR_SELECTED_RATE_DATA,
   HIDE_ENTITY_TYPES_LOADER,
   LOAD_CATEGORY_SUCCESS,
   LOAD_RATES_SUCCESS,
   RATE_MODAL_STATE,
+  SELECTED_CATEGORY_DATA,
   SELECTED_RATE_DATA,
   SHOW_ENTITY_TYPES_LOADER,
+  UPDATE_CATEGORY_DATA,
   UPDATE_RATE_DATA,
 } from '../../constants/actions/entityTypes';
-import { RATE_DELETED, RATE_SAVED } from '../../constants/common';
+import { CATEGORY_SAVED, RATE_DELETED, RATE_SAVED } from '../../constants/common';
 import { IEntityTypesActionType } from '../../types/actions';
-import { IEntityCategory } from '../../types/api';
+import { ICategory, IEntityCategory } from '../../types/api';
 import {
+  IChangedCategoryState,
   IChangedRateInfoState, IChangedRateTypeInfoState, IRateInfoState, IRateState,
 } from '../../types/state';
 import { successfullSaveState } from './SuccessfullSaveAction';
@@ -50,7 +56,9 @@ const selectedRateDataClear = (): IEntityTypesActionType => ({
 
 const loadCategory = (data: IEntityCategory): IEntityTypesActionType => ({
   type: LOAD_CATEGORY_SUCCESS,
-  category: data,
+  category: {
+    data,
+  },
 });
 
 const loadRates = (data: IRateState): IEntityTypesActionType => ({
@@ -68,17 +76,43 @@ const updateRates = (updatedData: any, index: number): IEntityTypesActionType =>
   },
 });
 
+const updateCategory = (updatedData: ICategory): IEntityTypesActionType => ({
+  type: UPDATE_CATEGORY_DATA,
+  category: {
+    updatedData,
+  },
+});
+
 export const rateModalWindowStateAction = (isVisible: boolean) => (dispatch: Dispatch) => {
   dispatch(rateModalState(isVisible));
 };
+
+export const categoryModalWindowStateAction = (isVisible: boolean): IEntityTypesActionType => ({
+  type: CATEGORY_MODAL_STATE,
+  category: {
+    categoryModalVisible: isVisible,
+  },
+});
 
 export const selectedRateDataAction = (rate: IRateInfoState, index: number) => (dispatch: Dispatch) => {
   dispatch(selectedRateData(rate, index));
 };
 
+export const selectedCategoryDataAction = (category: ICategory, index: number): IEntityTypesActionType => ({
+  type: SELECTED_CATEGORY_DATA,
+  category: {
+    selectedCategory: category,
+    changedDataIndex: index,
+  },
+});
+
 export const selectedRateDataCLearAction = () => (dispatch: Dispatch) => {
   dispatch(selectedRateDataClear());
 };
+
+export const selectedCategoryDataCLearAction = (): IEntityTypesActionType => ({
+  type: CLEAR_SELECTED_CATEGORY_DATA,
+});
 
 export const loadCategoryAction = () => async (dispatch: Dispatch) => {
   dispatch(showLoader());
@@ -131,6 +165,25 @@ export const deleteRateAction = (rateId: string, rateTypeId: string) => async (d
     if (responseRate.status === 200 && responseRateType.status === 200) {
       dispatch(successfullSaveState(RATE_DELETED, true));
     }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const changeCategoryAction = (categoryId: string, name: string, description: string) => async (dispatch: Dispatch) => {
+  try {
+    const response: AxiosResponse<IChangedCategoryState> = await changeCategory(categoryId, name, description);
+    dispatch(updateCategory(response.data.data));
+    if (response.status === 200) dispatch(successfullSaveState(CATEGORY_SAVED, true));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteCategoryAction = (categoryId: string) => async (dispatch: Dispatch) => {
+  try {
+    const response = await deleteCategory(categoryId);
+    if (response.status === 200) dispatch(successfullSaveState(RATE_DELETED, true));
   } catch (error) {
     console.log(error);
   }

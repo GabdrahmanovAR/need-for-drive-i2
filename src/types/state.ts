@@ -1,5 +1,5 @@
 import {
-  ICarInfoData, ICities, IEntityCategory, IPoint,
+  ICarInfoData, ICategory, ICities, IEntityCategory, IPoint,
 } from './api';
 
 export interface IState {
@@ -158,6 +158,16 @@ export interface IChangedRateTypeInfoState {
   };
 }
 
+export interface IChangedCategoryState {
+  data: {
+    updatedAt: number;
+    createdAt: number;
+    name: string;
+    description: string;
+    id: string;
+  }
+}
+
 export interface IOrderStatusState {
   count: number;
   loading: boolean;
@@ -195,7 +205,7 @@ export interface IAdminCarCardState {
 }
 
 export interface IEntityTypesState {
-  category: IEntityCategory;
+  category: IEntityCategoryState;
   rates: IEntityRateState;
   isLoading: boolean;
 }
@@ -205,5 +215,13 @@ export interface IEntityRateState {
   updatedData: IRateInfoState;
   selectedRate: IRateInfoState;
   rateModalVisible: boolean;
+  changedDataIndex: number;
+}
+
+export interface IEntityCategoryState {
+  data: IEntityCategory;
+  updatedData: ICategory;
+  selectedCategory: ICategory;
+  categoryModalVisible: boolean;
   changedDataIndex: number;
 }

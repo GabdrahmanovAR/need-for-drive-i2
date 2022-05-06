@@ -51,7 +51,7 @@ const getOrderStatusData = (data: IOrderStatusResponse, count?: number): IOrderS
     price: data.price,
     rate: data.rateId ? data.rateId.rateTypeId.name : EMPTY_DATA,
     cityName: data.cityId ? data.cityId.name : EMPTY_DATA,
-    pointName: data.pointId.address,
+    pointName: data.pointId ? data.pointId.address : EMPTY_DATA,
   },
 });
 
@@ -105,7 +105,7 @@ export const adminGetCarOrderAction = (page: number) => async (dispatch: Dispatc
   dispatch(loadingOrderStart());
   try {
     const response: AxiosResponse<IAdminOrderStatusState> = await adminGetCarOrder(page);
-    if (response) dispatch(getOrderStatusData(response.data.data[0], response.data.count));
+    if (response.status === 200) dispatch(getOrderStatusData(response.data.data[0], response.data.count));
   } catch (error) {
     console.log(error);
   } finally {
