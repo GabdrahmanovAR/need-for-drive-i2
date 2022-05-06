@@ -166,7 +166,7 @@ const EditRates = () => {
           <Form.Item>
             <div>
               <Button
-                type="primary"
+                type="default"
                 htmlType="reset"
                 onClick={handleDeleteClick}
                 danger

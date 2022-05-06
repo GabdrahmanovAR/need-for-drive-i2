@@ -34,3 +34,5 @@ export const RATE_SAVED = 'Изменение тарифа сохранено';
 export const RATE_DELETED = 'Тариф удален';
 export const CATEGORY_SAVED = 'Категория изменена';
 export const CATEGORY_DELETED = 'Категория удалена';
+export const POINT_SAVED = 'Пункт выдачи изменен';
+export const POINT_DELETED = 'Пункт выдачи удален';

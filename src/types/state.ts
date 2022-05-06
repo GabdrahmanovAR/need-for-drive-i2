@@ -1,5 +1,5 @@
 import {
-  ICarInfoData, ICategory, ICities, IEntityCategory, IPoint,
+  ICarInfoData, ICategory, ICities, IEntityCategory, IPoint, IPointsData,
 } from './api';
 
 export interface IState {
@@ -89,7 +89,12 @@ export interface IOrderStepState {
 }
 
 export interface IPointsDataState {
-  data: Array<IPoint>;
+  points: {
+    data: IPointsData;
+    selectedPoint: IPoint;
+    changedIndexData: number;
+    pointModalVisible: boolean;
+  }
   cityCoords: Array<IPointCityCoordsState>;
   markerCoords: Array<IPointMarkerCoordsState>;
   isLoading: boolean;

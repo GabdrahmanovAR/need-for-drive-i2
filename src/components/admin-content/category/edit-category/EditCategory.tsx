@@ -3,7 +3,6 @@ import {
 } from 'antd';
 import React, { BaseSyntheticEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteCategory } from '../../../../api-request/apiRequest';
 import { EMPTY_STRING } from '../../../../constants/common';
 import { inputRules } from '../../../../constants/inputRules';
 import {
@@ -20,7 +19,7 @@ interface ICategoryFormResult {
   description: string;
 }
 
-const EditRates = () => {
+const EditCategory = () => {
   const dispatch = useDispatch();
   const { category } = useSelector(entityTypesSelector);
   const [data, setData] = useState({
@@ -57,7 +56,7 @@ const EditRates = () => {
 
   const handleSaveChangesButtonClick = (values: ICategoryFormResult) => {
     if (category.selectedCategory.name !== values.category
-      || category.selectedCategory.description === values.description) {
+      || category.selectedCategory.description !== values.description) {
       dispatch(changeCategoryAction(category.selectedCategory.id, values.category, values.description));
     }
     dispatch(categoryModalWindowStateAction(false));
@@ -123,7 +122,7 @@ const EditRates = () => {
           <Form.Item>
             <div>
               <Button
-                type="primary"
+                type="default"
                 htmlType="reset"
                 onClick={handleDeleteClick}
                 danger
@@ -157,4 +156,4 @@ const EditRates = () => {
   );
 };
 
-export default EditRates;
+export default EditCategory;

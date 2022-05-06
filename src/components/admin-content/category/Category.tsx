@@ -21,7 +21,7 @@ const Category = () => {
   const [categoryElementsOnPage, setCategoryElementsOnPage] = useState([] as ICategory[]);
 
   useEffect(() => {
-    if (category.data.data.length === 0) dispatch(loadCategoryAction());
+    dispatch(loadCategoryAction());
   }, []);
 
   useEffect(() => {

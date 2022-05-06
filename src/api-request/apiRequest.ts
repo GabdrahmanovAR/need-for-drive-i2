@@ -130,6 +130,8 @@ export const deleteRateType = (rateTypeId: string) => (
   })
 );
 
+//-----------------------------------------------------------------------------------------------
+
 export const changeCategory = (categoryId: string, name: string, description: string) => (
   apiDB.put(`${api.CATEGORY_URL}/${categoryId}`, {
     name,
@@ -144,6 +146,31 @@ export const changeCategory = (categoryId: string, name: string, description: st
 
 export const deleteCategory = (categoryId: string) => (
   apiDB.delete(`${api.CATEGORY_URL}/${categoryId}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
+    },
+  })
+);
+
+//-----------------------------------------------------------------------------------------------
+
+export const changePoint = (pointId: string, name: string, address: string, cityId: string) => (
+  apiDB.put(`${api.POINT_URL}/${pointId}`, {
+    name,
+    cityId: {
+      id: cityId,
+    },
+    address,
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
+    },
+  })
+);
+
+export const deletePoint = (pointId: string) => (
+  apiDB.delete(`${api.POINT_URL}/${pointId}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
     },
