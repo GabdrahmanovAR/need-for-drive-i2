@@ -13,6 +13,18 @@ export interface IPoint {
   name: string,
 }
 
+export interface IChangedPoint {
+  data: {
+    id: string,
+    address: string,
+    cityId: {
+      id: string,
+      name: string,
+    },
+    name: string,
+  }
+}
+
 export interface ICities {
   count: number;
   data: Array<ICityInfo>;
@@ -23,6 +35,15 @@ export interface ICityInfo {
   createdAt: number;
   name: string;
   id: string;
+}
+
+export interface IChangedCityInfo {
+  data: {
+    updatedAt: number;
+    createdAt: number;
+    name: string;
+    id: string;
+  }
 }
 
 export interface ICarsData {

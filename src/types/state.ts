@@ -1,5 +1,5 @@
 import {
-  ICarInfoData, ICategory, ICities, IEntityCategory, IPoint, IPointsData,
+  ICarInfoData, ICategory, ICities, ICityInfo, IEntityCategory, IPoint, IPointsData,
 } from './api';
 
 export interface IState {
@@ -94,11 +94,18 @@ export interface IPointsDataState {
     selectedPoint: IPoint;
     changedIndexData: number;
     pointModalVisible: boolean;
+    updatedData: IPoint;
   }
   cityCoords: Array<IPointCityCoordsState>;
   markerCoords: Array<IPointMarkerCoordsState>;
   isLoading: boolean;
-  cities: ICities;
+  cities: {
+    data: ICities;
+    selectedCity: ICityInfo;
+    changedIndexData: number;
+    cityModalVisible: boolean;
+    updatedData: ICityInfo;
+  };
 }
 
 export interface IPointCityCoordsState {

@@ -1,5 +1,5 @@
 import {
-  ICarInfoData, ICarsData, ICategory, ICities, IEntityCategory, IPoint, IPointsData,
+  ICarInfoData, ICarsData, ICategory, ICities, ICityInfo, IEntityCategory, IPoint, IPointsData,
 } from './api';
 import {
   IOrderStatusInfoState, IPointCityCoordsState, IPointMarkerCoordsState, IRateInfoState, IRateState,
@@ -78,16 +78,23 @@ export interface IOrderStepActionType extends IActionType {
 }
 
 export interface IPointsDataActionType extends IActionType {
-  points?: IPointsData;
-  selectedPoint?: {
-    point?: IPoint;
-    index?: number;
+  points?: {
+    data?: IPointsData;
+    selectedPoint?: IPoint;
+    changedIndexData?: number;
+    pointModalVisible?: boolean;
+    updatedData?: IPoint;
   };
-  pointModalVisible?: boolean;
   cityCoords?: Array<IPointCityCoordsState>;
   markerCoords?: Array<IPointMarkerCoordsState>;
   isLoading?: boolean;
-  cities?: ICities;
+  cities?: {
+    data?: ICities;
+    selectedCity?: ICityInfo;
+    changedIndexData?: number;
+    cityModalVisible?: boolean;
+    updatedData?: ICityInfo;
+  }
 }
 
 export interface ICarsDataActionType extends IActionType {

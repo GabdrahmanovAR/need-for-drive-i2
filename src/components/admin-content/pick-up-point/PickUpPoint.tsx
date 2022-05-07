@@ -74,7 +74,7 @@ const PickUpPoints = () => {
       <EntityListContainer
         title="Пункты выдачи"
         childComponent={table}
-        dataCount={pointsDataState.cities.count}
+        dataCount={pointsDataState.points.data.count}
         filterFields={selectorData}
         isLoading={pointsDataState.isLoading}
         pageLimit={LIMIT_PER_PAGE}

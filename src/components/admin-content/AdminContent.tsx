@@ -11,6 +11,7 @@ import { adminSidebarMenuSelector } from '../../selectors/adminSidebarMenuSelect
 import PickUpPoints from './pick-up-point/PickUpPoint';
 import Category from './category/Category';
 import ListOfRates from './list-of-rates/ListOfRates';
+import ListOfCities from './list-of-cities/ListOfCities';
 
 const AdminContent = () => {
   const adminSidebarState = useSelector(adminSidebarMenuSelector);
@@ -23,6 +24,7 @@ const AdminContent = () => {
       case 'points': return <PickUpPoints />;
       case 'category': return <Category />;
       case 'rate': return <ListOfRates />;
+      case 'cities': return <ListOfCities />;
       default: return <ErrorPage />;
     }
   };

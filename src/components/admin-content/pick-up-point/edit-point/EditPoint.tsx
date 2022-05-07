@@ -23,7 +23,6 @@ const EditPoint = () => {
   const [data, setData] = useState({} as IPointFormResult);
 
   useEffect(() => {
-    console.log(points.selectedPoint);
     if (points.selectedPoint.id) {
       setData({
         point: points.selectedPoint.name,
@@ -44,7 +43,6 @@ const EditPoint = () => {
   };
 
   const handleSaveChangesButtonClick = (values: IPointFormResult) => {
-    console.log(values);
     if (points.selectedPoint.name !== values.point || points.selectedPoint.address !== values.address) {
       dispatch(changePointsAction(points.selectedPoint.id, values.point, values.address, points.selectedPoint.cityId.id));
     }
@@ -68,7 +66,7 @@ const EditPoint = () => {
   return (
     <Modal
       className="modal"
-      title="Изменение тарифа"
+      title="Изменение пункта выдачи"
       visible={points.pointModalVisible}
       closable
       onCancel={handleCancelClick}

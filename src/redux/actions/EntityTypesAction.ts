@@ -151,8 +151,10 @@ export const changeRatePriceAction = (rateId: string, rateTypeId: string, price:
 export const changeRateTypeAction = (rateTypeId: string, name: string, unit: string, index: number) => async (dispatch: Dispatch) => {
   try {
     const response: AxiosResponse<IChangedRateTypeInfoState> = await changeRateType(rateTypeId, name, unit);
-    dispatch(updateRates(response.data.data, index));
-    if (response.status === 200) dispatch(successfullSaveState(RATE_SAVED, true));
+    if (response.status === 200) {
+      dispatch(updateRates(response.data.data, index));
+      dispatch(successfullSaveState(RATE_SAVED, true));
+    }
   } catch (error) {
     console.log(error);
   }
@@ -173,8 +175,10 @@ export const deleteRateAction = (rateId: string, rateTypeId: string) => async (d
 export const changeCategoryAction = (categoryId: string, name: string, description: string) => async (dispatch: Dispatch) => {
   try {
     const response: AxiosResponse<IChangedCategoryState> = await changeCategory(categoryId, name, description);
-    dispatch(updateCategory(response.data.data));
-    if (response.status === 200) dispatch(successfullSaveState(CATEGORY_SAVED, true));
+    if (response.status === 200) {
+      dispatch(updateCategory(response.data.data));
+      dispatch(successfullSaveState(CATEGORY_SAVED, true));
+    }
   } catch (error) {
     console.log(error);
   }

@@ -36,3 +36,5 @@ export const CATEGORY_SAVED = 'Категория изменена';
 export const CATEGORY_DELETED = 'Категория удалена';
 export const POINT_SAVED = 'Пункт выдачи изменен';
 export const POINT_DELETED = 'Пункт выдачи удален';
+export const CITY_SAVED = 'Город изменен';
+export const CITY_DELETED = 'Город удален';

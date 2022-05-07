@@ -176,3 +176,24 @@ export const deletePoint = (pointId: string) => (
     },
   })
 );
+
+//-----------------------------------------------------------------------------------------------
+
+export const changeCity = (cityId: string, name: string) => (
+  apiDB.put(`${api.CITY_URL}/${cityId}`, {
+    name,
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
+    },
+  })
+);
+
+export const deleteCity = (cityId: string) => (
+  apiDB.delete(`${api.CITY_URL}/${cityId}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
+    },
+  })
+);
