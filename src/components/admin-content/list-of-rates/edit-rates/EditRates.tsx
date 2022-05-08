@@ -3,7 +3,7 @@ import {
 } from 'antd';
 import React, { BaseSyntheticEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { EMPTY_STRING } from '../../../../constants/common';
+import { EMPTY_DATA, EMPTY_STRING } from '../../../../constants/common';
 import { inputRules } from '../../../../constants/inputRules';
 import {
   changeRatePriceAction,
@@ -32,9 +32,9 @@ const EditRates = () => {
   useEffect(() => {
     if (rates.selectedRate.id !== EMPTY_STRING) {
       setData({
-        rate: rates.selectedRate.rateTypeId.name,
+        rate: rates.selectedRate.rateTypeId ? rates.selectedRate.rateTypeId.name : EMPTY_DATA,
         price: rates.selectedRate.price,
-        unit: rates.selectedRate.rateTypeId.unit,
+        unit: rates.selectedRate.rateTypeId ? rates.selectedRate.rateTypeId.unit : EMPTY_DATA,
       });
     }
   }, [rates.selectedRate]);
@@ -121,7 +121,7 @@ const EditRates = () => {
           <Form.Item
             name="rate"
             rules={inputRules.rate}
-            initialValue={rates.selectedRate.rateTypeId.name}
+            initialValue={rates.selectedRate.rateTypeId ? rates.selectedRate.rateTypeId.name : EMPTY_DATA}
           >
             <Input
               id="rate"
@@ -136,7 +136,7 @@ const EditRates = () => {
           <Form.Item
             name="unit"
             rules={inputRules.unit}
-            initialValue={rates.selectedRate.rateTypeId.unit}
+            initialValue={rates.selectedRate.rateTypeId ? rates.selectedRate.rateTypeId.unit : EMPTY_DATA}
           >
             <Input
               id="unit"
@@ -178,11 +178,11 @@ const EditRates = () => {
               <Button
                 type="default"
                 htmlType="submit"
-                disabled={
-                  data.price === rates.selectedRate.price
-                  && data.rate === rates.selectedRate.rateTypeId.name
-                  && data.unit === rates.selectedRate.rateTypeId.unit
-                }
+                // disabled={
+                //   data.price === rates.selectedRate.price
+                //   && data.rate === rates.selectedRate.rateTypeId.name
+                //   && data.unit === rates.selectedRate.rateTypeId.unit
+                // }
               >
                 Сохранить изменения
               </Button>

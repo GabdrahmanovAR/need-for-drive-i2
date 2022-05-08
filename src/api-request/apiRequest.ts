@@ -130,6 +130,32 @@ export const deleteRateType = (rateTypeId: string) => (
   })
 );
 
+export const createRate = (rateTypeId: string, price: number) => (
+  apiDB.post(api.RATE_URL, {
+    price,
+    rateTypeId: {
+      id: rateTypeId,
+    },
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
+    },
+  })
+);
+
+export const createRateType = (name: string, unit: string) => (
+  apiDB.post(api.RATE_TYPE_URL, {
+    name,
+    unit,
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
+    },
+  })
+);
+
 //-----------------------------------------------------------------------------------------------
 
 export const changeCategory = (categoryId: string, name: string, description: string) => (
@@ -146,6 +172,18 @@ export const changeCategory = (categoryId: string, name: string, description: st
 
 export const deleteCategory = (categoryId: string) => (
   apiDB.delete(`${api.CATEGORY_URL}/${categoryId}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
+    },
+  })
+);
+
+export const createCategory = (name: string, description: string) => (
+  apiDB.post(api.CATEGORY_URL, {
+    name,
+    description,
+  },
+  {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
     },
@@ -177,6 +215,21 @@ export const deletePoint = (pointId: string) => (
   })
 );
 
+export const createPoint = (name: string, address: string, cityId: string) => (
+  apiDB.post(api.POINT_URL, {
+    name,
+    address,
+    cityId: {
+      id: cityId,
+    },
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
+    },
+  })
+);
+
 //-----------------------------------------------------------------------------------------------
 
 export const changeCity = (cityId: string, name: string) => (
@@ -192,6 +245,17 @@ export const changeCity = (cityId: string, name: string) => (
 
 export const deleteCity = (cityId: string) => (
   apiDB.delete(`${api.CITY_URL}/${cityId}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
+    },
+  })
+);
+
+export const createCity = (name: string) => (
+  apiDB.post(api.CITY_URL, {
+    name,
+  },
+  {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
     },

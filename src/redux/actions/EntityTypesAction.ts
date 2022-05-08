@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import { Dispatch } from 'redux';
 import {
   changeCategory,
-  changeRatePrice, changeRateType, deleteCategory, deleteRate, deleteRateType, getCategory, getRate,
+  changeRatePrice, changeRateType, createCategory, createRate, createRateType, deleteCategory, deleteRate, deleteRateType, getCategory, getRate,
 } from '../../api-request/apiRequest';
 import {
   CATEGORY_MODAL_STATE,
@@ -18,7 +18,9 @@ import {
   UPDATE_CATEGORY_DATA,
   UPDATE_RATE_DATA,
 } from '../../constants/actions/entityTypes';
-import { CATEGORY_SAVED, RATE_DELETED, RATE_SAVED } from '../../constants/common';
+import {
+  CATEGORY_CREATED, CATEGORY_SAVED, RATE_CREATED, RATE_DELETED, RATE_SAVED,
+} from '../../constants/common';
 import { IEntityTypesActionType } from '../../types/actions';
 import { ICategory, IEntityCategory } from '../../types/api';
 import {
@@ -172,6 +174,20 @@ export const deleteRateAction = (rateId: string, rateTypeId: string) => async (d
   }
 };
 
+export const createRateAction = (rateName: string, unit: string, price: number) => async (dispatch: Dispatch) => {
+  dispatch(showLoader());
+  try {
+    const responseRateType: AxiosResponse<IChangedRateTypeInfoState> = await createRateType(rateName, unit);
+    console.log(responseRateType.data);
+    if (responseRateType.status === 200) {
+      const responseRate = await createRate(responseRateType.data.data.id, price);
+      if (responseRate.status === 200) dispatch(successfullSaveState(RATE_CREATED, true));
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const changeCategoryAction = (categoryId: string, name: string, description: string) => async (dispatch: Dispatch) => {
   try {
     const response: AxiosResponse<IChangedCategoryState> = await changeCategory(categoryId, name, description);
@@ -190,5 +206,17 @@ export const deleteCategoryAction = (categoryId: string) => async (dispatch: Dis
     if (response.status === 200) dispatch(successfullSaveState(RATE_DELETED, true));
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const createCategoryAction = (name: string, description: string) => async (dispatch: Dispatch) => {
+  dispatch(showLoader());
+  try {
+    const response = await createCategory(name, description);
+    if (response.status === 200) dispatch(successfullSaveState(CATEGORY_CREATED, true));
+  } catch (error) {
+    console.log(error);
+  } finally {
+    dispatch(hideLoader());
   }
 };

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
-import { EMPTY_STRING, LIMIT_PER_PAGE, selectorData } from '../../../constants/common';
+import {
+  EMPTY_DATA, EMPTY_STRING, LIMIT_PER_PAGE, selectorData,
+} from '../../../constants/common';
 import {
   loadRatesAction, rateModalWindowStateAction, selectedRateDataAction,
 } from '../../../redux/actions/EntityTypesAction';
@@ -51,8 +53,8 @@ const ListOfRates = () => {
             key={index}
             onClick={() => handleTableRowClick(rate, index)}
           >
-            <td>{rate.rateTypeId.name}</td>
-            <td>{rate.rateTypeId.unit}</td>
+            <td>{rate.rateTypeId ? rate.rateTypeId.name : EMPTY_DATA}</td>
+            <td>{rate.rateTypeId ? rate.rateTypeId.unit : EMPTY_DATA}</td>
             <td>{rate.price}</td>
             <td>{moment(rate.updatedAt).format('DD.MM.YYYY')}</td>
           </tr>

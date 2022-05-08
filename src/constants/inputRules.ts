@@ -77,6 +77,12 @@ export const inputRules = {
       message: 'Используйте буквы кириллического алфавита',
     },
   ],
+  description: [
+    {
+      required: true,
+      message: 'Пожалуйста введите описание',
+    },
+  ],
   city: [
     {
       required: true,
@@ -84,6 +90,22 @@ export const inputRules = {
     },
     {
       pattern: new RegExp(/^[А-я| |-]*$/, 'g'),
+      message: 'Используйте буквы кириллического алфавита',
+    },
+  ],
+  selectCity: [
+    {
+      required: true,
+      message: 'Пожалуйста выберите название города',
+    },
+  ],
+  point: [
+    {
+      required: true,
+      message: 'Пожалуйста введите название пукнта выдачи',
+    },
+    {
+      pattern: new RegExp(/^[А-я| |-|,|\\/|0-9]*$/, 'g'),
       message: 'Используйте буквы кириллического алфавита',
     },
   ],

@@ -17,7 +17,7 @@ import {
   UPDATE_POINT_DATA,
 } from '../../constants/actions/pointsData';
 import {
-  ICities, ICityInfo, IPoint,
+  ICities, ICityInfo, IPoint, IPointsData,
 } from '../../types/api';
 import { EMPTY_STRING } from '../../constants/common';
 
@@ -64,8 +64,8 @@ const initialState: IPointsDataState = {
   },
 };
 
-const loadPointsData = (draft: IPointsDataState, data?: IPoint[]) => {
-  draft.points.data.data = data || [];
+const loadPointsData = (draft: IPointsDataState, data?: IPointsData) => {
+  draft.points.data = data || {} as IPointsData;
   return draft;
 };
 
@@ -144,7 +144,7 @@ export default (state = initialState, action: IPointsDataActionType) => produce(
   state,
   (draft: IPointsDataState) => {
     switch (action.type) {
-      case LOAD_POINTS_SUCCESS: return loadPointsData(draft, action.points?.data?.data);
+      case LOAD_POINTS_SUCCESS: return loadPointsData(draft, action.points?.data);
       case LOAD_CITIES_SUCCESS: return loadCitiesData(draft, action.cities?.data);
       case SHOW_POINTS_LOADER: return showLoader(draft);
       case HIDE_POINTS_LOADER: return hideLoader(draft);

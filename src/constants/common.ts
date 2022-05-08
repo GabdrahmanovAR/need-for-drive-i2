@@ -38,3 +38,7 @@ export const POINT_SAVED = 'Пункт выдачи изменен';
 export const POINT_DELETED = 'Пункт выдачи удален';
 export const CITY_SAVED = 'Город изменен';
 export const CITY_DELETED = 'Город удален';
+export const CATEGORY_CREATED = 'Категория автомобиля создана';
+export const CITY_CREATED = 'Новый город добавлен';
+export const POINT_CREATED = 'Новый пункт выдачи добавлен';
+export const RATE_CREATED = 'Новый тариф добавлен';

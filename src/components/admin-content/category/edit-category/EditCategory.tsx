@@ -112,7 +112,7 @@ const EditCategory = () => {
           >
             <Input
               id="description"
-              placeholder="Введите единицу измерения"
+              placeholder="Введите описание"
               value={data.description}
               onInput={handleInputChange}
             />

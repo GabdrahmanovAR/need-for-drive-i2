@@ -19,7 +19,7 @@ import {
 } from '../../constants/actions/pointsData';
 import {
   changeCity,
-  changePoint, deleteCity, deletePoint, getCities, getPickupPoints,
+  changePoint, createCity, createPoint, deleteCity, deletePoint, getCities, getPickupPoints,
 } from '../../api-request/apiRequest';
 import { IPointCityCoordsState, IPointMarkerCoordsState } from '../../types/state';
 import {
@@ -29,7 +29,8 @@ import {
 } from '../../types/api';
 import { successfullSaveState } from './SuccessfullSaveAction';
 import {
-  CITY_DELETED, CITY_SAVED, POINT_DELETED, POINT_SAVED,
+  CITY_CREATED,
+  CITY_DELETED, CITY_SAVED, POINT_CREATED, POINT_DELETED, POINT_SAVED,
 } from '../../constants/common';
 
 const loadPointsData = (data: IPointsData): IPointsDataActionType => ({
@@ -175,5 +176,29 @@ export const deleteCitytAction = (cityId: string) => async (dispatch: Dispatch) 
     }
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const createCityAction = (cityName: string) => async (dispatch: Dispatch) => {
+  dispatch(showLoader());
+  try {
+    const response = await createCity(cityName);
+    if (response.status === 200) dispatch(successfullSaveState(CITY_CREATED, true));
+  } catch (error) {
+    console.log(error);
+  } finally {
+    dispatch(hideLoader());
+  }
+};
+
+export const createPointAction = (name: string, address: string, cityId: string) => async (dispatch: Dispatch) => {
+  dispatch(showLoader());
+  try {
+    const response = await createPoint(name, address, cityId);
+    if (response.status === 200) dispatch(successfullSaveState(POINT_CREATED, true));
+  } catch (error) {
+    console.log(error);
+  } finally {
+    dispatch(hideLoader());
   }
 };
