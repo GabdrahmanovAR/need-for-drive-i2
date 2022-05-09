@@ -159,8 +159,7 @@
 
         &__block {
           display: flex;
-          flex-grow: 1;
-          width: calc(50% - 0.5rem);
+          width: 100%;
 
           &__input {
             margin-right: .5rem;
@@ -190,7 +189,7 @@
         }
 
         &__checkbox {
-          width: calc(50% - .5rem);
+          width: 100%;
 
           &__block {
             display: flex;
@@ -250,6 +249,21 @@
       .ant-form-item-explain-error {
         font-size: .625rem;
       }
+
+      &__advanced {
+        display: flex;
+        flex-grow: 1;
+
+        &__color {
+          width: 100%;
+          margin-right: .5rem;
+        }
+
+        &__price {
+          width: 100%;
+          margin-left: .5rem;
+        }
+      }
     }
   }
 }
@@ -283,6 +297,15 @@
 
   .admin-car-card__form__settings .settings-colors__block {
     width: 100%;
+  }
+
+  .admin-car-card__form__settings__advanced {
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+
+    &__price {
+      margin-left: 0;
+    }
   }
 
   .settings__footer {
@@ -326,6 +349,15 @@
 
   .admin-car-card__form__settings .settings-colors__block {
     width: 100%;
+  }
+
+  .admin-car-card__form__settings__advanced {
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+
+    &__price {
+      margin-left: 0;
+    }
   }
 
   .settings__footer {

@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Menu } from 'antd';
 import './Sidebar.scss';
 import {
+  BankOutlined,
   CarOutlined,
   DatabaseOutlined,
-  DiffOutlined, EnvironmentOutlined, UnorderedListOutlined,
+  EnvironmentOutlined, FileAddOutlined, QuestionCircleOutlined, SnippetsOutlined, UnorderedListOutlined,
 } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
@@ -19,10 +20,14 @@ import {
 } from '../../../redux/actions/AdminSidebarMenuAction';
 import { adminCarCardChangeStateAction } from '../../../redux/actions/AdminCarCardAction';
 import { ICarInfoData } from '../../../types/api';
+import { successfullSaveSelector } from '../../../selectors/successfulSaveSelector';
+import { successfullSaveStateAction } from '../../../redux/actions/SuccessfullSaveAction';
+import { EMPTY_STRING } from '../../../constants/common';
 
 const Sidebar = () => {
   const [currentWindowWidth, setCurrentWindowWidth] = useState(window.innerWidth);
   const adminSidebarMenuState = useSelector(adminSidebarMenuSelector);
+  const successfulSaveState = useSelector(successfullSaveSelector);
   const dispatch = useDispatch();
 
   const classNameSidebar = cn('admin-sidebar__container', {
@@ -46,6 +51,7 @@ const Sidebar = () => {
     if (currentWindowWidth > 767 && currentWindowWidth < 1024 && !adminSidebarMenuState.isOpen) {
       dispatch(adminSidebarMenuStateAction(!adminSidebarMenuState.isOpen));
     }
+    if (successfulSaveState.isActive) dispatch(successfullSaveStateAction(EMPTY_STRING, false));
   };
 
   const handleCollapsedMenuButtonClick = () => {
@@ -85,7 +91,7 @@ const Sidebar = () => {
         >
           <Menu.Item
             key="orders"
-            icon={<DiffOutlined />}
+            icon={<SnippetsOutlined />}
           >
             Заказы
           </Menu.Item>
@@ -102,22 +108,40 @@ const Sidebar = () => {
             Список автомобилей
           </Menu.Item>
           <Menu.Item
-            key="points"
-            icon={<EnvironmentOutlined />}
-          >
-            Пункты выдачи
-          </Menu.Item>
-          <Menu.Item
             key="category"
             icon={<DatabaseOutlined />}
           >
             Категории автомобилей
           </Menu.Item>
           <Menu.Item
+            key="cities"
+            icon={<BankOutlined />}
+          >
+            Список городов
+          </Menu.Item>
+          <Menu.Item
+            key="points"
+            icon={<EnvironmentOutlined />}
+          >
+            Пункты выдачи
+          </Menu.Item>
+          <Menu.Item
             key="rate"
             icon={<UnorderedListOutlined />}
           >
             Список тарифов
+          </Menu.Item>
+          <Menu.Item
+            key="status"
+            icon={<QuestionCircleOutlined />}
+          >
+            Статусы заказов
+          </Menu.Item>
+          <Menu.Item
+            key="entity"
+            icon={<FileAddOutlined />}
+          >
+            Создать сущность
           </Menu.Item>
         </Menu>
       </div>

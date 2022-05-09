@@ -1,5 +1,5 @@
 import {
-  ICarInfoData, ICities, IEntityCategory, IPoint,
+  ICarInfoData, ICategory, ICities, ICityInfo, IEntityCategory, IPoint, IPointsData,
 } from './api';
 
 export interface IState {
@@ -89,11 +89,23 @@ export interface IOrderStepState {
 }
 
 export interface IPointsDataState {
-  data: Array<IPoint>;
+  points: {
+    data: IPointsData;
+    selectedPoint: IPoint;
+    changedIndexData: number;
+    pointModalVisible: boolean;
+    updatedData: IPoint;
+  }
   cityCoords: Array<IPointCityCoordsState>;
   markerCoords: Array<IPointMarkerCoordsState>;
   isLoading: boolean;
-  cities: ICities;
+  cities: {
+    data: ICities;
+    selectedCity: ICityInfo;
+    changedIndexData: number;
+    cityModalVisible: boolean;
+    updatedData: ICityInfo;
+  };
 }
 
 export interface IPointCityCoordsState {
@@ -134,16 +146,48 @@ export interface IRateInfoState {
   id: string;
 }
 
-interface IRateTypeInfoState {
+export interface IChangedRateInfoState {
+  data: {
+    updatedAt: number;
+    createdAt: number;
+    price: number;
+    rateTypeId: IRateTypeInfoState;
+    id: string;
+  };
+}
+
+export interface IRateTypeInfoState {
   unit: string;
   name: string;
   id: string;
+}
+
+export interface IChangedRateTypeInfoState {
+  data: {
+    unit: string;
+    name: string;
+    id: string;
+  };
+}
+
+export interface IChangedCategoryState {
+  data: {
+    updatedAt: number;
+    createdAt: number;
+    name: string;
+    description: string;
+    id: string;
+  }
 }
 
 export interface IOrderStatusState {
   count: number;
   loading: boolean;
   statusInfo: IOrderStatusInfoState;
+}
+
+export interface IChangedOrderStatusState {
+  data: IStatusInfoState;
 }
 
 export interface IOrderStatusInfoState {
@@ -164,9 +208,14 @@ export interface IOrderStatusInfoState {
   pointName: string;
   price: number;
   rate: string;
+  orderStatusId: {
+    id: string;
+    name: string;
+  }
 }
 
 export interface ISuccessfullSaveState {
+  message: string;
   isActive: boolean;
 }
 
@@ -176,7 +225,42 @@ export interface IAdminCarCardState {
 }
 
 export interface IEntityTypesState {
-  category: IEntityCategory;
-  rates: IRateState;
+  category: IEntityCategoryState;
+  rates: IEntityRateState;
+  statusList: IEntityStatusState;
   isLoading: boolean;
+}
+
+export interface IEntityRateState {
+  data: IRateState;
+  updatedData: IRateInfoState;
+  selectedRate: IRateInfoState;
+  rateModalVisible: boolean;
+  changedDataIndex: number;
+}
+
+export interface IEntityCategoryState {
+  data: IEntityCategory;
+  updatedData: ICategory;
+  selectedCategory: ICategory;
+  categoryModalVisible: boolean;
+  changedDataIndex: number;
+}
+
+export interface IEntityStatusState {
+  data: IStatusListState;
+  updatedData: IStatusInfoState;
+  selectedStatus: IStatusInfoState;
+  statusModalVisible: boolean;
+  changedDataIndex: number;
+}
+
+export interface IStatusListState {
+  count: number;
+  data: IStatusInfoState[];
+}
+
+export interface IStatusInfoState {
+  id: string;
+  name: string;
 }

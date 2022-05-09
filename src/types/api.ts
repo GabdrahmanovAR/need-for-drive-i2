@@ -1,4 +1,5 @@
 export interface IPointsData {
+  count: number;
   data: Array<IPoint>;
 }
 
@@ -12,6 +13,18 @@ export interface IPoint {
   name: string,
 }
 
+export interface IChangedPoint {
+  data: {
+    id: string,
+    address: string,
+    cityId: {
+      id: string,
+      name: string,
+    },
+    name: string,
+  }
+}
+
 export interface ICities {
   count: number;
   data: Array<ICityInfo>;
@@ -22,6 +35,15 @@ export interface ICityInfo {
   createdAt: number;
   name: string;
   id: string;
+}
+
+export interface IChangedCityInfo {
+  data: {
+    updatedAt: number;
+    createdAt: number;
+    name: string;
+    id: string;
+  }
 }
 
 export interface ICarsData {
@@ -42,6 +64,20 @@ export interface ICarInfoData {
   tank: number;
   colors: string[],
   id: string;
+}
+
+export interface ICreateCar {
+  description?: string;
+  priceMin?: number;
+  priceMax?: number;
+  name?: string;
+  number?: string;
+  categoryId?: {
+    id: string;
+  };
+  thumbnail?: ICarThumbnail,
+  tank?: number;
+  colors?: string[],
 }
 
 export interface ICarCategory {

@@ -6,24 +6,25 @@ import closeIcon from '../../../assets/icons/menu_close_btn.svg';
 import './SuccessfulSave.scss';
 import { successfullSaveSelector } from '../../../selectors/successfulSaveSelector';
 import { successfullSaveStateAction } from '../../../redux/actions/SuccessfullSaveAction';
+import { EMPTY_STRING } from '../../../constants/common';
 
 const SuccessfulSave = () => {
-  const successfulSaveState = useSelector(successfullSaveSelector);
+  const { message, isActive } = useSelector(successfullSaveSelector);
   const dispatch = useDispatch();
 
   const classNameBlockState = cn('success-save', {
-    'success-save_visible': successfulSaveState.isActive,
+    'success-save_visible': isActive,
   });
 
   const handleCloseButtonClick = () => {
-    dispatch(successfullSaveStateAction(false));
+    dispatch(successfullSaveStateAction(EMPTY_STRING, false));
   };
 
   return (
     <div className={classNameBlockState}>
       <div>
         <CheckOutlined />
-        <p>Успех! Машина сохранена</p>
+        <p>{`Успех! ${message}`}</p>
       </div>
       <button
         type="button"

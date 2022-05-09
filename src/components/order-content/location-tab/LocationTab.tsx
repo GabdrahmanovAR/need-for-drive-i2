@@ -30,7 +30,7 @@ interface ILocationTabProps {
 }
 
 const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocationData }) => {
-  const pointsDataState = useSelector((pointsDataSelector));
+  const pointsDataState = useSelector(pointsDataSelector);
   const orderInfoState = useSelector(orderInfoSelector);
   const dispatch = useDispatch();
 
@@ -55,7 +55,7 @@ const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocati
   useEffect(() => {
     dispatch(resetRadioBtnAction());
     if (city === EMPTY_STRING) return;
-    pointsDataState.data.forEach((someCity: IPoint) => {
+    pointsDataState.points.data.data.forEach((someCity: IPoint) => {
       if (someCity.cityId !== null && someCity.cityId.name === city) {
         const cityCoordinates = GetPointCoordinates(pointsDataState, someCity.cityId.id, CITY_KEY);
         changeLocationData(someCity.cityId.name, cityCoordinates, someCity.cityId.id, CITY_KEY);
@@ -65,7 +65,7 @@ const LocationTab: FC<ILocationTabProps> = ({ cityName, markerName, changeLocati
 
   useEffect(() => {
     if (marker === EMPTY_STRING) return;
-    pointsDataState.data.forEach((point: IPoint) => {
+    pointsDataState.points.data.data.forEach((point: IPoint) => {
       if (point.cityId !== null && point.address === marker) {
         const cityCoordinates = GetPointCoordinates(pointsDataState, point.cityId.id, CITY_KEY);
         const markerCoordinates = GetPointCoordinates(pointsDataState, point.id, MARKER_KEY);

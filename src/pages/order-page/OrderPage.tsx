@@ -17,7 +17,7 @@ const OrderPage = () => {
   const locationPath = useLocation();
 
   useEffect(() => {
-    if (pointsDataState.data.length === 0) {
+    if (pointsDataState.points.data.data.length === 0) {
       dispatch(getPointsAction());
     }
   }, []);

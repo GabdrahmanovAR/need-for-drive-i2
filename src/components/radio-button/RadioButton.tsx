@@ -26,6 +26,7 @@ interface IRadioButtonProps {
   btnNames: string[],
   type?: string,
   direction?: string,
+  isDisabled?: boolean
 }
 
 const RadioButton: FC<IRadioButtonProps> = (props) => {
@@ -34,6 +35,7 @@ const RadioButton: FC<IRadioButtonProps> = (props) => {
     btnNames,
     type = 'radio',
     direction = EMPTY_STRING,
+    isDisabled = false,
   } = props;
   const { car } = useSelector(orderInfoSelector);
   const rateState = useSelector(rateSelector);
@@ -98,6 +100,7 @@ const RadioButton: FC<IRadioButtonProps> = (props) => {
               onChange={handleOnChangeEvent}
               value={name && name[0].toUpperCase() + name.slice(1)}
               checked={IsChecked(type, index, formName, radioBtnState)}
+              disabled={isDisabled}
             />
             <span className={`
               form_radio__fieldset__name 

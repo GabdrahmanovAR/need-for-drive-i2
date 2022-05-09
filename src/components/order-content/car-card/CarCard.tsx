@@ -18,7 +18,7 @@ interface ICarCardProps {
 const CarCard: FC<ICarCardProps> = ({ id, carInfo, activeCard }) => {
   const { car } = useSelector((orderInfoSelector));
   const dispatch = useDispatch();
-  const regex = new RegExp(/^(data:image\/)(jpeg|png);base64/);
+  const regex = new RegExp(/^.*base64,/);
 
   const classNameCarCard = cn('car-card', {
     'car-card_active': activeCard === id,

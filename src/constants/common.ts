@@ -28,3 +28,23 @@ export const selectorData = [
     data: ['Field'],
   },
 ];
+
+export const CAR_SAVED = 'Машина сохранена';
+export const RATE_SAVED = 'Изменение тарифа сохранено';
+export const RATE_DELETED = 'Тариф удален';
+export const CATEGORY_SAVED = 'Категория изменена';
+export const CATEGORY_DELETED = 'Категория удалена';
+export const POINT_SAVED = 'Пункт выдачи изменен';
+export const POINT_DELETED = 'Пункт выдачи удален';
+export const CITY_SAVED = 'Город изменен';
+export const CITY_DELETED = 'Город удален';
+export const CATEGORY_CREATED = 'Категория автомобиля создана';
+export const CITY_CREATED = 'Новый город добавлен';
+export const POINT_CREATED = 'Новый пункт выдачи добавлен';
+export const RATE_CREATED = 'Новый тариф добавлен';
+export const STATUS_SAVED = 'Изменение статуса сохранено';
+export const STATUS_DELETED = 'Статус удален';
+export const STATUS_CREATED = 'Новый статус добавлен';
+export const CAR_CREATED = 'Новый автомобиль добавлен';
+export const CAR_UPDATED = 'Данные автомобиля обновлены';
+export const CAR_DELETED = 'Автомобиль удален';

@@ -32,7 +32,7 @@ const YandexMaps = () => {
     let cityIdOfMarker = EMPTY_STRING;
     let markerCityCoords: number[] = [];
 
-    pointsDataState.data.forEach((point: IPoint) => {
+    pointsDataState.points.data.data.forEach((point: IPoint) => {
       if (point.id === clickedMarkerId) {
         markerName = point.address;
         markerId = point.id;
@@ -52,7 +52,7 @@ const YandexMaps = () => {
   };
 
   const handleOnLoadMap = (maps: YMapsApi) => {
-    const array: any = GetCoordinates(maps, pointsDataState.data);
+    const array: any = GetCoordinates(maps, pointsDataState.points.data.data);
     array.then((result: any) => {
       if (result[0].length === 0 || result[1].length === 0) setResultReceived(false);
       else {
