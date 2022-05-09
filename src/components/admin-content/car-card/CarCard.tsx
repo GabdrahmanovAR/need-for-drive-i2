@@ -45,9 +45,9 @@ const CarCard = () => {
   const dispatch = useDispatch();
 
   const [carModelInput, setCarModelInput] = useState(data.id ? data.name : EMPTY_STRING);
-  const [numberInput, setNumberInput] = useState(EMPTY_STRING);
-  const [tankInput, setTankInput] = useState(EMPTY_STRING);
-  const [selectedCategoryId, setSelectedCategoryId] = useState(EMPTY_STRING);
+  const [numberInput, setNumberInput] = useState(data.id ? data.number : EMPTY_STRING);
+  const [tankInput, setTankInput] = useState(data.id ? data.tank : EMPTY_STRING);
+  const [selectedCategoryId, setSelectedCategoryId] = useState(data.id ? data.categoryId.id : EMPTY_STRING);
 
   const initialState = {
     colors: data.id ? data.colors : [] as string[],
@@ -55,13 +55,37 @@ const CarCard = () => {
     placeholderImitation: 'Выберите файл...',
     description: data.id ? data.description : descriptionInitialState,
     descriptionTextValue: data.id ? data.description : descriptionInitialState,
+    priceMin: data.id ? data.priceMin : 0,
+    priceMax: data.id ? data.priceMax : 1000,
   };
 
   const [propsState, setPropsState] = useState(initialState);
   const [isModalDescriptionVisible, setIsModalDescriptionVisible] = useState(false);
 
   useEffect(() => {
-    setProgressBarWidth(0);
+    setProgressBarWidth(
+      +(propsState.colors.length && 12)
+      + +(propsState.descriptionTextValue && 4)
+      + +(carModelInput && 12)
+      + +(numberInput && 12)
+      + +(tankInput && 12)
+      + +(selectedCategoryId && 12)
+      + +(propsState.priceMax && 12)
+      + +(propsState.priceMin && 12)
+      + +(file && 12),
+    );
+  }, [
+    propsState.colors,
+    propsState.descriptionTextValue,
+    propsState.priceMax,
+    propsState.priceMin,
+    carModelInput,
+    numberInput,
+    tankInput,
+    selectedCategoryId,
+  ]);
+
+  useEffect(() => {
     if (Object.keys(file).length !== 0) toBase64Url(file, (result) => setImageBase64Url(result));
   }, [file]);
 
@@ -75,7 +99,6 @@ const CarCard = () => {
   };
 
   const handleFinishButtonClick = (values: ICarFormValues) => {
-    console.log(values);
     if (data.id) {
       const updateData: ICreateCar = {
         name: values.name,
@@ -93,7 +116,6 @@ const CarCard = () => {
           mimetype: file.type,
         } : undefined,
       };
-      console.log(JSON.parse(JSON.stringify(updateData)));
       dispatch(updateCarAction(data.id, updateData));
     } else {
       const newData: ICreateCar = {
@@ -112,7 +134,6 @@ const CarCard = () => {
           mimetype: file.type,
         },
       };
-      console.log(newData);
       dispatch(createCarAction(newData));
     }
   };
@@ -185,6 +206,14 @@ const CarCard = () => {
 
   const handleDeleteClick = () => {
     dispatch(deleteCarAction(data.id));
+  };
+
+  const handlePriceMaxInput = (event: BaseSyntheticEvent) => {
+    setPropsState((prevState) => ({ ...prevState, priceMax: event.target.value }));
+  };
+
+  const handlePriceMinInput = (event: BaseSyntheticEvent) => {
+    setPropsState((prevState) => ({ ...prevState, priceMin: event.target.value }));
   };
 
   if (cardState === 'create') {
@@ -375,7 +404,9 @@ const CarCard = () => {
                   >
                     <Input
                       placeholder="Введите минимальную стоимость"
-                      defaultValue={data.id ? data.priceMin : EMPTY_STRING}
+                      defaultValue={data.id ? data.priceMin : propsState.priceMin}
+                      onInput={handlePriceMinInput}
+                      value={propsState.priceMin}
                     />
                   </Form.Item>
                 </div>
@@ -386,7 +417,9 @@ const CarCard = () => {
                   >
                     <Input
                       placeholder="Введите максимальную стоимость"
-                      defaultValue={data.id ? data.priceMax : EMPTY_STRING}
+                      defaultValue={data.id ? data.priceMax : propsState.priceMax}
+                      onInput={handlePriceMaxInput}
+                      value={propsState.priceMax}
                     />
                   </Form.Item>
                 </div>

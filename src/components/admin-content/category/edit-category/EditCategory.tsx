@@ -37,7 +37,6 @@ const EditCategory = () => {
   }, [category.selectedCategory]);
 
   const handleCancelClick = () => {
-    // TODO заменить action
     dispatch(selectedCategoryDataCLearAction());
     setData({
       category: EMPTY_STRING,

@@ -38,7 +38,6 @@ const StatusList = () => {
   }, [entityTypesState.statusList, currentPage]);
 
   const handleTableRowClick = (statusInfo: IStatusInfoState, index: number) => {
-    console.log(statusInfo, index);
     dispatch(selectedStatusDataAction(statusInfo, index));
     dispatch(statusModalWindowStateAction(true));
   };

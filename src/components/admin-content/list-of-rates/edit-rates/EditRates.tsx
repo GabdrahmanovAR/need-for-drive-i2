@@ -49,7 +49,6 @@ const EditRates = () => {
   };
 
   const handleDeleteClick = () => {
-    // TODO добавить обновление тарифов после удаления
     dispatch(deleteRateAction(rates.selectedRate.id, rates.selectedRate.rateTypeId.id));
     dispatch(selectedRateDataCLearAction());
     setData({
@@ -162,7 +161,6 @@ const EditRates = () => {
           </Form.Item>
         </div>
         <div className="list-of-rates__form-buttons">
-          {/* TODO добавить лоадер на кнопки при сохранении или удалении */}
           <Form.Item>
             <div>
               <Button
@@ -178,11 +176,11 @@ const EditRates = () => {
               <Button
                 type="default"
                 htmlType="submit"
-                // disabled={
-                //   data.price === rates.selectedRate.price
-                //   && data.rate === rates.selectedRate.rateTypeId.name
-                //   && data.unit === rates.selectedRate.rateTypeId.unit
-                // }
+                disabled={
+                  data.price === rates.selectedRate.price
+                  && data.rate === rates.selectedRate.rateTypeId.name
+                  && data.unit === rates.selectedRate.rateTypeId.unit
+                }
               >
                 Сохранить изменения
               </Button>
