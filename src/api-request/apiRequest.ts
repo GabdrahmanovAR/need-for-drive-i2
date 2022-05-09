@@ -21,6 +21,8 @@ export const getRate = () => apiDB.get(api.RATE_URL);
 
 export const getCategory = () => apiDB.get(api.CATEGORY_URL);
 
+export const getStatusList = () => apiDB.get(api.ORDER_STARUS_URL);
+
 export const registerOrder = (orderInfo: IOrderInfoState) => apiDB.post(api.ORDER_URL, {
   orderStatusId: { id: '5e26a191099b810b946c5d89' },
   cityId: { id: orderInfo.location.cityId },
@@ -253,6 +255,38 @@ export const deleteCity = (cityId: string) => (
 
 export const createCity = (name: string) => (
   apiDB.post(api.CITY_URL, {
+    name,
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
+    },
+  })
+);
+
+//-----------------------------------------------------------------------------------------------
+
+export const changeStatus = (statusId: string, name: string) => (
+  apiDB.put(`${api.ORDER_STARUS_URL}/${statusId}`, {
+    name,
+  },
+  {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
+    },
+  })
+);
+
+export const deleteStatus = (statusId: string) => (
+  apiDB.delete(`${api.ORDER_STARUS_URL}/${statusId}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
+    },
+  })
+);
+
+export const createStatus = (name: string) => (
+  apiDB.post(api.ORDER_STARUS_URL, {
     name,
   },
   {

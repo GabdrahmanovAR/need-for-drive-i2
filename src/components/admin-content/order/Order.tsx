@@ -20,6 +20,7 @@ const Order = () => {
     carColor,
     image,
     price,
+    orderStatusId,
   } = {
     cityName: orderStatusState.statusInfo.cityName,
     pointName: orderStatusState.statusInfo.pointName,
@@ -31,6 +32,9 @@ const Order = () => {
     carColor: orderStatusState.statusInfo.color,
     image: orderStatusState.statusInfo.car.image,
     price: orderStatusState.statusInfo.price,
+    orderStatusId: {
+      name: orderStatusState.statusInfo.orderStatusId.name,
+    },
   };
 
   useEffect(() => {
@@ -57,6 +61,10 @@ const Order = () => {
             <span className="dim-text">Цвет: </span>
             <span><strong>{carColor}</strong></span>
           </div>
+          <div>
+            <span className="dim-text">Статус: </span>
+            <span><strong>{orderStatusId.name}</strong></span>
+          </div>
         </section>
       </div>
       <section className="admin-order__radio-buttons">
@@ -65,6 +73,7 @@ const Order = () => {
           btnNames={['Полный бак, 500₽', 'Детское кресло, 200₽', 'Правый руль, 1600₽']}
           type="checkbox"
           direction="column"
+          isDisabled
         />
       </section>
       <section className="admin-order__price">

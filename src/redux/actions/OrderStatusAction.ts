@@ -52,6 +52,7 @@ const getOrderStatusData = (data: IOrderStatusResponse, count?: number): IOrderS
     rate: data.rateId ? data.rateId.rateTypeId.name : EMPTY_DATA,
     cityName: data.cityId ? data.cityId.name : EMPTY_DATA,
     pointName: data.pointId ? data.pointId.address : EMPTY_DATA,
+    orderStatusId: data.orderStatusId,
   },
 });
 

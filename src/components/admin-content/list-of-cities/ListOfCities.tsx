@@ -42,7 +42,7 @@ const ListOfCities = () => {
   };
 
   const table = (
-    <table className="pick-up-point">
+    <table className="list-of-cities">
       <thead>
         <tr>
           <th>Город</th>

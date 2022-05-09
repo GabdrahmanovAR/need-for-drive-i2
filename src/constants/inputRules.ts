@@ -109,4 +109,10 @@ export const inputRules = {
       message: 'Используйте буквы кириллического алфавита',
     },
   ],
+  carImage: [
+    {
+      required: true,
+      message: 'Пожалуйста выберите файл',
+    },
+  ],
 };

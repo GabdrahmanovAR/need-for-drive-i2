@@ -10,6 +10,7 @@ export const RATE_URL = '/db/rate';
 export const RATE_TYPE_URL = '/db/rateType';
 export const CATEGORY_URL = '/db/category';
 export const ORDER_URL = '/db/order';
+export const ORDER_STARUS_URL = '/db/orderStatus';
 export const AUTHORIZATION_URL = '/auth/login';
 export const REGISTRATION_URL = '/auth/register';
 export const ADMIN_LOGIN_URL = '/admin/login';

@@ -30,6 +30,10 @@ const initialState: IOrderStatusState = {
     pointName: EMPTY_STRING,
     price: 0,
     rate: EMPTY_STRING,
+    orderStatusId: {
+      id: EMPTY_STRING,
+      name: EMPTY_STRING,
+    },
   },
 };
 

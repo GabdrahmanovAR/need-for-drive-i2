@@ -42,3 +42,6 @@ export const CATEGORY_CREATED = 'Категория автомобиля соз�
 export const CITY_CREATED = 'Новый город добавлен';
 export const POINT_CREATED = 'Новый пункт выдачи добавлен';
 export const RATE_CREATED = 'Новый тариф добавлен';
+export const STATUS_SAVED = 'Изменение статуса сохранено';
+export const STATUS_DELETED = 'Статус удален';
+export const STATUS_CREATED = 'Новый статус добавлен';

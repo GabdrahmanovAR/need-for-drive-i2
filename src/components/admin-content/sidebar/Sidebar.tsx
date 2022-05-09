@@ -5,7 +5,7 @@ import {
   BankOutlined,
   CarOutlined,
   DatabaseOutlined,
-  EnvironmentOutlined, FileAddOutlined, SnippetsOutlined, UnorderedListOutlined,
+  EnvironmentOutlined, FileAddOutlined, QuestionCircleOutlined, SnippetsOutlined, UnorderedListOutlined,
 } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
@@ -130,6 +130,12 @@ const Sidebar = () => {
             icon={<UnorderedListOutlined />}
           >
             Список тарифов
+          </Menu.Item>
+          <Menu.Item
+            key="status"
+            icon={<QuestionCircleOutlined />}
+          >
+            Статусы заказов
           </Menu.Item>
           <Menu.Item
             key="entity"

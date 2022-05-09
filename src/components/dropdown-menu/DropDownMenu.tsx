@@ -64,7 +64,7 @@ const DropDownMenu: FC<IDropDownMenu> = (props) => {
       <nav className={classNameDefaultMenu}>
         <ul>
           {focusedItemState.item === 'city-field'
-            ? (data.data.map((someCity: IPoint, index: number) => {
+            ? (data.points.data.data.map((someCity: IPoint, index: number) => {
               if (someCity.cityId === null || someCity.cityId.name.slice(0, cityName.length) !== cityName) return null;
               return (
                 <li
@@ -77,7 +77,7 @@ const DropDownMenu: FC<IDropDownMenu> = (props) => {
                 </li>
               );
             }))
-            : (data.data.map((someMarker: IPoint, index: number) => {
+            : (data.points.data.data.map((someMarker: IPoint, index: number) => {
               if (location.cityName === EMPTY_STRING && someMarker.cityId !== null) {
                 return (
                   <li

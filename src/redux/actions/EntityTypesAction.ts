@@ -2,30 +2,36 @@ import { AxiosResponse } from 'axios';
 import { Dispatch } from 'redux';
 import {
   changeCategory,
-  changeRatePrice, changeRateType, createCategory, createRate, createRateType, deleteCategory, deleteRate, deleteRateType, getCategory, getRate,
+  changeRatePrice, changeRateType, changeStatus, createCategory, createRate, createRateType, createStatus, deleteCategory, deleteRate, deleteRateType, deleteStatus, getCategory, getRate, getStatusList,
 } from '../../api-request/apiRequest';
 import {
   CATEGORY_MODAL_STATE,
   CLEAR_SELECTED_CATEGORY_DATA,
   CLEAR_SELECTED_RATE_DATA,
+  CLEAR_SELECTED_STATUS_DATA,
   HIDE_ENTITY_TYPES_LOADER,
   LOAD_CATEGORY_SUCCESS,
   LOAD_RATES_SUCCESS,
+  LOAD_STATUS_LIST_SUCCESS,
   RATE_MODAL_STATE,
   SELECTED_CATEGORY_DATA,
   SELECTED_RATE_DATA,
+  SELECTED_STATUS_DATA,
   SHOW_ENTITY_TYPES_LOADER,
+  STATUS_MODAL_STATE,
   UPDATE_CATEGORY_DATA,
   UPDATE_RATE_DATA,
+  UPDATE_STATUS_DATA,
 } from '../../constants/actions/entityTypes';
 import {
-  CATEGORY_CREATED, CATEGORY_SAVED, RATE_CREATED, RATE_DELETED, RATE_SAVED,
+  CATEGORY_CREATED, CATEGORY_SAVED, RATE_CREATED, RATE_DELETED, RATE_SAVED, STATUS_CREATED, STATUS_DELETED, STATUS_SAVED,
 } from '../../constants/common';
 import { IEntityTypesActionType } from '../../types/actions';
 import { ICategory, IEntityCategory } from '../../types/api';
 import {
   IChangedCategoryState,
-  IChangedRateInfoState, IChangedRateTypeInfoState, IRateInfoState, IRateState,
+  IChangedOrderStatusState,
+  IChangedRateInfoState, IChangedRateTypeInfoState, IRateInfoState, IRateState, IStatusInfoState, IStatusListState,
 } from '../../types/state';
 import { successfullSaveState } from './SuccessfullSaveAction';
 
@@ -70,6 +76,13 @@ const loadRates = (data: IRateState): IEntityTypesActionType => ({
   },
 });
 
+const loadStatusList = (data: IStatusListState): IEntityTypesActionType => ({
+  type: LOAD_STATUS_LIST_SUCCESS,
+  statusList: {
+    data,
+  },
+});
+
 const updateRates = (updatedData: any, index: number): IEntityTypesActionType => ({
   type: UPDATE_RATE_DATA,
   rates: {
@@ -85,6 +98,13 @@ const updateCategory = (updatedData: ICategory): IEntityTypesActionType => ({
   },
 });
 
+const updateStatus = (updatedData: IStatusInfoState): IEntityTypesActionType => ({
+  type: UPDATE_STATUS_DATA,
+  statusList: {
+    updatedData,
+  },
+});
+
 export const rateModalWindowStateAction = (isVisible: boolean) => (dispatch: Dispatch) => {
   dispatch(rateModalState(isVisible));
 };
@@ -93,6 +113,13 @@ export const categoryModalWindowStateAction = (isVisible: boolean): IEntityTypes
   type: CATEGORY_MODAL_STATE,
   category: {
     categoryModalVisible: isVisible,
+  },
+});
+
+export const statusModalWindowStateAction = (isVisible: boolean): IEntityTypesActionType => ({
+  type: STATUS_MODAL_STATE,
+  statusList: {
+    statusModalVisible: isVisible,
   },
 });
 
@@ -108,12 +135,24 @@ export const selectedCategoryDataAction = (category: ICategory, index: number): 
   },
 });
 
+export const selectedStatusDataAction = (status: IStatusInfoState, index: number): IEntityTypesActionType => ({
+  type: SELECTED_STATUS_DATA,
+  statusList: {
+    selectedStatus: status,
+    changedDataIndex: index,
+  },
+});
+
 export const selectedRateDataCLearAction = () => (dispatch: Dispatch) => {
   dispatch(selectedRateDataClear());
 };
 
 export const selectedCategoryDataCLearAction = (): IEntityTypesActionType => ({
   type: CLEAR_SELECTED_CATEGORY_DATA,
+});
+
+export const selectedStatusDataCLearAction = (): IEntityTypesActionType => ({
+  type: CLEAR_SELECTED_STATUS_DATA,
 });
 
 export const loadCategoryAction = () => async (dispatch: Dispatch) => {
@@ -140,6 +179,18 @@ export const loadRatesAction = () => async (dispatch: Dispatch) => {
   }
 };
 
+export const loadStatusListAction = () => async (dispatch: Dispatch) => {
+  dispatch(showLoader());
+  try {
+    const response: AxiosResponse<IStatusListState> = await getStatusList();
+    dispatch(loadStatusList(response.data));
+  } catch (error) {
+    console.log(error);
+  } finally {
+    dispatch(hideLoader());
+  }
+};
+
 export const changeRatePriceAction = (rateId: string, rateTypeId: string, price: number, index: number) => async (dispatch: Dispatch) => {
   try {
     const response: AxiosResponse<IChangedRateInfoState> = await changeRatePrice(rateId, rateTypeId, price);
@@ -157,6 +208,39 @@ export const changeRateTypeAction = (rateTypeId: string, name: string, unit: str
       dispatch(updateRates(response.data.data, index));
       dispatch(successfullSaveState(RATE_SAVED, true));
     }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const changeStatusAction = (statusId: string, name: string) => async (dispatch: Dispatch) => {
+  try {
+    const response: AxiosResponse<IChangedOrderStatusState> = await changeStatus(statusId, name);
+    if (response.status === 200) {
+      dispatch(updateStatus(response.data.data));
+      dispatch(successfullSaveState(STATUS_SAVED, true));
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const createStatusAction = (name: string) => async (dispatch: Dispatch) => {
+  dispatch(showLoader());
+  try {
+    const response = await createStatus(name);
+    if (response.status === 200) dispatch(successfullSaveState(STATUS_CREATED, true));
+  } catch (error) {
+    console.log(error);
+  } finally {
+    dispatch(hideLoader());
+  }
+};
+
+export const deleteStatusAction = (statusId: string) => async (dispatch: Dispatch) => {
+  try {
+    const response = await deleteStatus(statusId);
+    if (response.status === 200) dispatch(successfullSaveState(STATUS_DELETED, true));
   } catch (error) {
     console.log(error);
   }

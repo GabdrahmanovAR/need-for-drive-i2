@@ -1,7 +1,7 @@
 import { ICategory, ICityInfo, IPoint } from '../types/api';
-import { IRateInfoState } from '../types/state';
+import { IRateInfoState, IStatusInfoState } from '../types/state';
 
-export const limitPerPage = (response: IPoint[] | ICategory[] | IRateInfoState[] | ICityInfo[], page: number, limit: number) => {
+export const limitPerPage = (response: IPoint[] | ICategory[] | IRateInfoState[] | ICityInfo[] | IStatusInfoState[], page: number, limit: number) => {
   let allData: any[] = [];
   const indexStart = Number(page) * Number(limit);
   const indexLimit = (Number(page) * Number(limit)) + Number(limit);

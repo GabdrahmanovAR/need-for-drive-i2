@@ -13,6 +13,7 @@ import Category from './category/Category';
 import ListOfRates from './list-of-rates/ListOfRates';
 import ListOfCities from './list-of-cities/ListOfCities';
 import CreateEntity from './create-entity/CreateEntity';
+import StatusList from './status-list/StatusList';
 
 const AdminContent = () => {
   const adminSidebarState = useSelector(adminSidebarMenuSelector);
@@ -27,6 +28,7 @@ const AdminContent = () => {
       case 'rate': return <ListOfRates />;
       case 'cities': return <ListOfCities />;
       case 'entity': return <CreateEntity />;
+      case 'status': return <StatusList />;
       default: return <ErrorPage />;
     }
   };

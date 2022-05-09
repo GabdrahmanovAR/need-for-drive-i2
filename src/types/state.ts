@@ -186,6 +186,10 @@ export interface IOrderStatusState {
   statusInfo: IOrderStatusInfoState;
 }
 
+export interface IChangedOrderStatusState {
+  data: IStatusInfoState;
+}
+
 export interface IOrderStatusInfoState {
   car: {
     name: string;
@@ -204,6 +208,10 @@ export interface IOrderStatusInfoState {
   pointName: string;
   price: number;
   rate: string;
+  orderStatusId: {
+    id: string;
+    name: string;
+  }
 }
 
 export interface ISuccessfullSaveState {
@@ -219,6 +227,7 @@ export interface IAdminCarCardState {
 export interface IEntityTypesState {
   category: IEntityCategoryState;
   rates: IEntityRateState;
+  statusList: IEntityStatusState;
   isLoading: boolean;
 }
 
@@ -236,4 +245,22 @@ export interface IEntityCategoryState {
   selectedCategory: ICategory;
   categoryModalVisible: boolean;
   changedDataIndex: number;
+}
+
+export interface IEntityStatusState {
+  data: IStatusListState;
+  updatedData: IStatusInfoState;
+  selectedStatus: IStatusInfoState;
+  statusModalVisible: boolean;
+  changedDataIndex: number;
+}
+
+export interface IStatusListState {
+  count: number;
+  data: IStatusInfoState[];
+}
+
+export interface IStatusInfoState {
+  id: string;
+  name: string;
 }

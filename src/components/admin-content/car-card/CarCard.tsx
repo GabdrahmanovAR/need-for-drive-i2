@@ -147,7 +147,7 @@ const CarCard = () => {
             <h2>{data.id ? data.name : 'Название автомобиля'}</h2>
             <p>{data.id ? data.categoryId.name : 'Тип автомобиля'}</p>
             <div className="admin-car-card__form__description__img__upload">
-              <Form.Item name="file">
+              <Form.Item name="file" rules={inputRules.carImage}>
                 <Upload
                   name="image-file"
                   beforeUpload={handleUploadingFile}

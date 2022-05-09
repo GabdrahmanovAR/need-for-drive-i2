@@ -3,22 +3,27 @@ import {
   CATEGORY_MODAL_STATE,
   CLEAR_SELECTED_CATEGORY_DATA,
   CLEAR_SELECTED_RATE_DATA,
+  CLEAR_SELECTED_STATUS_DATA,
   HIDE_ENTITY_TYPES_LOADER,
   LOAD_CATEGORY_SUCCESS,
   LOAD_RATES_SUCCESS,
+  LOAD_STATUS_LIST_SUCCESS,
   RATE_MODAL_STATE,
   SELECTED_CATEGORY_DATA,
   SELECTED_RATE_DATA,
+  SELECTED_STATUS_DATA,
   SHOW_ENTITY_TYPES_LOADER,
+  STATUS_MODAL_STATE,
   UPDATE_CATEGORY_DATA,
   UPDATE_RATE_DATA,
+  UPDATE_STATUS_DATA,
 } from '../../constants/actions/entityTypes';
 import { EMPTY_STRING } from '../../constants/common';
 import { IEntityTypesActionType } from '../../types/actions';
 import { ICategory, IEntityCategory } from '../../types/api';
 import {
   IEntityCategoryState,
-  IEntityRateState, IEntityTypesState, IRateInfoState, IRateState,
+  IEntityRateState, IEntityStatusState, IEntityTypesState, IRateInfoState, IRateState, IStatusInfoState, IStatusListState,
 } from '../../types/state';
 
 const rateDataInitialState: IRateInfoState = {
@@ -62,6 +67,16 @@ const initialState: IEntityTypesState = {
     changedDataIndex: 0,
     updatedData: {} as IRateInfoState,
   } as IEntityRateState,
+  statusList: {
+    data: {
+      count: 0,
+      data: [] as IStatusInfoState[],
+    },
+    selectedStatus: {} as IStatusInfoState,
+    statusModalVisible: false,
+    changedDataIndex: 0,
+    updatedData: {} as IStatusInfoState,
+  } as IEntityStatusState,
   isLoading: false,
 };
 
@@ -87,6 +102,12 @@ const selectedCategoryData = (draft: IEntityTypesState, category?: ICategory, in
   return draft;
 };
 
+const selectedStatusData = (draft: IEntityTypesState, status?: IStatusInfoState, index?: number) => {
+  draft.statusList.selectedStatus = status || {} as IStatusInfoState;
+  draft.statusList.changedDataIndex = index || 0;
+  return draft;
+};
+
 const updateRateData = (draft: IEntityTypesState, rate?: any, index?: number) => {
   if (rate?.price && index) draft.rates.data.data[index] = rate;
   if (rate?.unit && index) {
@@ -107,6 +128,11 @@ const updateCategoryData = (draft: IEntityTypesState, category?: ICategory) => {
   return draft;
 };
 
+const updateStatusData = (draft: IEntityTypesState, status?: IStatusInfoState) => {
+  if (status) draft.statusList.data.data[draft.statusList.changedDataIndex] = status;
+  return draft;
+};
+
 const clearSelectedRateData = (draft: IEntityTypesState) => {
   draft.rates.selectedRate = rateDataInitialState;
   draft.rates.rateModalVisible = false;
@@ -116,6 +142,12 @@ const clearSelectedRateData = (draft: IEntityTypesState) => {
 const clearSelectedCategoryData = (draft: IEntityTypesState) => {
   draft.category.selectedCategory = categoryDataInitialState;
   draft.category.categoryModalVisible = false;
+  return draft;
+};
+
+const clearSelectedStatusData = (draft: IEntityTypesState) => {
+  draft.statusList.selectedStatus = categoryDataInitialState;
+  draft.statusList.statusModalVisible = false;
   return draft;
 };
 
@@ -129,6 +161,11 @@ const categoryModalWindowState = (draft: IEntityTypesState, isVisible?: boolean)
   return draft;
 };
 
+const statusModalWindowState = (draft: IEntityTypesState, isVisible?: boolean) => {
+  draft.statusList.statusModalVisible = isVisible || false;
+  return draft;
+};
+
 const loadCategory = (draft: IEntityTypesState, data?: IEntityCategory) => {
   draft.category.data = data || {} as IEntityCategory;
   return draft;
@@ -139,22 +176,33 @@ const loadRates = (draft: IEntityTypesState, data?: IRateState) => {
   return draft;
 };
 
+const loadStatusList = (draft: IEntityTypesState, data?: IStatusListState) => {
+  if (data) draft.statusList.data = data;
+  return draft;
+};
+
 export default (state = initialState, action: IEntityTypesActionType) => produce(
   state,
   (draft: IEntityTypesState) => {
     switch (action.type) {
       case LOAD_CATEGORY_SUCCESS: return loadCategory(draft, action.category?.data);
       case LOAD_RATES_SUCCESS: return loadRates(draft, action.rates?.data);
+      case LOAD_STATUS_LIST_SUCCESS: return loadStatusList(draft, action.statusList?.data);
       case SELECTED_RATE_DATA:
         return selectedRateData(draft, action.rates?.selectedRate, action.rates?.changedDataIndex);
       case SELECTED_CATEGORY_DATA:
         return selectedCategoryData(draft, action.category?.selectedCategory, action.category?.changedDataIndex);
+      case SELECTED_STATUS_DATA:
+        return selectedStatusData(draft, action.statusList?.selectedStatus, action.statusList?.changedDataIndex);
       case UPDATE_RATE_DATA: return updateRateData(draft, action.rates?.updatedData, action.rates?.changedDataIndex);
       case UPDATE_CATEGORY_DATA: return updateCategoryData(draft, action.category?.updatedData);
+      case UPDATE_STATUS_DATA: return updateStatusData(draft, action.statusList?.updatedData);
       case RATE_MODAL_STATE: return rateModalWindowState(draft, action.rates?.rateModalVisible);
       case CATEGORY_MODAL_STATE: return categoryModalWindowState(draft, action.category?.categoryModalVisible);
+      case STATUS_MODAL_STATE: return statusModalWindowState(draft, action.statusList?.statusModalVisible);
       case CLEAR_SELECTED_RATE_DATA: return clearSelectedRateData(draft);
       case CLEAR_SELECTED_CATEGORY_DATA: return clearSelectedCategoryData(draft);
+      case CLEAR_SELECTED_STATUS_DATA: return clearSelectedStatusData(draft);
       case SHOW_ENTITY_TYPES_LOADER: return showLoader(draft);
       case HIDE_ENTITY_TYPES_LOADER: return hideLoader(draft);
       default: return state;

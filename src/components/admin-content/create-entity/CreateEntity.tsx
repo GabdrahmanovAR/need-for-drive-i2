@@ -10,6 +10,7 @@ import CreateCategory from './create-category/CreateCategory';
 import CreateCity from './create-city/CreateCity';
 import CreatePoint from './create-point/CreatePoint';
 import CreateRate from './create-rate/CreateRate';
+import CreateStatus from './create-status/CreateStatus';
 import './CreateEntity.scss';
 
 const { Panel } = Collapse;
@@ -49,6 +50,9 @@ const CreateEntity = () => {
           </Panel>
           <Panel header="Тариф" key="4">
             <CreateRate setActivePanel={setActivePanel} />
+          </Panel>
+          <Panel header="Статус" key="5">
+            <CreateStatus setActivePanel={setActivePanel} />
           </Panel>
         </Collapse>
       </section>
