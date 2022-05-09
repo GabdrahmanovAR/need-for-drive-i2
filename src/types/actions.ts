@@ -1,8 +1,8 @@
 import {
-  ICarInfoData, ICarsData, ICities, IEntityCategory, IPoint,
+  ICarInfoData, ICarsData, ICategory, ICities, ICityInfo, IEntityCategory, IPoint, IPointsData,
 } from './api';
 import {
-  IOrderStatusInfoState, IPointCityCoordsState, IPointMarkerCoordsState, IRateInfoState, IRateState,
+  IOrderStatusInfoState, IPointCityCoordsState, IPointMarkerCoordsState, IRateInfoState, IRateState, IStatusInfoState, IStatusListState,
 } from './state';
 
 export interface IActionType {
@@ -78,11 +78,23 @@ export interface IOrderStepActionType extends IActionType {
 }
 
 export interface IPointsDataActionType extends IActionType {
-  data?: Array<IPoint>;
+  points?: {
+    data?: IPointsData;
+    selectedPoint?: IPoint;
+    changedIndexData?: number;
+    pointModalVisible?: boolean;
+    updatedData?: IPoint;
+  };
   cityCoords?: Array<IPointCityCoordsState>;
   markerCoords?: Array<IPointMarkerCoordsState>;
   isLoading?: boolean;
-  cities?: ICities;
+  cities?: {
+    data?: ICities;
+    selectedCity?: ICityInfo;
+    changedIndexData?: number;
+    cityModalVisible?: boolean;
+    updatedData?: ICityInfo;
+  }
 }
 
 export interface ICarsDataActionType extends IActionType {
@@ -110,6 +122,7 @@ export interface IOrderStatusActionType extends IActionType {
 }
 
 export interface ISuccessfullSaveACtionType extends IActionType {
+  message?: string;
   isActive?: boolean;
 }
 
@@ -119,7 +132,32 @@ export interface IAdminCarCardActionType extends IActionType {
 }
 
 export interface IEntityTypesActionType extends IActionType {
-  category?: IEntityCategory;
-  rates?: IRateState;
+  category?: IEntityCategoryActionType;
+  rates?: IEntityRateStateActionType;
+  statusList?: IEntityStatusActionType;
   isLoading?: boolean;
+}
+
+export interface IEntityRateStateActionType {
+  data?: IRateState;
+  updatedData?: IRateInfoState;
+  selectedRate?: IRateInfoState;
+  rateModalVisible?: boolean;
+  changedDataIndex?: number;
+}
+
+export interface IEntityCategoryActionType {
+  data?: IEntityCategory;
+  updatedData?: ICategory;
+  selectedCategory?: ICategory;
+  categoryModalVisible?: boolean;
+  changedDataIndex?: number;
+}
+
+export interface IEntityStatusActionType {
+  data?: IStatusListState;
+  updatedData?: IStatusInfoState;
+  selectedStatus?: IStatusInfoState;
+  statusModalVisible?: boolean;
+  changedDataIndex?: number;
 }

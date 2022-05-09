@@ -7,23 +7,22 @@ import OrdersInfo from './orders-info/OrdersInfo';
 import ListOfCars from './list-of-cars/ListOfCars';
 import CarCard from './car-card/CarCard';
 import ErrorPage from './error-page/ErrorPage';
-import { successfullSaveSelector } from '../../selectors/successfulSaveSelector';
-import { successfullSaveStateAction } from '../../redux/actions/SuccessfullSaveAction';
 import { adminSidebarMenuSelector } from '../../selectors/adminSidebarMenuSelector';
 import PickUpPoints from './pick-up-point/PickUpPoint';
 import Category from './category/Category';
 import ListOfRates from './list-of-rates/ListOfRates';
+import ListOfCities from './list-of-cities/ListOfCities';
+import CreateEntity from './create-entity/CreateEntity';
+import StatusList from './status-list/StatusList';
+import { loadCategoryAction } from '../../redux/actions/EntityTypesAction';
 
 const AdminContent = () => {
-  const successfulSaveState = useSelector(successfullSaveSelector);
-  const adminSidebarState = useSelector(adminSidebarMenuSelector);
   const dispatch = useDispatch();
+  const adminSidebarState = useSelector(adminSidebarMenuSelector);
 
   useEffect(() => {
-    if (adminSidebarState.selectedMenu !== 'car' && successfulSaveState.isActive) {
-      dispatch(successfullSaveStateAction(false));
-    }
-  }, [adminSidebarState.selectedMenu]);
+    dispatch(loadCategoryAction());
+  }, []);
 
   const switchContent = (menuValue: string) => {
     switch (menuValue) {
@@ -33,6 +32,9 @@ const AdminContent = () => {
       case 'points': return <PickUpPoints />;
       case 'category': return <Category />;
       case 'rate': return <ListOfRates />;
+      case 'cities': return <ListOfCities />;
+      case 'entity': return <CreateEntity />;
+      case 'status': return <StatusList />;
       default: return <ErrorPage />;
     }
   };

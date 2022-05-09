@@ -1,0 +1,56 @@
+@import "src/constants/styles/common";
+
+.create-entity {
+  &__info {
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.5rem;
+    background-color: $main-white-color;
+    padding: 1rem;
+    box-shadow: 0 3px 6px -4px rgba(0, 0, 0, .12), 0 3px 6px 0 rgba(0, 0, 0, .1), 0 9px 28px 8px rgba(0, 0, 0, .05);
+
+    .ant-select-open {
+      font-size: 11px;
+    }
+  }
+
+  &__title {
+    font-size: .6875rem;
+  }
+  
+  &__field {
+    .ant-form-item {
+      margin-bottom: .875rem;
+    }
+  
+    input, input::placeholder, .ant-select-selection-item, .ant-select {
+      font-size: .6875rem;
+    }
+  }
+
+  .ant-form-item-explain-error {
+    font-size: .625rem;
+  }
+
+  &__form-buttons {
+    .ant-form-item-control-input-content {
+      display: flex;
+      justify-content: flex-end;
+  
+      button {
+        margin-left: 1rem;
+      }
+    }
+  
+    button {
+      min-width: 110px;
+      padding: 0 .5rem;
+      font-size: .6875rem;
+    }
+  
+    .ant-form-item {
+      margin-bottom: 0;
+      margin-top: 1.5rem;
+    }
+  }
+}

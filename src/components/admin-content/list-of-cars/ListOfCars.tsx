@@ -12,6 +12,7 @@ import { formatString } from '../../../utils/FormatString';
 import { adminCarCardChangeStateAction } from '../../../redux/actions/AdminCarCardAction';
 import { adminSidebarChangeMenuAction } from '../../../redux/actions/AdminSidebarMenuAction';
 import { CarNumber } from '../../../utils/CarNumber';
+import { EMPTY_DATA } from '../../../constants/common';
 
 const selectorData = [
   {
@@ -90,7 +91,7 @@ const ListOfCars = () => {
                     >
                       <td><img src={car.thumbnail.path} alt="Car" /></td>
                       <td>{car.name}</td>
-                      <td>{car.categoryId.name}</td>
+                      <td>{car.categoryId ? car.categoryId.name : EMPTY_DATA}</td>
                       <td>{CarNumber(car.number)}</td>
                       <td>{car.tank}</td>
                       <td>

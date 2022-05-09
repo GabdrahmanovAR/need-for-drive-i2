@@ -1,0 +1,47 @@
+.list-of-categories__edit-title {
+  font-size: .6875rem;
+}
+
+.list-of-categories__edit {
+
+  .ant-form-item {
+    margin-bottom: .875rem;
+  }
+
+  input, input::placeholder {
+    font-size: .6875rem;
+  }
+}
+
+.list-of-categories__modal {
+  .ant-form-item-explain-error {
+    font-size: .625rem;
+  }
+}
+
+.list-of-categories__form-buttons {
+  .ant-form-item-control-input-content {
+    display: flex;
+    justify-content: flex-end;
+
+    div:not(:first-child) {
+      width: 100%;
+      text-align: end;
+
+      button {
+        margin-left: 1rem;
+      }
+    }
+  }
+
+  button {
+    min-width: 110px;
+    padding: 0 .5rem;
+    font-size: .6875rem;
+  }
+
+  .ant-form-item {
+    margin-bottom: 0;
+    margin-top: 1.5rem;
+  }
+}
