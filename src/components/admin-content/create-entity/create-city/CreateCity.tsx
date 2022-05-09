@@ -24,7 +24,6 @@ const CreateCity: FC<ICreateCityProps> = ({ setActivePanel }) => {
   const { isLoading } = useSelector(entityTypesSelector);
 
   const handleCreateButtonClick = (values: ICreateCityForm) => {
-    console.log(values);
     dispatch(createCityAction(values.city));
     setFormKey('form-end');
   };
