@@ -66,6 +66,20 @@ export interface ICarInfoData {
   id: string;
 }
 
+export interface ICreateCar {
+  description?: string;
+  priceMin?: number;
+  priceMax?: number;
+  name?: string;
+  number?: string;
+  categoryId?: {
+    id: string;
+  };
+  thumbnail?: ICarThumbnail,
+  tank?: number;
+  colors?: string[],
+}
+
 export interface ICarCategory {
   name: string;
   description: string;

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './AdminContent.scss';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Sidebar from './sidebar/Sidebar';
 import Header from './header/Header';
 import OrdersInfo from './orders-info/OrdersInfo';
@@ -14,9 +14,15 @@ import ListOfRates from './list-of-rates/ListOfRates';
 import ListOfCities from './list-of-cities/ListOfCities';
 import CreateEntity from './create-entity/CreateEntity';
 import StatusList from './status-list/StatusList';
+import { loadCategoryAction } from '../../redux/actions/EntityTypesAction';
 
 const AdminContent = () => {
+  const dispatch = useDispatch();
   const adminSidebarState = useSelector(adminSidebarMenuSelector);
+
+  useEffect(() => {
+    dispatch(loadCategoryAction());
+  }, []);
 
   const switchContent = (menuValue: string) => {
     switch (menuValue) {

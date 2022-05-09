@@ -45,3 +45,6 @@ export const RATE_CREATED = 'Новый тариф добавлен';
 export const STATUS_SAVED = 'Изменение статуса сохранено';
 export const STATUS_DELETED = 'Статус удален';
 export const STATUS_CREATED = 'Новый статус добавлен';
+export const CAR_CREATED = 'Новый автомобиль добавлен';
+export const CAR_UPDATED = 'Данные автомобиля обновлены';
+export const CAR_DELETED = 'Автомобиль удален';

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import moment from 'moment';
 import * as api from '../constants/api';
+import { ICreateCar } from '../types/api';
 import { IOrderInfoState } from '../types/state';
 import { randomHash } from '../utils/RandomHash';
 
@@ -290,6 +291,32 @@ export const createStatus = (name: string) => (
     name,
   },
   {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
+    },
+  })
+);
+
+//-----------------------------------------------------------------------------------------------
+
+export const createCar = (body: ICreateCar) => (
+  apiDB.post(api.CARS_URL, body, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
+    },
+  })
+);
+
+export const updateCar = (carId: string, body: ICreateCar) => (
+  apiDB.put(`${api.CARS_URL}/${carId}`, body, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
+    },
+  })
+);
+
+export const deleteCar = (carId: string) => (
+  apiDB.delete(`${api.CARS_URL}/${carId}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
     },

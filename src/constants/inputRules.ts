@@ -24,11 +24,23 @@ export const inputRules = {
   carType: [
     {
       required: true,
-      message: 'Пожалуйста введите тип автомобиля',
+      message: 'Пожалуйста выберите тип автомобиля',
+    },
+  ],
+  tank: [
+    {
+      required: true,
+      message: 'Пожалуйста укажите количество топлива, %',
     },
     {
-      pattern: new RegExp(/^[А-я| ]*$/, 'g'),
-      message: 'Используйте буквы кириллического алфавита',
+      pattern: new RegExp(/^[0-9]*$/, 'g'),
+      message: 'Используйте только цифры',
+    },
+  ],
+  number: [
+    {
+      required: true,
+      message: 'Пожалуйста введите номер автомобиля, например а000аа 16',
     },
   ],
   carColor: [

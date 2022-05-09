@@ -3,37 +3,55 @@ import React, {
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  Button, Form, Input, Upload,
+  Button, Form, Input, Select, Upload,
 } from 'antd';
 import { RcFile } from 'antd/lib/upload';
 import { EditOutlined } from '@ant-design/icons';
 import Modal from 'antd/lib/modal/Modal';
+import _ from 'lodash';
 import noFoto from '../../../assets/images/no-foto.png';
 import './CarCard.scss';
 import ProgressBar from '../../progress-bar/ProgressBar';
-import { CAR_SAVED, EMPTY_ARRAY, EMPTY_STRING } from '../../../constants/common';
+import { EMPTY_ARRAY, EMPTY_STRING } from '../../../constants/common';
 import { formatString } from '../../../utils/FormatString';
 import Checkbox from '../checkbox/Checkbox';
 import { inputRules } from '../../../constants/inputRules';
-import { successfullSaveStateAction } from '../../../redux/actions/SuccessfullSaveAction';
 import { adminCarCardSelector } from '../../../selectors/adminCarCardSelector';
 import { adminCarCardChangeStateAction } from '../../../redux/actions/AdminCarCardAction';
-import { ICarInfoData } from '../../../types/api';
+import { ICarInfoData, ICategory, ICreateCar } from '../../../types/api';
+import { entityTypesSelector } from '../../../selectors/entityTypesSelector';
+import { toBase64Url } from '../../../utils/ToBase64';
+import { createCarAction, deleteCarAction, updateCarAction } from '../../../redux/actions/CarsDataAction';
 
 const descriptionInitialState = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio eaque, quidem, commodi soluta qui quae quod dolorum sint alias, possimus illum assumenda eligendi cumque?';
 
+interface ICarFormValues {
+  file: RcFile,
+  name: string,
+  category: string,
+  color: string,
+  minPrice: number,
+  maxPrice: number,
+  tank: number,
+  number: string,
+}
+
 const CarCard = () => {
   const [file, setFile] = useState({} as RcFile);
+  const [progressBarWidth, setProgressBarWidth] = useState(0);
+  const [imageBase64Url, setImageBase64Url] = useState(EMPTY_STRING);
   const { cardState, data } = useSelector(adminCarCardSelector);
+  const { category } = useSelector(entityTypesSelector);
   const dispatch = useDispatch();
 
-  const [carModelInput, setCarModelInput] = useState(EMPTY_STRING);
-  const [carTypeInput, setCarTypeInput] = useState(EMPTY_STRING);
+  const [carModelInput, setCarModelInput] = useState(data.id ? data.name : EMPTY_STRING);
+  const [numberInput, setNumberInput] = useState(EMPTY_STRING);
+  const [tankInput, setTankInput] = useState(EMPTY_STRING);
+  const [selectedCategoryId, setSelectedCategoryId] = useState(EMPTY_STRING);
 
   const initialState = {
     colors: data.id ? data.colors : [] as string[],
     newColor: EMPTY_STRING,
-    progressBarWidth: '0%',
     placeholderImitation: 'Выберите файл...',
     description: data.id ? data.description : descriptionInitialState,
     descriptionTextValue: data.id ? data.description : descriptionInitialState,
@@ -43,9 +61,9 @@ const CarCard = () => {
   const [isModalDescriptionVisible, setIsModalDescriptionVisible] = useState(false);
 
   useEffect(() => {
-    setPropsState((prevState) => ({ ...prevState, progressBarWidth: '74%' }));
-    console.log(file);
-  }, []);
+    setProgressBarWidth(0);
+    if (Object.keys(file).length !== 0) toBase64Url(file, (result) => setImageBase64Url(result));
+  }, [file]);
 
   const handleUploadingFile = (uploadedFile: RcFile) => {
     setFile(uploadedFile);
@@ -56,9 +74,47 @@ const CarCard = () => {
     setPropsState((prevState) => ({ ...prevState, placeholderImitation: 'Выберите файл...' }));
   };
 
-  const handleFinishButtonClick = (values: any) => {
+  const handleFinishButtonClick = (values: ICarFormValues) => {
     console.log(values);
-    dispatch(successfullSaveStateAction(CAR_SAVED, true));
+    if (data.id) {
+      const updateData: ICreateCar = {
+        name: values.name,
+        categoryId: selectedCategoryId === EMPTY_STRING ? undefined : { id: selectedCategoryId },
+        description: propsState.description === initialState.description ? undefined : propsState.description,
+        number: values.number,
+        priceMax: values.maxPrice,
+        priceMin: values.minPrice,
+        tank: values.tank,
+        colors: _.isEqual(data.colors, propsState.colors) ? undefined : propsState.colors,
+        thumbnail: file.name ? {
+          path: imageBase64Url,
+          originalname: file.name,
+          size: file.size,
+          mimetype: file.type,
+        } : undefined,
+      };
+      console.log(JSON.parse(JSON.stringify(updateData)));
+      dispatch(updateCarAction(data.id, updateData));
+    } else {
+      const newData: ICreateCar = {
+        name: values.name,
+        categoryId: { id: selectedCategoryId },
+        description: propsState.description === initialState.description ? EMPTY_STRING : propsState.description,
+        number: values.number,
+        priceMax: values.maxPrice,
+        priceMin: values.minPrice,
+        tank: values.tank,
+        colors: propsState.colors,
+        thumbnail: {
+          path: imageBase64Url,
+          originalname: file.name,
+          size: file.size,
+          mimetype: file.type,
+        },
+      };
+      console.log(newData);
+      dispatch(createCarAction(newData));
+    }
   };
 
   const handleResetButtonClcick = () => {
@@ -115,8 +171,20 @@ const CarCard = () => {
     setCarModelInput(event.target.value);
   };
 
-  const handleCarTypeInput = (event: BaseSyntheticEvent) => {
-    setCarTypeInput(event.target.value);
+  const handleCategorySelection = (categoryId: string) => {
+    setSelectedCategoryId(categoryId);
+  };
+
+  const handleNumberInput = (event: BaseSyntheticEvent) => {
+    setNumberInput(event.target.value);
+  };
+
+  const handleTankInput = (event: BaseSyntheticEvent) => {
+    setTankInput(event.target.value);
+  };
+
+  const handleDeleteClick = () => {
+    dispatch(deleteCarAction(data.id));
   };
 
   if (cardState === 'create') {
@@ -143,13 +211,23 @@ const CarCard = () => {
       >
         <div className="admin-car-card__form__description">
           <div className="admin-car-card__form__description__img">
-            <img src={data.id ? data.thumbnail.path : noFoto} alt="Car" />
-            <h2>{data.id ? data.name : 'Название автомобиля'}</h2>
+            {data.id ? (
+              <img src={data.id ? data.thumbnail.path : noFoto} alt="Car" />
+            )
+              : (
+                <img src={imageBase64Url !== EMPTY_STRING ? imageBase64Url : noFoto} alt="Car" />
+              )}
+            <h2>
+              {data.id ? data.name : 'Название автомобиля'}
+            </h2>
             <p>{data.id ? data.categoryId.name : 'Тип автомобиля'}</p>
             <div className="admin-car-card__form__description__img__upload">
-              <Form.Item name="file" rules={inputRules.carImage}>
+              <Form.Item
+                name="file"
+                rules={data.id ? [{}] : inputRules.carImage}
+              >
                 <Upload
-                  name="image-file"
+                  name="file"
                   beforeUpload={handleUploadingFile}
                   accept=".bmp, .jpeg, .jpg, .png"
                   onRemove={handleRemoveFile}
@@ -166,9 +244,9 @@ const CarCard = () => {
           <div className="admin-car-card__form__description__progress">
             <div>
               <p>Заполнено</p>
-              <p>{propsState.progressBarWidth}</p>
+              <p>{`${progressBarWidth}%`}</p>
             </div>
-            <ProgressBar progressBarWidth={propsState.progressBarWidth} />
+            <ProgressBar progressBarWidth={`${progressBarWidth}%`} />
           </div>
           <div className="admin-car-card__form__description__text">
             <div className="admin-car-card__form__description__text__title">
@@ -184,8 +262,8 @@ const CarCard = () => {
             <div className="admin-car-card__form__settings__car_model">
               <span>Модель автомобиля</span>
               <Form.Item
-                name="car-model"
-                rules={inputRules.carModel}
+                name="name"
+                rules={data.id ? [{}] : inputRules.carModel}
               >
                 <Input
                   placeholder="Введите название..."
@@ -196,51 +274,123 @@ const CarCard = () => {
               </Form.Item>
             </div>
             <div className="admin-car-card__form__settings__car_type">
-              <span>Тип автомобиля</span>
+              <span>Категория автомобиля</span>
               <Form.Item
-                name="car-type"
-                rules={inputRules.carType}
+                name="category"
+                rules={data.id ? [{}] : inputRules.carType}
+              >
+                <Select
+                  placeholder="Выберите категорию"
+                  onChange={handleCategorySelection}
+                  defaultValue={data.categoryId ? data.categoryId.name : EMPTY_STRING}
+                >
+                  {category.data.data.map((categoryInfo: ICategory) => (
+                    <Select.Option value={categoryInfo.id}>{categoryInfo.name}</Select.Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </div>
+          </div>
+          <div className="admin-car-card__form__settings__car">
+            <div className="admin-car-card__form__settings__car_model">
+              <span>Номер автомобиля</span>
+              <Form.Item
+                name="number"
+                rules={data.id ? [{}] : inputRules.number}
               >
                 <Input
-                  placeholder="Введите тип..."
-                  defaultValue={data.id ? data.categoryId.name : EMPTY_STRING}
-                  value={carTypeInput}
-                  onInput={handleCarTypeInput}
+                  placeholder="Введите номер автомобиля"
+                  defaultValue={data.id ? data.number : EMPTY_STRING}
+                  value={numberInput}
+                  onInput={handleNumberInput}
+                />
+              </Form.Item>
+            </div>
+            <div className="admin-car-card__form__settings__car_type">
+              <span>Топливо</span>
+              <Form.Item
+                name="tank"
+                rules={data.id ? [{}] : inputRules.tank}
+              >
+                <Input
+                  placeholder="Введите количество топлива"
+                  defaultValue={data.id ? data.tank : EMPTY_STRING}
+                  value={tankInput}
+                  onInput={handleTankInput}
                 />
               </Form.Item>
             </div>
           </div>
-          <span>Доступные цвета</span>
-          <div className="admin-car-card__form__settings__colors settings-colors">
-            <div className="settings-colors__block">
-              <div className="settings-colors__block__input">
-                <Form.Item name="car-color" rules={inputRules.carColor}>
-                  <Input
-                    placeholder="Введите цвет..."
-                    onInput={handleInputColor}
-                    value={propsState.newColor}
-                  />
-                </Form.Item>
-              </div>
-              <div className="settings-colors__block__add">
-                <Button
-                  type="default"
-                  onClick={handleAddColorButtonClick}
-                >
-                  +
-                </Button>
+          <div className="admin-car-card__form__settings__advanced">
+            <div className="admin-car-card__form__settings__advanced__color">
+              <span>Доступные цвета</span>
+              <div className="admin-car-card__form__settings__colors settings-colors">
+                <div className="settings-colors__block">
+                  <div className="settings-colors__block__input">
+                    <Form.Item
+                      name="color"
+                      rules={[
+                        {
+                          required: propsState.colors.length === 0 && true,
+                          message: 'Пожалуйста введите не менее 1го цвета',
+                        },
+                      ]}
+                    >
+                      <Input
+                        placeholder="Введите цвет..."
+                        onInput={handleInputColor}
+                        value={propsState.newColor}
+                      />
+                    </Form.Item>
+                  </div>
+                  <div className="settings-colors__block__add">
+                    <Button
+                      type="default"
+                      onClick={handleAddColorButtonClick}
+                    >
+                      +
+                    </Button>
+                  </div>
+                </div>
+                <div className="settings-colors__checkbox">
+                  <Form.Item>
+                    {propsState.colors.map((color: string, index: number) => (
+                      <Checkbox
+                        text={color}
+                        key={index}
+                        onRemove={removeColor}
+                      />
+                    ))}
+                  </Form.Item>
+                </div>
               </div>
             </div>
-            <div className="settings-colors__checkbox">
-              <Form.Item>
-                {propsState.colors.map((color: string, index: number) => (
-                  <Checkbox
-                    text={color}
-                    key={index}
-                    onRemove={removeColor}
-                  />
-                ))}
-              </Form.Item>
+            <div className="admin-car-card__form__settings__advanced__price">
+              <span>Диапозон цен</span>
+              <div>
+                <div>
+                  <Form.Item
+                    name="minPrice"
+                    rules={data.id ? [{}] : inputRules.price}
+                  >
+                    <Input
+                      placeholder="Введите минимальную стоимость"
+                      defaultValue={data.id ? data.priceMin : EMPTY_STRING}
+                    />
+                  </Form.Item>
+                </div>
+                <div>
+                  <Form.Item
+                    name="maxPrice"
+                    rules={data.id ? [{}] : inputRules.price}
+                  >
+                    <Input
+                      placeholder="Введите максимальную стоимость"
+                      defaultValue={data.id ? data.priceMax : EMPTY_STRING}
+                    />
+                  </Form.Item>
+                </div>
+              </div>
             </div>
           </div>
           <div className="admin-car-card__form__settings__footer settings__footer">
@@ -266,7 +416,12 @@ const CarCard = () => {
             </div>
             <div className="settings__footer__delete-button">
               <Form.Item>
-                <Button type="primary" htmlType="button" danger>
+                <Button
+                  type="primary"
+                  htmlType="button"
+                  danger
+                  onClick={handleDeleteClick}
+                >
                   Удалить
                 </Button>
               </Form.Item>
